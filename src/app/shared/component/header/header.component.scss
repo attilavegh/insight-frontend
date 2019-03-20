@@ -53,6 +53,11 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     align-items: center;
   }
 
+  &__logo-link {
+    display: flex;
+    align-items: center;
+  }
+
   &__logo {
     width: $logoWidth;
   }
@@ -62,6 +67,13 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     padding-right: $defaultPadding;
     justify-content: flex-end;
     align-items: center;
+  }
+
+  &__menu-icon-clickable-area {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
   }
 
   &__menu-content {

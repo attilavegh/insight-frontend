@@ -27,8 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navigationSubscription.unsubscribe();
   }
 
-
-  onOpenChange(value: boolean) {
-    this.isOpen = value;
+  toggle() {
+    this.isOpen = !this.isOpen;
   }
 }

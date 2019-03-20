@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'insight-hamburger-icon',
@@ -10,13 +10,6 @@ export class HamburgerIconComponent {
   @Input()
   open: boolean;
 
-  @Output()
-  changeOpen = new EventEmitter<boolean>();
-
   constructor() {}
 
-  toggle() {
-    this.open = !this.open;
-    this.changeOpen.emit(this.open);
-  }
 }
