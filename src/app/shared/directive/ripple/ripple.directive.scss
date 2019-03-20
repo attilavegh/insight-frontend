@@ -11,7 +11,7 @@
 
     will-change: transform;
     transform: scale(0);
-    animation: ripple 1s ease-out;
+    animation: ripple 0.8s ease-out;
   }
 
   @keyframes ripple {
@@ -23,7 +23,7 @@
 
   &--button {
     &__circle {
-      animation: ripple-button 1s ease-out;
+      animation: ripple-button 300ms ease-out;
     }
 
     @keyframes ripple-button {
