@@ -1,0 +1,116 @@
+@import "../../style/styles";
+
+$mobileMenuContentHeight: 140px;
+$menuItemPadding: 6px;
+$menuItemPaddingSeparated: 20px;
+
+$profilePictureDimension: 40px;
+$logoWidth: 70px;
+
+$hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultElementHeight}));
+
+.insight-header {
+  position: relative;
+  height: $defaultElementHeight;
+
+  z-index: 10;
+
+  &__bar {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: $defaultElementHeight;
+
+    z-index: 10;
+    background-color: $primary;
+  }
+
+  &__section {
+    display: flex;
+  }
+
+  &__profile-picture {
+    width: 32%;
+    align-items: center;
+    padding-left: $defaultPadding;
+  }
+
+  &__profile_picture-wrapper {
+    width: $profilePictureDimension;
+    height: $profilePictureDimension;
+
+    border-radius: 50%;
+    background-color: white;
+
+    transition: opacity $animationDuration ease-out;
+    opacity: 0;
+  }
+
+  &__logo-wrapper {
+    width: 34%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__logo {
+    width: $logoWidth;
+  }
+
+  &__menu-icon {
+    width: 32%;
+    padding-right: $defaultPadding;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__menu-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $mobileMenuContentHeight;
+
+    background-color: $primary;
+    border-bottom-right-radius: $defaultRadius;
+
+    transition: $animationDuration ease-out;
+    transform: translateY($hiddenMenuContentPosition);
+
+    &-items {
+      list-style: none;
+      padding: 0;
+
+      transition: opacity $animationDuration ease-out $animationDelay;
+      opacity: 0;
+    }
+
+    &-item {
+      text-align: center;
+      padding: $menuItemPadding;
+    }
+
+    &-item-selected {
+      font-weight: bold;
+    }
+
+    &-item-separated {
+      padding-top: $menuItemPaddingSeparated;
+    }
+  }
+
+  &__open {
+    .insight-header {
+      &__menu-content {
+        transform: translateY($defaultElementHeight);
+      }
+
+      &__menu-content-items {
+        opacity: 1;
+      }
+
+      &__profile_picture-wrapper {
+        opacity: 1;
+      }
+    }
+  }
+}

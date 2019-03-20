@@ -1,7 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { NewInsightComponent } from './module/new-insight/container/new-insight/new-insight.component';
+import { MyInsightComponent } from './module/my-insight/container/my-insight/my-insight.component';
+
+const routes: Routes = [
+  {
+    path: '', component: NewInsightComponent
+  },
+  {
+    path: 'insights', component: MyInsightComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

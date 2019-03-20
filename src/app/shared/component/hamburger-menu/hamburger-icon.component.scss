@@ -1,0 +1,54 @@
+@import "../../style/styles";
+
+$iconWidth: 20px;
+$iconHeight: 7px;
+$iconLineHeight: 2px;
+
+.hamburger-menu {
+  display: flex;
+
+  &__icon {
+    position: relative;
+    display: block;
+
+    height: $iconHeight;
+    width: $iconWidth;
+  }
+
+  &__icon-top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: $iconWidth;
+    height: $iconLineHeight;
+    background-color: $text;
+
+    transition: transform $animationDuration ease-out;
+  }
+
+  &__icon-bottom-line {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    width: $iconWidth;
+    height: $iconLineHeight;
+    background-color: $text;
+
+    transition: transform $animationDuration ease-out;
+  }
+
+  &__open {
+    .hamburger-menu {
+
+      &__icon-top-line {
+        transform: translateY(2px) rotate(-45deg);
+      }
+
+      &__icon-bottom-line {
+        transform: translateY(-3px) rotate(45deg);
+      }
+    }
+  }
+}
