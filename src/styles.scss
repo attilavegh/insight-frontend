@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@import "app/shared/style/styles";
+@import 'app/shared/directive/ripple/ripple.directive';
+
+* {
+  box-sizing: border-box;
+  color: $text;
+  font-family: 'Rubik', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+input::placeholder, textarea::placeholder {
+  color: $text;
+}
+
+input:hover,
+textarea:hover,
+input:focus,
+textarea:focus {
+  outline: none;
+}

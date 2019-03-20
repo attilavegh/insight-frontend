@@ -1,0 +1,18 @@
+<div class="my-insight">
+  <form class="my-insight__form" [formGroup]="form">
+    <div class="my-insight__form-row">
+      <insight-user-search formControlName="name"></insight-user-search>
+    </div>
+    <div class="my-insight__form-row">
+      <insight-type-selector formControlName="type"></insight-type-selector>
+    </div>
+    <div class="my-insight__form-row">
+      <insight-input-box formControlName="continue"></insight-input-box>
+    </div>
+    <div class="my-insight__form-row">
+      <insight-input-box formControlName="consider"></insight-input-box>
+    </div>
+
+    <insight-button text="Send"></insight-button>
+  </form>
+</div>

@@ -1,0 +1,40 @@
+@import "../../../../shared/style/styles";
+
+.user-search {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 46px;
+
+  padding-left: 16px;
+  padding-right: 16px;
+
+  background-color: $secondary;
+
+  &__icon {
+    position: absolute;
+    left: 16px;
+
+    width: 14px;
+    height: 14px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+
+    font-size: 15px;
+
+    border: none;
+    background-color: $secondary;
+  }
+}
+
+input::placeholder {
+  font-size: 15px;
+  text-align: center;
+}

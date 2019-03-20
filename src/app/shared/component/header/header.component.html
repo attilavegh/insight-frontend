@@ -1,0 +1,29 @@
+<div [class.insight-header__open]="isOpen" class="insight-header">
+  <div class="insight-header__bar">
+    <div class="insight-header__profile-picture insight-header__section">
+      <div class="insight-header__profile_picture-wrapper"></div>
+    </div>
+
+    <div class="insight-header__logo-wrapper insight-header__section">
+      <a routerLink="/">
+        <img class="insight-header__logo" src="assets/insight-logo.png" alt="Insight">
+      </a>
+    </div>
+
+    <div class="insight-header__menu-icon insight-header__section">
+      <insight-hamburger-icon [open]="isOpen" (changeOpen)="onOpenChange($event)"></insight-hamburger-icon>
+    </div>
+  </div>
+
+  <div class="insight-header__menu-content">
+      <ul class="insight-header__menu-content-items">
+        <li class="insight-header__menu-content-item">
+          <a routerLink="/" routerLinkActive="insight-header__menu-content-item-selected" [routerLinkActiveOptions]="{ exact: true }">Send insight</a>
+        </li>
+        <li class="insight-header__menu-content-item">
+          <a routerLink="/insights" routerLinkActive="insight-header__menu-content-item-selected">My insights</a>
+        </li>
+        <li class="insight-header__menu-content-item insight-header__menu-content-item-separated">Logout</li>
+      </ul>
+  </div>
+</div>

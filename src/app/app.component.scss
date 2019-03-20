@@ -1,0 +1,12 @@
+@import "shared/style/styles";
+
+.insight-wrapper {
+  margin: 0 auto;
+  height: 100%;
+
+  max-width: $maxPageWidth;
+
+  &__content {
+    margin: $pagePadding ;
+  }
+}
