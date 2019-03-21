@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { InsightType } from '../../../../shared/model/insight-type.model';
 
 @Component({
   selector: 'insight-new-insight',
@@ -9,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class NewInsightComponent implements OnInit {
 
   nameControl = new FormControl('', [Validators.required]);
-  typeControl = new FormControl('', [Validators.required]);
+  typeControl = new FormControl(InsightType.CONTINUE, [Validators.required]);
   continueControl = new FormControl('', [Validators.required]);
   considerControl = new FormControl('', [Validators.required]);
 

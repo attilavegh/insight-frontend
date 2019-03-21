@@ -20,7 +20,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    height: $largeElementHeight;
+    height: 100%;
 
     z-index: 10;
     background-color: $primary;

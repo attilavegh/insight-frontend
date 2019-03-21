@@ -1,30 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { filter, tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'insight-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
 
   isOpen = false;
-
-  navigationSubscription: Subscription;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.navigationSubscription = this.router.events.pipe(
+    this.router.events.pipe(
       filter(event => event instanceof NavigationStart),
       tap(() => this.isOpen = false)
-    ).subscribe();
-  }
-
-  ngOnDestroy() {
-    this.navigationSubscription.unsubscribe();
+    );
   }
 
   toggle() {
