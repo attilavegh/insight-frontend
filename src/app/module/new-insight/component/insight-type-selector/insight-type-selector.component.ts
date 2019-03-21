@@ -1,5 +1,7 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+
+import { InsightType } from '../../../../shared/model/insight-type.model';
 
 @Component({
   selector: 'insight-type-selector',
@@ -11,29 +13,57 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular
       useExisting: forwardRef(() => InsightTypeSelectorComponent),
       multi: true
     },
-    // {
-    //   provide: NG_VALIDATORS,
-    //   useExisting: forwardRef(() => InsightTypeSelectorComponent),
-    //   multi: true
-    // }
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => InsightTypeSelectorComponent),
+      multi: true
+    }
   ]
 })
-export class InsightTypeSelectorComponent implements OnInit, ControlValueAccessor {
+export class InsightTypeSelectorComponent implements ControlValueAccessor, Validator {
+
+  private _value;
+
+  onChange = (_: any) => {};
 
   constructor() {}
 
-  ngOnInit() {
+  registerOnChange(fn: any) {
+    this.onChange = fn;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnTouched(fn: any) {}
+
+  writeValue(value: any) {
+    this.value = this.isValidInsightType(value) ? value : InsightType.CONTINUE;
   }
 
-  registerOnTouched(fn: any): void {
+  validate(): ValidationErrors | null {
+    return (!this.value) ? null : { valid: false };
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  private isValidInsightType(value: any) {
+    return Object.values(InsightType).includes(value);
   }
 
-  writeValue(obj: any): void {
+  onContinue() {
+    this.value = InsightType.CONTINUE;
+  }
+
+  onConsider() {
+    this.value = InsightType.CONSIDER;
+  }
+
+  get isConsider() {
+    return this.value === InsightType.CONSIDER;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  set value(value: InsightType) {
+    this._value = value;
+    this.onChange(value);
   }
 }

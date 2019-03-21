@@ -38,6 +38,7 @@ export class RippleDirective implements OnInit {
     if (this.trigger.tagName === 'BUTTON') {
       this.trigger.classList.add(this.directiveClassName + '--button');
     }
+
     this.setupTriggerEvents();
   }
 

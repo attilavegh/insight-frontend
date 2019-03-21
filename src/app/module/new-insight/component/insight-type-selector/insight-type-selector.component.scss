@@ -1,0 +1,64 @@
+@import "../../../../shared/style/styles";
+
+.insight-type-selector {
+  position: relative;
+
+  display: flex;
+  width: 100%;
+  height: $defaultElementHeight;
+
+  border: 1px solid $secondary;
+
+  &__continue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    height: 100%;
+
+    background-color: $secondary;
+  }
+
+  &__link {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    transition: opacity $animationDuration ease-out;
+    opacity: 0;
+  }
+
+  &__continue-consider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    height: 100%;
+
+    &-background {
+      position: absolute;
+      transition: $animationDuration ease-out;
+      transform: translateX(-100%);
+
+      width: 50%;
+      height: 100%;
+
+      background-color: $secondary;
+
+      z-index: -1;
+    }
+
+    &-selected {
+      .insight-type-selector__continue-consider-background {
+        transform: translateX(0);
+      }
+
+      .insight-type-selector__link {
+        opacity: 1;
+      }
+    }
+  }
+}
