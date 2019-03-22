@@ -1,7 +1,7 @@
 @import "../../../../shared/style/styles";
 
 .my-insight {
-  &__form-row {
-    padding-top: $defaultPadding;
+  &__form-row:not(:first-child) {
+    padding-top: $largePadding;
   }
 }
