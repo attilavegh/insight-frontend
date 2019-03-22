@@ -1,5 +1,13 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
+} from '@angular/forms';
 
 @Component({
   selector: 'insight-input-box',
@@ -11,29 +19,67 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular
       useExisting: forwardRef(() => InsightInputBoxComponent),
       multi: true
     },
-    // {
-    //   provide: NG_VALIDATORS,
-    //   useExisting: forwardRef(() => InsightInputBoxComponent),
-    //   multi: true
-    // }
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => InsightInputBoxComponent),
+      multi: true
+    }
   ]
 })
-export class InsightInputBoxComponent implements OnInit, ControlValueAccessor {
+export class InsightInputBoxComponent implements ControlValueAccessor, Validator {
+
+  @ViewChild('textarea') textarea: ElementRef;
+
+  @Input() headerText;
+
+  _value: string;
+  isValid: boolean;
+  isFocused = false;
+  isDisabled = false;
+
+  onChange = (_: any) => {};
 
   constructor() {}
 
-  ngOnInit() {
+  registerOnChange(fn: any) {
+    this.onChange = fn;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnTouched(fn: any) {
   }
 
-  registerOnTouched(fn: any): void {
+  setDisabledState(isDisabled: boolean) {
+    this.isDisabled = isDisabled;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  writeValue(obj: any) {
+    this.value = obj;
   }
 
-  writeValue(obj: any): void {
+  validate(control: AbstractControl): ValidationErrors | null {
+    this.isValid = control.pristine || (control.value !== '' && control.valid);
+
+    return (this.isValid) ? null : { valid: false };
+  }
+
+  onFocus() {
+    this.isFocused = true;
+  }
+
+  onBlur() {
+    this.isFocused = false;
+  }
+
+  onKeyup(value: string) {
+    this.value = value;
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  set value(value: any) {
+    this._value = value;
+    this.onChange(value);
   }
 }
