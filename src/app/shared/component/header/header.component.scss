@@ -1,8 +1,9 @@
 @import "../../style/styles";
 
-$mobileMenuContentHeight: 140px;
+$mobileMenuContentHeight: 160px;
+$menuItemHeight: 40px;
 $menuItemPadding: 6px;
-$menuItemPaddingSeparated: 20px;
+$menuItemMarginSeparated: 16px;
 
 $profilePictureDimension: 40px;
 $logoWidth: 70px;
@@ -30,13 +31,13 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     display: flex;
   }
 
-  &__profile-picture {
+  &__profile-picture-wrapper {
     width: 32%;
     align-items: center;
     padding-left: $defaultPadding;
   }
 
-  &__profile_picture-wrapper {
+  &__profile_picture {
     width: $profilePictureDimension;
     height: $profilePictureDimension;
 
@@ -91,22 +92,31 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     &-items {
       list-style: none;
       padding: 0;
+      margin: 0;
 
       transition: opacity $regularAnimationDuration ease-out $animationDelay;
       opacity: 0;
     }
 
     &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       text-align: center;
+      height: $menuItemHeight;
       padding: $menuItemPadding;
+
+      outline: none;
+      border: 2px solid transparent;
     }
 
     &-item-selected {
-      font-weight: bold;
+      border-color: $secondary;
     }
 
     &-item-separated {
-      padding-top: $menuItemPaddingSeparated;
+      margin-top: $menuItemMarginSeparated;
     }
   }
 
@@ -120,7 +130,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
         opacity: 1;
       }
 
-      &__profile_picture-wrapper {
+      &__profile_picture {
         opacity: 1;
       }
     }

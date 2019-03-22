@@ -7,7 +7,6 @@
   max-width: $maxPageWidth;
 
   &__content {
-    margin-left: $pagePadding;
-    margin-right: $pagePadding;
+    margin: $pageMarginHorizontal $pageMarginVertical;
   }
 }
