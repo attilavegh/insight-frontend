@@ -1,12 +1,18 @@
 @import "../../style/styles";
 
-.button {
-  width: 100%;
-  height: $largeElementHeight;
+.button-wrapper {
 
-  background-color: $secondary;
+  &__button {
+    width: 100%;
+    height: $defaultElementHeight;
 
-  &__text {
+    background-color: $secondary;
+
+    border: none;
+    outline: none;
+  }
+
+  &__button-text {
     display: flex;
     justify-content: center;
     align-items: center;

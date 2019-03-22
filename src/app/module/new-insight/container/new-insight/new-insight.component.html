@@ -1,5 +1,5 @@
 <div class="my-insight">
-  <form class="my-insight__form" [formGroup]="form">
+  <form class="my-insight__form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="my-insight__form-row">
       <insight-user-search formControlName="name"></insight-user-search>
     </div>
@@ -7,14 +7,14 @@
       <insight-type-selector formControlName="type"></insight-type-selector>
     </div>
     <div class="my-insight__form-row">
-      <insight-input-box formControlName="continue"></insight-input-box>
+      <insight-input-box [headerText]="'Continue'" formControlName="continue"></insight-input-box>
     </div>
-    <div class="my-insight__form-row">
-      <insight-input-box formControlName="consider"></insight-input-box>
+    <div *ngIf="isConsider" class="my-insight__form-row">
+      <insight-input-box [headerText]="'Consider'" formControlName="consider"></insight-input-box>
     </div>
 
-    <insight-button text="Send"></insight-button>
+    <div class="my-insight__form-row">
+      <insight-button [type]="'submit'" text="Send"></insight-button>
+    </div>
   </form>
 </div>
-
-<pre>{{form.value | json}}</pre>

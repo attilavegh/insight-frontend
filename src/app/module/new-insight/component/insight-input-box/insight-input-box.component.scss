@@ -1,0 +1,71 @@
+@import "../../../../shared/style/styles";
+
+.insight-input-box {
+  position: relative;
+  width: 100%;
+
+  transition: border $fastAnimationDuration ease-out;
+  border: 1px solid $secondary;
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 40px;
+    padding-left: $defaultPadding;
+
+    transition: background-color $fastAnimationDuration ease-out;
+    background-color: $secondary;
+  }
+
+  &__header-arrow {
+    position: absolute;
+    top: 40px;
+    left: 16px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+
+    transition: border-top-color $fastAnimationDuration ease-out;
+    border-top: 8px solid $secondary;
+  }
+
+  &__text {
+    display: block;
+    width: 100%;
+    height: 120px;
+
+    resize: none;
+
+    padding: $defaultPadding;
+    border: none;
+  }
+
+  &__focused {
+    border-color: $primary;
+
+    .insight-input-box__header {
+      background-color: $primary;
+    }
+
+    .insight-input-box__header-arrow {
+      border-top-color: $primary;
+    }
+  }
+
+  &__invalid {
+    border-color: $warn;
+
+    .insight-input-box__header {
+      background-color: $warn;
+    }
+
+    .insight-input-box__header-arrow {
+      border-top-color: $warn;
+    }
+  }
+}

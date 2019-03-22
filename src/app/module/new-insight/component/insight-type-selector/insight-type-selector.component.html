@@ -1,11 +1,11 @@
 <div class="insight-type-selector" [class.insight-type-selector__continue-consider-selected]="isConsider">
-  <div insightRipple class="insight-type-selector__continue" (click)="onContinue()">
+  <div #continue insightRipple class="insight-type-selector__continue">
     <span class="insight-type-selector__continue-consider-text">Continue</span>
   </div>
 
   <div class="insight-type-selector__link">&</div>
 
-  <div class="insight-type-selector__continue-consider" (click)="onConsider()">
+  <div #consider class="insight-type-selector__continue-consider">
     <span class="insight-type-selector__continue-consider-text">Consider</span>
     <div class="insight-type-selector__continue-consider-background"></div>
   </div>

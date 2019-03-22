@@ -10,6 +10,9 @@ export class ButtonComponent implements OnInit {
   @Input()
   text = 'Button';
 
+  @Input()
+  type = 'button';
+
   constructor() {}
 
   ngOnInit() {}

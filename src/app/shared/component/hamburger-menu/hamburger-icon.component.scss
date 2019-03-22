@@ -24,7 +24,7 @@ $iconLineHeight: 2px;
     height: $iconLineHeight;
     background-color: $text;
 
-    transition: transform $animationDuration ease-out;
+    transition: transform $regularAnimationDuration ease-out;
   }
 
   &__icon-bottom-line {
@@ -36,7 +36,7 @@ $iconLineHeight: 2px;
     height: $iconLineHeight;
     background-color: $text;
 
-    transition: transform $animationDuration ease-out;
+    transition: transform $regularAnimationDuration ease-out;
   }
 
   &__open {

@@ -1,3 +1,7 @@
-<p>
-  insight-input-box works!
-</p>
+<div class="insight-input-box" [class.insight-input-box__focused]="isFocused" [class.insight-input-box__invalid]="!isValid && !isFocused">
+  <div class="insight-input-box__header">
+    <span>{{headerText}}</span>
+    <div class="insight-input-box__header-arrow"></div>
+  </div>
+  <textarea #textarea [value]="value" (focus)="onFocus()" (blur)="onBlur()" (keyup)="onKeyup($event.target.value)" class="insight-input-box__text"></textarea>
+</div>
