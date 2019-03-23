@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>Search icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="insight-mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mobile---landing-page" transform="translate(-23.000000, -98.000000)" stroke="#2B2B2B" stroke-width="2">
+            <g id="Body" transform="translate(0.000000, 56.000000)">
+                <g id="Search-bar" transform="translate(6.000000, 26.000000)">
+                    <g id="Search-icon" transform="translate(18.000000, 17.000000)">
+                        <ellipse id="Oval" cx="4.36363636" cy="4.27906977" rx="4.36363636" ry="4.27906977"></ellipse>
+                        <path d="M7.63636364,7.48837209 L11.5757576,11.4108527" id="Line-2" stroke-linecap="square"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

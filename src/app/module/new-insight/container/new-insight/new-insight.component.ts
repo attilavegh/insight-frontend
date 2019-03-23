@@ -14,19 +14,20 @@ export class NewInsightComponent implements OnInit, OnDestroy {
 
   typeControlSubscription: Subscription;
 
-  nameControl = new FormControl('', [Validators.required]);
+  userControl = new FormControl('', [Validators.required]);
   typeControl = new FormControl(InsightType.CONTINUE, [Validators.required]);
   continueControl = new FormControl('', [Validators.required]);
-  considerControl = new FormControl('', [Validators.required]);
+  considerControl = new FormControl({ value: '', disabled: true }, [Validators.required]);
 
   form = new FormGroup({
-    name: this.nameControl,
+    user: this.userControl,
     type: this.typeControl,
     continue: this.continueControl,
     consider: this.considerControl
   });
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
     this.typeControlSubscription = this.typeControl.valueChanges.subscribe(this.onTypeControlChange.bind(this));

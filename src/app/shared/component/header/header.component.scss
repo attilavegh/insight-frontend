@@ -1,7 +1,8 @@
 @import "../../style/styles";
 
-$mobileMenuContentHeight: 160px;
+$mobileMenuContentHeight: 170px;
 $menuItemHeight: 40px;
+$menuItemWidth: 120px;
 $menuItemPadding: 6px;
 $menuItemMarginSeparated: 16px;
 
@@ -105,6 +106,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
 
       text-align: center;
       height: $menuItemHeight;
+      width: $menuItemWidth;
       padding: $menuItemPadding;
 
       outline: none;
