@@ -1,18 +1,24 @@
 @import "../../../../shared/style/styles";
 
+$headerHeight: 40px;
+$textareaHeight: 120px;
+
+$arrowHeight: 7px;
+$arrowWidth: 8px;
+
 .insight-input-box {
   position: relative;
   width: 100%;
 
   transition: border $fastAnimationDuration ease-out;
-  border: 1px solid $secondary;
+  border: $thinBorder solid $secondary;
 
   &__header {
     display: flex;
     align-items: center;
 
     width: 100%;
-    height: 40px;
+    height: $headerHeight;
     padding-left: $defaultPadding;
 
     transition: background-color $fastAnimationDuration ease-out;
@@ -21,23 +27,23 @@
 
   &__header-arrow {
     position: absolute;
-    top: 40px;
-    left: 16px;
+    top: $headerHeight;
+    left: $defaultPadding;
 
     width: 0;
     height: 0;
 
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
+    border-left: $arrowHeight solid transparent;
+    border-right: $arrowHeight solid transparent;
 
     transition: border-top-color $fastAnimationDuration ease-out;
-    border-top: 8px solid $secondary;
+    border-top: $arrowWidth solid $secondary;
   }
 
   &__text {
     display: block;
     width: 100%;
-    height: 120px;
+    height: $textareaHeight;
 
     resize: none;
 

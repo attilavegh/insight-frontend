@@ -1,40 +1,197 @@
 @import "../../../../shared/style/styles";
 
+$boxHorizontalPadding: calc(#{$defaultElementHeight + $smallPadding});
+$dropdownContentHeight: calc(#{$defaultElementHeight * 5});
+
+$imageWidth: 35px;
+$imageHeight: 35px;
+
 .user-search {
   position: relative;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &__box {
+    display: flex;
+    position: relative;
+    overflow: hidden;
 
-  width: 100%;
-  height: $defaultElementHeight;
+    width: 100%;
+    height: $defaultElementHeight;
 
-  padding-left: 16px;
-  padding-right: 16px;
+    padding-left: $boxHorizontalPadding;
 
-  background-color: $secondary;
-
-  &__icon {
-    position: absolute;
-    left: 16px;
-
-    width: 14px;
-    height: 14px;
+    transition: border $regularAnimationDuration ease-out;
+    border: $thinBorder solid $secondary;
   }
 
-  &__input {
+  &__box-error {
+    border-color: $warn;
+
+    .user-search__box-background {
+      background-color: $warn;
+    }
+
+    .user-search__box-icon {
+      background-color: $warn;
+    }
+  }
+
+  &__box-focus-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    z-index: 1;
+  }
+
+  &__box-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+
     width: 100%;
     height: 100%;
 
-    font-size: 16px;
+    z-index: -1;
 
-    border: none;
+    transition: $regularAnimationDuration ease-out, opacity $regularAnimationDuration ease-out;
+    transform: translateX(0);
     background-color: $secondary;
   }
-}
 
-input::placeholder {
-  font-size: 15px;
-  text-align: center;
+  &__box-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    left: 0;
+
+    height: 100%;
+    width: $defaultElementHeight;
+
+    transition: background-color $regularAnimationDuration ease-out;
+    background-color: $secondary;
+  }
+
+  &__box-user-image {
+    width: $imageWidth;
+    height: $imageHeight;
+    border-radius: 50%;
+  }
+
+  &__box-input {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    padding-right: $boxHorizontalPadding;
+
+    border: none;
+    background-color: transparent;
+  }
+
+  &__box-input-value {
+    text-align: center;
+  }
+
+  &__box-input::placeholder {
+    visibility: visible;
+    text-align: center;
+  }
+
+  &__box-input:focus::placeholder {
+    visibility: hidden;
+  }
+
+  &__box-input:focus {
+    color: $text;
+    padding-right: $smallPadding;
+  }
+
+  &__box:focus-within {
+    border-color: $primary;
+
+    .user-search {
+      &__box-background {
+        transform: translateX(-100%);
+      }
+
+      &__box-focus-area {
+        z-index: -2;
+      }
+
+      &__box-icon {
+        background-color: $primary;
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: $defaultElementHeight;
+    left: 0;
+    right: 0;
+
+    max-height: $dropdownContentHeight;
+    overflow: scroll;
+
+    border: 1px solid $primary;
+    border-top: none;
+    background-color: white;
+
+    z-index: 1;
+  }
+
+  &__dropdown-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__dropdown-item {
+    display: flex;
+    align-items: center;
+
+    height: $defaultElementHeight;
+
+    &:last-child {
+      height: calc(#{$defaultElementHeight} - #{$thinBorder});
+
+      .user-search__dropdown-item-name {
+        border: none;
+      }
+    }
+  }
+
+  &__dropdown-item-image-wrapper {
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    left: 0;
+
+    width: $defaultElementHeight;
+  }
+
+  &__dropdown-item-image {
+    width: $imageWidth;
+    height: $imageHeight;
+    border-radius: 50%;
+  }
+
+  &__dropdown-item-name {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    padding-left: $smallPadding;
+    margin-left: $defaultElementHeight;
+
+    border-bottom: $thinBorder solid $primary
+  }
 }

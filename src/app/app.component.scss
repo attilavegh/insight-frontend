@@ -2,9 +2,9 @@
 
 .insight-wrapper {
   margin: 0 auto;
-  height: 100%;
 
   max-width: $maxPageWidth;
+  height: 100vh;
 
   &__content {
     margin: $pageMarginHorizontal $pageMarginVertical;
