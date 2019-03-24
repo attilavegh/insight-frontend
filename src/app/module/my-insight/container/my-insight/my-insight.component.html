@@ -1,5 +1,5 @@
 <div class="my-insight">
-  <div class="my-insight__options">
+  <div class="my-insight__row my-insight__options">
     <div class="my-insight__options-type">
       <insight-message-type-selector (messageTypeChange)="onMessageTypeChange($event)"></insight-message-type-selector>
     </div>
@@ -8,7 +8,11 @@
     </div>
   </div>
 
-  <div class="my-insight__content">
+  <div class="my-insight__row my-insight__content">
+    <insight-message></insight-message>
+  </div>
 
+  <div class="my-insight__row">
+    <insight-paging></insight-paging>
   </div>
 </div>

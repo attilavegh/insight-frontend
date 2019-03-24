@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
-import { InsightType } from '../../../../shared/model/insight-type.model';
+import { InsightType } from '../../../../shared/model/message/insight-type.model';
 
 @Component({
   selector: 'insight-new-insight',
