@@ -35,6 +35,10 @@ $imageHeight: 35px;
     }
   }
 
+  &__box-valid {
+    border: $thinBorder solid $primary;
+  }
+
   &__box-focus-area {
     position: absolute;
     top: 0;

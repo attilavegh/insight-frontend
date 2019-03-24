@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationError
 import { fromEvent, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { InsightType } from '../../../../shared/model/insight-type.model';
+import { InsightType } from '../../../../shared/model/message/insight-type.model';
 
 @Component({
   selector: 'insight-type-selector',

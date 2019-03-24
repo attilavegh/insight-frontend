@@ -1,0 +1,69 @@
+@import "../../../../../shared/style/styles";
+
+$headerHeight: 40px;
+
+$arrowHeight: 7px;
+$arrowWidth: 8px;
+
+.message {
+  position: relative;
+  width: 100%;
+
+  border: $thinBorder solid $secondary;
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: $headerHeight;
+    padding-left: $defaultPadding;
+
+    transition: background-color $fastAnimationDuration ease-out;
+    background-color: $secondary;
+
+    &-separator {
+      padding-right: $smallPadding;
+      padding-left: $smallPadding;
+    }
+
+    &-timestamp {
+      font-weight: lighter;
+    }
+  }
+
+  &__header-arrow {
+    position: absolute;
+    top: $headerHeight;
+    left: $defaultPadding;
+
+    width: 0;
+    height: 0;
+
+    border-left: $arrowHeight solid transparent;
+    border-right: $arrowHeight solid transparent;
+
+    transition: border-top-color $fastAnimationDuration ease-out;
+    border-top: $arrowWidth solid $secondary;
+  }
+
+  &__content {
+    margin: $defaultMargin;
+  }
+
+  &__content-label {
+    width: fit-content;
+    padding: $xSmallPadding;
+    margin-bottom: $xSmallMargin;
+    background-color: $secondary;
+
+    font-weight: lighter;
+    font-size: 15px;
+  }
+
+  &__content-consider {
+    margin-top: $defaultMargin;
+    padding-top: $defaultPadding;
+    border-top: $thinBorder solid $secondary;
+  }
+}

@@ -6,13 +6,15 @@ import { HeaderComponent } from './component/header/header.component';
 import { HamburgerIconComponent } from './component/hamburger-menu/hamburger-icon.component';
 import { ButtonComponent } from './component/button/button.component';
 import { RippleDirective } from './directive/ripple/ripple.directive';
+import { PagingComponent } from './component/paging/paging.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     HamburgerIconComponent,
     ButtonComponent,
-    RippleDirective
+    RippleDirective,
+    PagingComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { RippleDirective } from './directive/ripple/ripple.directive';
     HeaderComponent,
     HamburgerIconComponent,
     ButtonComponent,
-    RippleDirective
+    RippleDirective,
+    PagingComponent
   ]
 })
 export class SharedModule {}
