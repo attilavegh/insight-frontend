@@ -1,0 +1,25 @@
+@import "../../../../../shared/style/styles";
+
+.my-insight-type {
+  &__button {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: $defaultElementHeight;
+
+    border: $thinBorder solid $secondary;
+
+    &-selected {
+      background-color: $secondary;
+    }
+  }
+
+  &__button-received, &__button-sent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+
+    transition: background-color $regularAnimationDuration ease-out;
+  }
+}

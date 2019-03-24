@@ -1,0 +1,61 @@
+@import "../../../../../shared/style/styles";
+
+$optionsWidth: 120px;
+
+$optionsRelativeYPosition: 46px;
+$optionsRelativeXPosition: -100px;
+
+.message-filer {
+  position: relative;
+  width: 100%;
+  height: $defaultElementHeight;
+
+  transition: background-color $regularAnimationDuration ease-out;
+  border: $thinBorder solid $secondary;
+  outline: none;
+
+  &-focused {
+    background-color: $secondary;
+  }
+
+  &__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+  }
+
+  &__options {
+    position: absolute;
+    top: $optionsRelativeYPosition;
+    left: $optionsRelativeXPosition;
+    width: $optionsWidth;
+    border: $thinBorder solid $primary;
+
+    &-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    &-list-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      transition: background-color $regularAnimationDuration ease-out;
+      background-color: $white;
+      height: $defaultElementHeight;
+
+      &-selected {
+        background-color: $secondary;
+      }
+
+      &:not(:last-child) {
+        border-bottom: $thinBorder solid $primary;
+      }
+    }
+  }
+}
