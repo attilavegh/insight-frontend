@@ -1,19 +1,19 @@
-<div class="my-insight">
-  <form class="my-insight__form" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="my-insight__form-row">
+<div class="new-insight">
+  <form class="new-insight__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="new-insight__form-row">
       <insight-user-search formControlName="user"></insight-user-search>
     </div>
-    <div class="my-insight__form-row">
+    <div class="new-insight__form-row">
       <insight-type-selector formControlName="type"></insight-type-selector>
     </div>
-    <div class="my-insight__form-row">
+    <div class="new-insight__form-row">
       <insight-input-box [headerText]="'Continue'" formControlName="continue"></insight-input-box>
     </div>
-    <div *ngIf="isConsider" class="my-insight__form-row">
+    <div *ngIf="isConsider" class="new-insight__form-row">
       <insight-input-box [headerText]="'Consider'" formControlName="consider"></insight-input-box>
     </div>
 
-    <div class="my-insight__form-row">
+    <div class="new-insight__form-row">
       <insight-button [type]="'submit'" text="Send"></insight-button>
     </div>
   </form>

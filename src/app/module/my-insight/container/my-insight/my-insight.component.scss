@@ -1,0 +1,22 @@
+@import "../../../../shared/style/styles";
+
+.my-insight {
+  &__row:not(:first-child) {
+    padding-top: $largePadding;
+  }
+
+  &__options {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+
+    &-type {
+      width: 80%;
+      padding-right: $smallPadding;
+    }
+
+    &-filter {
+      width: $defaultElementHeight;
+    }
+  }
+}

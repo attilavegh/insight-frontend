@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MyInsightComponent } from './my-insight.component';
+import { MessageFilterComponent } from '../component/message-filter/message-filter.component';
+import { MessageTypeSelectorComponent } from '../component/message-type-selector/message-type-selector.component';
 
 describe('MyInsightComponent', () => {
   let component: MyInsightComponent;
@@ -8,7 +10,11 @@ describe('MyInsightComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyInsightComponent ]
+      declarations: [
+        MyInsightComponent,
+        MessageFilterComponent,
+        MessageTypeSelectorComponent
+      ]
     })
     .compileComponents();
   }));
