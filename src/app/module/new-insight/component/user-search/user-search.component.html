@@ -1,5 +1,5 @@
 <div class="user-search">
-  <div class="user-search__box" [class.user-search__box-error]="!isUserValid" [class.user-search__box-valid]="isUserValid && selectedUser">
+  <div class="user-search__box" [class.user-search__box-error]="!isValid" [class.user-search__box-valid]="selectedUser">
     <div class="user-search__box-focus-area" (click)="searchField.focus()"></div>
     <div class="user-search__box-background"></div>
 

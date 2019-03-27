@@ -1,6 +1,6 @@
 @import "../../../../../shared/style/styles";
 
-$optionsWidth: 120px;
+$optionsWidth: 130px;
 
 $optionsRelativeYPosition: 46px;
 $optionsRelativeXPosition: -100px;
@@ -32,8 +32,8 @@ $optionsRelativeXPosition: -100px;
     top: $optionsRelativeYPosition;
     left: $optionsRelativeXPosition;
     width: $optionsWidth;
-    border: $thinBorder solid $primary;
 
+    box-shadow: $shadow 0 1px 4px 0;
     z-index: 1;
 
     &-list {
@@ -53,10 +53,6 @@ $optionsRelativeXPosition: -100px;
 
       &-selected {
         background-color: $secondary;
-      }
-
-      &:not(:last-child) {
-        border-bottom: $thinBorder solid $primary;
       }
     }
   }

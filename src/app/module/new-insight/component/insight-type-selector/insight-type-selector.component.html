@@ -1,11 +1,11 @@
-<div class="insight-type-selector" [class.insight-type-selector__continue-consider-selected]="isConsider">
-  <div #continue insightRipple class="insight-type-selector__continue">
-    <span class="insight-type-selector__continue-consider-text">Continue</span>
-  </div>
+<div insightRipple [disableRipple]="!isConsider || isSelectionChanged" class="insight-type-selector" [class.insight-type-selector__continue-consider-selected]="isConsider">
+    <div #continueButton class="insight-type-selector__continue" insightRipple [disableRipple]="isConsider">
+      <span class="insight-type-selector__continue-consider-text">Continue</span>
+    </div>
 
   <div class="insight-type-selector__link">&</div>
 
-  <div #consider class="insight-type-selector__continue-consider">
+  <div #considerButton class="insight-type-selector__continue-consider">
     <span class="insight-type-selector__continue-consider-text">Consider</span>
     <div class="insight-type-selector__continue-consider-background"></div>
   </div>

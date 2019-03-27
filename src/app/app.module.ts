@@ -21,4 +21,4 @@ import { NewInsightModule } from './module/new-insight/new-insight.module';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

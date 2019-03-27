@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { InsightType } from '../../../../shared/model/message/insight-type.model';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'insight-new-insight',
@@ -30,7 +31,9 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.typeControlSubscription = this.typeControl.valueChanges.subscribe(this.onTypeControlChange.bind(this));
+    this.typeControlSubscription = this.typeControl.valueChanges.pipe(
+      distinctUntilChanged()
+    ).subscribe(this.onTypeControlChange.bind(this));
   }
 
   ngOnDestroy() {
@@ -38,19 +41,24 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.markControlsAsDirty();
+    this.checkFormStatus();
 
     if (this.form.valid) {
+      this.form.reset();
       console.log('submit');
     }
   }
 
-  private markControlsAsDirty() {
-    Object.keys(this.form.controls).forEach((key: string) => this.form.get(key).markAsDirty());
+  private checkFormStatus() {
+    Object.keys(this.form.controls).forEach((key: string) => {
+      this.form.get(key).markAsDirty();
+      this.form.get(key).updateValueAndValidity();
+    });
   }
 
   private onTypeControlChange(value: InsightType) {
     if (value === InsightType.CONSIDER) {
+      this.considerControl.reset();
       this.considerControl.enable();
     } else {
       this.considerControl.disable();

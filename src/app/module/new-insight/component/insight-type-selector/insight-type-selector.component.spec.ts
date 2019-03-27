@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RippleDirective } from '../../../../shared/directive/ripple/ripple.directive';
+
 import { InsightTypeSelectorComponent } from './insight-type-selector.component';
 
 describe('InsightTypeSelectorComponent', () => {
@@ -8,7 +10,10 @@ describe('InsightTypeSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InsightTypeSelectorComponent ]
+      declarations: [
+        InsightTypeSelectorComponent,
+        RippleDirective
+      ]
     })
     .compileComponents();
   }));
