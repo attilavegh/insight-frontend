@@ -14,6 +14,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
 .insight-header {
   position: relative;
   height: $largeElementHeight;
+  box-shadow: $shadow 0 1px 4px 0;
 
   z-index: 10;
 
@@ -87,6 +88,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     background-color: $primary;
     border-bottom-right-radius: $defaultRadius;
 
+    box-shadow: $shadow 0 1px 4px 0;
     transition: $regularAnimationDuration ease-out;
     transform: translateY($hiddenMenuContentPosition);
 

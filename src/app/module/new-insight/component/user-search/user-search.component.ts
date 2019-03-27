@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
 import { fromEvent, Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
 
   @ViewChild('searchField') searchField: ElementRef;
   hasValue = false;
-  isUserValid = true;
+  isValid = true;
   isFocused = false;
 
   elementEventSubscriptions: Subscription[] = [];
@@ -60,12 +60,12 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return undefined;
+    this.isValid = !control.dirty || (control.value !== '' && control.valid);
+    return (this.isValid) ? null : { valid: false };
   }
 
   observeSearchChange() {
     const valueChange = fromEvent(this.searchField.nativeElement, 'keyup').pipe(
-      tap(() => this.selectedUser = null),
       distinctUntilChanged(),
       debounceTime(300),
       map((event: any) => event.target.value),
@@ -77,7 +77,10 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
 
   observeSearchFocus() {
     const focusSubscription = fromEvent(this.searchField.nativeElement, 'focus').pipe(
-      tap(() => this.isFocused = true)
+      tap(() => {
+        this.isFocused = true;
+        this.selectedUser = null;
+      })
     ).subscribe();
 
     this.elementEventSubscriptions.push(focusSubscription);
@@ -87,7 +90,7 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
     const blurSubscription = fromEvent(this.searchField.nativeElement, 'blur').pipe(
       tap(() => {
         this.isFocused = false;
-        this.isUserValid = !(this.searchFieldValue !== '' && !this.selectedUser);
+        this.isValid = !(this.searchFieldValue !== '' && !this.selectedUser);
       })
     ).subscribe();
 
@@ -111,6 +114,6 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
     this._selectedUser = user;
 
     this.hasValue = !!user;
-    this.searchFieldValue = user ? user.name : this.searchFieldValue;
+    this.searchFieldValue = user ? user.name : '';
   }
 }

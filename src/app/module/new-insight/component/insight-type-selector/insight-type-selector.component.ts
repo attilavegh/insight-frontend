@@ -25,11 +25,13 @@ import { InsightType } from '../../../../shared/model/message/insight-type.model
 })
 export class InsightTypeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
 
-  @ViewChild('continue') continueButton: ElementRef;
-  @ViewChild('consider') considerButton: ElementRef;
+  @ViewChild('continueButton') continueButton: ElementRef;
+  @ViewChild('considerButton') considerButton: ElementRef;
 
   continueClickSubscription: Subscription;
   considerClickSubscription: Subscription;
+
+  isSelectionChanged = false;
 
   private _value;
 
@@ -65,7 +67,7 @@ export class InsightTypeSelectorComponent implements OnInit, OnDestroy, ControlV
   }
 
   validate(): ValidationErrors | null {
-    return (!this.value) ? null : {valid: false};
+    return (this.value) ? null : {valid: false};
   }
 
   private isValidInsightType(value: any) {
@@ -81,6 +83,7 @@ export class InsightTypeSelectorComponent implements OnInit, OnDestroy, ControlV
   }
 
   set value(value: InsightType) {
+    this.isSelectionChanged = this._value !== value;
     this._value = value;
     this.onChange(value);
   }

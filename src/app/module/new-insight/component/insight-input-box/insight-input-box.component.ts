@@ -2,7 +2,6 @@ import { Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/co
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -57,8 +56,7 @@ export class InsightInputBoxComponent implements ControlValueAccessor, Validator
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    this.isValid = control.pristine || (control.value !== '' && control.valid);
-
+    this.isValid = !control.dirty || (control.value !== '' && control.valid);
     return (this.isValid) ? null : { valid: false };
   }
 

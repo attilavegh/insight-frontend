@@ -6,6 +6,7 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 export class RippleDirective implements OnInit {
   private _trigger: HTMLElement;
   private directiveClassName = 'ripple-directive';
+  private listener = (): void => {};
 
   constructor(
     public renderer: Renderer2,
@@ -21,6 +22,7 @@ export class RippleDirective implements OnInit {
 
   set disableRipple(disableRipple: any) {
     this._disableRipple = disableRipple;
+    this.setupTriggerEvents();
   }
 
   @Input('rippleTrigger')
@@ -67,7 +69,9 @@ export class RippleDirective implements OnInit {
 
   private setupTriggerEvents() {
     if (!this.isDisabled()) {
-      this.renderer.listen(this.trigger, 'click', this.createRipple.bind(this));
+      this.listener = this.renderer.listen(this.trigger, 'click', this.createRipple.bind(this));
+    } else {
+      this.listener();
     }
   }
 
