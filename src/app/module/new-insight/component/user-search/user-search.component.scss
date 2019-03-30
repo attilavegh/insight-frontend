@@ -8,6 +8,7 @@ $imageHeight: 35px;
 
 .user-search {
   position: relative;
+  border-radius: $smallRadius;
 
   &__box {
     display: flex;
@@ -19,8 +20,9 @@ $imageHeight: 35px;
 
     padding-left: $boxHorizontalPadding;
 
-    transition: border $regularAnimationDuration ease-out;
+    transition: border $defaultAnimationDuration ease-out;
     border: $thinBorder solid $secondary;
+    border-radius: 3px;
   }
 
   &__box-error {
@@ -32,6 +34,29 @@ $imageHeight: 35px;
 
     .user-search__box-icon {
       background-color: $warn;
+    }
+  }
+
+  &__loading {
+    .user-search__box-icon {
+      animation-duration: $slowAnimationDuration;
+      animation-name: loading-animation-background;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+  }
+
+  &__box-dropdown-visible {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  @keyframes loading-animation-background {
+    from {
+      background: $primary;
+    }
+    to {
+      background: $secondary;
     }
   }
 
@@ -60,7 +85,7 @@ $imageHeight: 35px;
 
     z-index: -1;
 
-    transition: $regularAnimationDuration ease-out, opacity $regularAnimationDuration ease-out;
+    transition: $defaultAnimationDuration ease-out, opacity $defaultAnimationDuration ease-out;
     transform: translateX(0);
     background-color: $secondary;
   }
@@ -76,7 +101,7 @@ $imageHeight: 35px;
     height: 100%;
     width: $defaultElementHeight;
 
-    transition: background-color $regularAnimationDuration ease-out;
+    transition: background-color $defaultAnimationDuration ease-out;
     background-color: $secondary;
   }
 
@@ -92,7 +117,7 @@ $imageHeight: 35px;
     height: 100%;
     width: 100%;
 
-    padding-right: $boxHorizontalPadding;
+    padding: 0 $boxHorizontalPadding 0 0;
 
     border: none;
     background-color: transparent;
@@ -145,6 +170,8 @@ $imageHeight: 35px;
 
     border: 1px solid $primary;
     border-top: none;
+    border-bottom-left-radius: $smallRadius;
+    border-bottom-right-radius: $smallRadius;
     background-color: white;
 
     z-index: 2;

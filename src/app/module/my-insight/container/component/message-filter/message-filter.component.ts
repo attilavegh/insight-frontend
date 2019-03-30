@@ -42,18 +42,11 @@ export class MessageFilterComponent implements OnInit, OnDestroy {
   onFilterSelect(filter: MessageFilterType) {
     this.selectedFilter = filter;
     this.filterChange.emit(filter);
-
-    timer(300).pipe(
-      take(1),
-      tap(() => {
-        this.filterElement.blur();
-      })
-    ).subscribe();
   }
 
   private observeFilterFocus() {
-    this.filterFocusSubscription = fromEvent(this.filterElement, 'focus').pipe(
-      tap(() => this.isFocused = true),
+    this.filterFocusSubscription = fromEvent(this.filterElement, 'click').pipe(
+      tap(() => this.isFocused = !this.isFocused),
       switchMap(() => fromEvent(this.filterElement, 'blur')),
       tap(() => this.isFocused = false)
     ).subscribe();

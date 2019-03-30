@@ -12,6 +12,7 @@ $arrowWidth: 8px;
 
   transition: border $fastAnimationDuration ease-out;
   border: $thinBorder solid $secondary;
+  border-radius: $smallRadius;
 
   &__header {
     display: flex;
@@ -49,6 +50,11 @@ $arrowWidth: 8px;
 
     padding: $defaultPadding;
     border: none;
+    font-weight: lighter;
+
+    &::placeholder {
+      color: $placeholder;
+    }
   }
 
   &__focused {

@@ -3,5 +3,5 @@
     <span>{{headerText}}</span>
     <div class="insight-input-box__header-arrow"></div>
   </div>
-  <textarea #textarea [value]="value" (focus)="onFocus()" (blur)="onBlur()" (keyup)="onKeyup($event.target.value)" class="insight-input-box__text"></textarea>
+  <textarea #textarea [placeholder]="placeholder" [value]="value" (focus)="onFocus()" (blur)="onBlur()" (keyup)="onKeyup($event.target.value)" class="insight-input-box__text"></textarea>
 </div>

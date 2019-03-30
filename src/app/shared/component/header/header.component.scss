@@ -6,15 +6,20 @@ $menuItemWidth: 120px;
 $menuItemPadding: 6px;
 $menuItemMarginSeparated: 16px;
 
+$logoHeight: 23px;
+
 $profilePictureDimension: 40px;
-$logoWidth: 70px;
 
 $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultElementHeight}));
 
 .insight-header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
   height: $largeElementHeight;
-  box-shadow: $shadow 0 1px 4px 0;
+  box-shadow: $shadow $defaultShadowValues;
 
   z-index: 10;
 
@@ -46,7 +51,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     border-radius: 50%;
     background-color: white;
 
-    transition: opacity $regularAnimationDuration ease-out;
+    transition: opacity $defaultAnimationDuration ease-out;
     opacity: 0;
   }
 
@@ -62,7 +67,8 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
   }
 
   &__logo {
-    width: $logoWidth;
+    display: block;
+    height: $logoHeight;
   }
 
   &__menu-icon {
@@ -86,10 +92,10 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     height: $mobileMenuContentHeight;
 
     background-color: $primary;
-    border-bottom-right-radius: $defaultRadius;
+    border-bottom-right-radius: $largeRadius;
 
-    box-shadow: $shadow 0 1px 4px 0;
-    transition: $regularAnimationDuration ease-out;
+    box-shadow: $shadow $defaultShadowValues;
+    transition: $defaultAnimationDuration ease-out;
     transform: translateY($hiddenMenuContentPosition);
 
     &-items {
@@ -97,7 +103,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
       padding: 0;
       margin: 0;
 
-      transition: opacity $regularAnimationDuration ease-out $animationDelay;
+      transition: opacity $defaultAnimationDuration ease-out $animationDelay;
       opacity: 0;
     }
 
@@ -115,7 +121,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
       border: 2px solid transparent;
     }
 
-    &-item-selected {
+    &-item-selected{
       border-color: $secondary;
     }
 

@@ -8,6 +8,7 @@
   height: $defaultElementHeight;
 
   border: 1px solid $secondary;
+  border-radius: $smallRadius;
 
   &__continue {
     display: flex;
@@ -26,7 +27,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
 
-    transition: opacity $regularAnimationDuration ease-out;
+    transition: opacity $defaultAnimationDuration ease-out;
     opacity: 0;
   }
 
@@ -40,7 +41,7 @@
 
     &-background {
       position: absolute;
-      transition: $regularAnimationDuration ease-out;
+      transition: $defaultAnimationDuration ease-out;
       transform: translateX(-75%);
 
       width: 100%;

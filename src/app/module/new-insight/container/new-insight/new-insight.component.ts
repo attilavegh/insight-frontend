@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs/operators';
 
 import { InsightType } from '../../../../shared/model/message/insight-type.model';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { UserService } from '../../../../shared/service/user/user.service';
+import { User } from '../../../../shared/model/user/user.model';
 
 @Component({
   selector: 'insight-new-insight',
@@ -18,7 +20,7 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   userControl = new FormControl('', [Validators.required]);
   typeControl = new FormControl(InsightType.CONTINUE, [Validators.required]);
   continueControl = new FormControl('', [Validators.required]);
-  considerControl = new FormControl({ value: '', disabled: true }, [Validators.required]);
+  considerControl = new FormControl({value: '', disabled: true}, [Validators.required]);
 
   form = new FormGroup({
     user: this.userControl,
@@ -27,13 +29,29 @@ export class NewInsightComponent implements OnInit, OnDestroy {
     consider: this.considerControl
   });
 
-  constructor() {
+  users$ = new Observable<User[]>();
+  userCount = 0;
+  isSearchLoading = false;
+
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
     this.typeControlSubscription = this.typeControl.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe(this.onTypeControlChange.bind(this));
+
+    this.users$ = this.userControl.valueChanges.pipe(
+      filter(value => typeof value === 'string'),
+      distinctUntilChanged(),
+      debounceTime(300),
+      tap(() => this.isSearchLoading = true),
+      switchMap((value: string) => this.userService.search(value)),
+      tap((users: User[]) => {
+        this.isSearchLoading = false;
+        this.userCount = users.length;
+      })
+    );
   }
 
   ngOnDestroy() {
@@ -41,19 +59,36 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.checkFormStatus();
-
     if (this.form.valid) {
-      this.form.reset();
+      this.resetForm();
       console.log('submit');
+    } else {
+      this.showErrors();
     }
   }
 
-  private checkFormStatus() {
-    Object.keys(this.form.controls).forEach((key: string) => {
-      this.form.get(key).markAsDirty();
-      this.form.get(key).updateValueAndValidity();
+  private showErrors() {
+    this.updateControls((control) => {
+      control.markAsDirty();
+      control.updateValueAndValidity();
     });
+  }
+
+  private resetForm() {
+    this.form.reset();
+    this.updateControls((control) => {
+      control.markAsPristine();
+      control.updateValueAndValidity();
+    });
+  }
+
+  private updateControls(callbackFn: (control: AbstractControl) => void) {
+    Object.keys(this.form.controls)
+      .map((key: string) => this.form.get(key))
+      .filter((control: FormControl) => control.enabled)
+      .forEach((control: FormControl) => {
+        callbackFn(control);
+      });
   }
 
   private onTypeControlChange(value: InsightType) {

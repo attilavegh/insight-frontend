@@ -30,9 +30,10 @@ export class InsightInputBoxComponent implements ControlValueAccessor, Validator
   @ViewChild('textarea') textarea: ElementRef;
 
   @Input() headerText;
+  @Input() placeholder;
 
   _value: string;
-  isValid: boolean;
+  isValid = true;
   isFocused = false;
   isDisabled = false;
 
@@ -56,7 +57,7 @@ export class InsightInputBoxComponent implements ControlValueAccessor, Validator
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    this.isValid = !control.dirty || (control.value !== '' && control.valid);
+    this.isValid = !control.dirty || control.value !== '';
     return (this.isValid) ? null : { valid: false };
   }
 

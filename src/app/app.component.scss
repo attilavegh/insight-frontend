@@ -2,11 +2,11 @@
 
 .insight-wrapper {
   margin: 0 auto;
+  padding-top: $largeElementHeight;
 
   max-width: $maxPageWidth;
-  height: 100vh;
 
   &__content {
-    margin: $pageMarginHorizontal $pageMarginVertical;
+    margin: $pageMarginVertical $pageMarginHorizontal;
   }
 }

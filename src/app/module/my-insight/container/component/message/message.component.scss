@@ -1,6 +1,7 @@
 @import "../../../../../shared/style/styles";
 
 $headerHeight: 40px;
+$headerImageHeight: 30px;
 
 $arrowHeight: 7px;
 $arrowWidth: 8px;
@@ -10,14 +11,17 @@ $arrowWidth: 8px;
   width: 100%;
 
   border: $thinBorder solid $secondary;
+  border-radius: $smallRadius;
 
   &__header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     width: 100%;
     height: $headerHeight;
     padding-left: $defaultPadding;
+    padding-right: $smallPadding;
 
     transition: background-color $fastAnimationDuration ease-out;
     background-color: $secondary;
@@ -47,8 +51,19 @@ $arrowWidth: 8px;
     border-top: $arrowWidth solid $secondary;
   }
 
+  &__header-image {
+    height: $headerImageHeight;
+    border-radius: 50%;
+  }
+
   &__content {
     margin: $defaultMargin;
+
+    &-text {
+      display: block;
+      font-weight: lighter;
+      text-align: justify;
+    }
   }
 
   &__content-label {
