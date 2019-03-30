@@ -10,8 +10,9 @@ $optionsRelativeXPosition: -100px;
   width: 100%;
   height: $defaultElementHeight;
 
-  transition: background-color $regularAnimationDuration ease-out;
+  transition: background-color $defaultAnimationDuration ease-out;
   border: $thinBorder solid $secondary;
+  border-radius: $smallRadius;
   outline: none;
 
   &-focused {
@@ -33,7 +34,9 @@ $optionsRelativeXPosition: -100px;
     left: $optionsRelativeXPosition;
     width: $optionsWidth;
 
-    box-shadow: $shadow 0 1px 4px 0;
+    box-shadow: $shadow $defaultShadowValues;
+    border-radius: $smallRadius;
+
     z-index: 1;
 
     &-list {
@@ -47,9 +50,22 @@ $optionsRelativeXPosition: -100px;
       justify-content: center;
       align-items: center;
 
-      transition: background-color $regularAnimationDuration ease-out;
       background-color: $white;
       height: $defaultElementHeight;
+
+      &:hover {
+        background-color: $secondary;
+      }
+
+      &:first-child {
+        border-top-left-radius: $smallRadius;
+        border-top-right-radius: $smallRadius;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: $smallRadius;
+        border-bottom-right-radius: $smallRadius;
+      }
 
       &-selected {
         background-color: $secondary;

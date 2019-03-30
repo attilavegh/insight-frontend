@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { MyInsightModule } from './module/my-insight/my-insight.module';
 import { NewInsightModule } from './module/new-insight/new-insight.module';
+import { LoginModule } from './module/login/login.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NewInsightModule } from './module/new-insight/new-insight.module';
     AppRoutingModule,
     SharedModule,
     NewInsightModule,
-    MyInsightModule
+    MyInsightModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

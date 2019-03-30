@@ -1,5 +1,8 @@
-<div class="user-search">
-  <div class="user-search__box" [class.user-search__box-error]="!isValid" [class.user-search__box-valid]="selectedUser">
+<div class="user-search" [class.user-search__loading]="loading && isFocused">
+  <div class="user-search__box"
+       [class.user-search__box-dropdown-visible]="userCount > 0 && isFocused"
+       [class.user-search__box-error]="!isValid && !isFocused"
+       [class.user-search__box-valid]="selectedUser">
     <div class="user-search__box-focus-area" (click)="searchField.focus()"></div>
     <div class="user-search__box-background"></div>
 
@@ -8,21 +11,23 @@
     </div>
 
     <div *ngIf="selectedUser && !isFocused" class="user-search__box-icon">
-      <img class="user-search__box-user-image" [src]="selectedUser.image" alt="Search icon">
+      <img class="user-search__box-user-image" [src]="selectedUser.imageUrl" alt="Search icon">
     </div>
 
     <input #searchField class="user-search__box-input" placeholder="Search"
-           [class.user-search__box-input-value]="hasValue && !isFocused">
+           [class.user-search__box-input-value]="selectedUser && !isFocused">
   </div>
 
-  <div *ngIf="isFocused" class="user-search__dropdown">
-    <ul class="user-search__dropdown-items">
-      <li class="user-search__dropdown-item" *ngFor="let user of users" (mousedown)="selectedUser = user">
-        <div class="user-search__dropdown-item-image-wrapper">
-          <img class="user-search__dropdown-item-image" [src]="user.image" alt="User profile picture">
-        </div>
-        <span class="user-search__dropdown-item-name">{{user.name}}</span>
-      </li>
-    </ul>
+  <div *ngIf="users | async as users" class="user-search__dropdown-wrapper">
+    <div *ngIf="isFocused && users.length > 0" class="user-search__dropdown">
+      <ul class="user-search__dropdown-items">
+        <li class="user-search__dropdown-item" *ngFor="let user of users" (mousedown)="selectUser(user)">
+          <div class="user-search__dropdown-item-image-wrapper">
+            <img class="user-search__dropdown-item-image" [src]="user.imageUrl" alt="User profile picture">
+          </div>
+          <span class="user-search__dropdown-item-name">{{user.firstName}} {{user.lastName}}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

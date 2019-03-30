@@ -8,6 +8,7 @@
     height: $defaultElementHeight;
 
     border: $thinBorder solid $secondary;
+    border-radius: $smallRadius;
 
     &-selected {
       background-color: $secondary;
@@ -20,6 +21,6 @@
     align-items: center;
     width: 50%;
 
-    transition: background-color $regularAnimationDuration ease-out;
+    transition: background-color $defaultAnimationDuration ease-out;
   }
 }

@@ -6,7 +6,7 @@
   <div *ngIf="isFocused" class="message-filer__options">
     <ul class="message-filer__options-list">
       <li class="message-filer__options-list-item" [class.message-filer__options-list-item-selected]="option.value == selectedFilter"
-          *ngFor="let option of filterOptions" insightRipple (click)="onFilterSelect(option.value)">
+          *ngFor="let option of filterOptions" (click)="onFilterSelect(option.value)">
         {{option.name}}
       </li>
     </ul>

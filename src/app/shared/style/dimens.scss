@@ -3,8 +3,8 @@ $maxPageWidth: 1200px;
 $thinBorder: 1px;
 $thickBorder: 2px;
 
-$pageMarginHorizontal: 24px;
-$pageMarginVertical: 6px;
+$pageMarginHorizontal: 6px;
+$pageMarginVertical: 24px;
 
 $defaultElementHeight: 56px;
 $largeElementHeight: 64px;
@@ -12,10 +12,15 @@ $largeElementHeight: 64px;
 $xSmallMargin: 4px;
 $smallMargin: 8px;
 $defaultMargin: 16px;
+$largeMargin: 24px;
 
 $xSmallPadding: 4px;
 $smallPadding: 8px;
 $defaultPadding: 16px;
 $largePadding: 24px;
+$xLargePadding: 32px;
 
-$defaultRadius: 20px;
+$smallRadius: 3px;
+$largeRadius: 20px;
+
+$defaultShadowValues: 0 1px 4px 0;

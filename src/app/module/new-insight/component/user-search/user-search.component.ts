@@ -1,10 +1,10 @@
-import { Component, ElementRef, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
-import { User, userListMock } from '../../../../shared/model/user/user.model';
+import { User } from '../../../../shared/model/user/user.model';
 
 @Component({
   selector: 'insight-user-search',
@@ -23,17 +23,20 @@ import { User, userListMock } from '../../../../shared/model/user/user.model';
     }
   ]
 })
-export class UserSearchComponent implements OnInit, ControlValueAccessor, Validator {
+export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
+
+  @Input() users: Observable<User[]>;
+  @Input() userCount: number;
+  @Input() loading = false;
+
+  selectedUser: User;
 
   @ViewChild('searchField') searchField: ElementRef;
-  hasValue = false;
   isValid = true;
   isFocused = false;
 
   elementEventSubscriptions: Subscription[] = [];
-  _selectedUser: User;
-
-  users = userListMock;
+  _value: any;
 
   onChange = (_: any) => {};
 
@@ -43,6 +46,10 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
     this.observeSearchChange();
     this.observeSearchFocus();
     this.observeSearchBlur();
+  }
+
+  ngOnDestroy(): void {
+    this.elementEventSubscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   registerOnChange(fn: any) {
@@ -55,21 +62,27 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
   setDisabledState(isDisabled: boolean) {
   }
 
-  writeValue(user: User) {
-    this.selectedUser = user;
+  writeValue(value: any) {
+    if (value == null) {
+      this.selectedUser = null;
+      this.searchFieldValue = null;
+    }
+
+    this.value = value;
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    this.isValid = !control.dirty || (control.value !== '' && control.valid);
+    this.isValid = !control.dirty || (control.value !== '' && !!this.selectedUser);
     return (this.isValid) ? null : { valid: false };
   }
 
   observeSearchChange() {
     const valueChange = fromEvent(this.searchField.nativeElement, 'keyup').pipe(
-      distinctUntilChanged(),
-      debounceTime(300),
       map((event: any) => event.target.value),
-      tap((value: string) => this.hasValue = value !== '')
+      tap((value: string) => {
+        this.selectedUser = null;
+        this.value = value;
+      })
     ).subscribe();
 
     this.elementEventSubscriptions.push(valueChange);
@@ -77,10 +90,7 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
 
   observeSearchFocus() {
     const focusSubscription = fromEvent(this.searchField.nativeElement, 'focus').pipe(
-      tap(() => {
-        this.isFocused = true;
-        this.selectedUser = null;
-      })
+      tap(() => this.isFocused = true)
     ).subscribe();
 
     this.elementEventSubscriptions.push(focusSubscription);
@@ -88,32 +98,28 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
 
   observeSearchBlur() {
     const blurSubscription = fromEvent(this.searchField.nativeElement, 'blur').pipe(
-      tap(() => {
-        this.isFocused = false;
-        this.isValid = !(this.searchFieldValue !== '' && !this.selectedUser);
-      })
+      tap(() => this.isFocused = false)
     ).subscribe();
 
     this.elementEventSubscriptions.push(blurSubscription);
   }
 
-  get searchFieldValue() {
-    return this.searchField.nativeElement.value;
+  selectUser(user: User) {
+    this.selectedUser = user;
+    this.value = user;
+    this.searchFieldValue = user.firstName + ' ' + user.lastName;
   }
 
   set searchFieldValue(value: string) {
     this.searchField.nativeElement.value = value;
   }
 
-  get selectedUser() {
-    return this._selectedUser;
+  get value() {
+    return this._value;
   }
 
-  set selectedUser(user: User) {
-    this.onChange(user);
-    this._selectedUser = user;
-
-    this.hasValue = !!user;
-    this.searchFieldValue = user ? user.name : '';
+  set value(value: any) {
+    this._value = value;
+    this.onChange(value);
   }
 }
