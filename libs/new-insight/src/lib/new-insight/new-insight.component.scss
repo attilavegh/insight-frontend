@@ -1,0 +1,7 @@
+@import "../../../../shared-styles/styles";
+
+.new-insight {
+  &__form-row:not(:first-child) {
+    padding-top: $largePadding;
+  }
+}

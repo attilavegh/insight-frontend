@@ -1,0 +1,228 @@
+@import "../../../../shared-styles/styles";
+
+$boxHorizontalPadding: calc(#{$defaultElementHeight + $smallPadding});
+$dropdownContentHeight: calc(#{$defaultElementHeight * 5});
+
+$imageWidth: 35px;
+$imageHeight: 35px;
+
+.user-search {
+  position: relative;
+  border-radius: $smallRadius;
+
+  &__box {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+    height: $defaultElementHeight;
+
+    padding-left: $boxHorizontalPadding;
+
+    transition: border $defaultAnimationDuration ease-out;
+    border: $thinBorder solid $secondary;
+    border-radius: 3px;
+  }
+
+  &__box-error {
+    border-color: $warn;
+
+    .user-search__box-background {
+      background-color: $warn;
+    }
+
+    .user-search__box-icon {
+      background-color: $warn;
+    }
+  }
+
+  &__loading {
+    .user-search__box-icon {
+      animation-duration: $slowAnimationDuration;
+      animation-name: loading-animation-background;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+  }
+
+  &__box-dropdown-visible {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  @keyframes loading-animation-background {
+    from {
+      background: $primary;
+    }
+    to {
+      background: $secondary;
+    }
+  }
+
+  &__box-valid {
+    border: $thinBorder solid $primary;
+  }
+
+  &__box-focus-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    z-index: 1;
+  }
+
+  &__box-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+
+    transition: $defaultAnimationDuration ease-out, opacity $defaultAnimationDuration ease-out;
+    transform: translateX(0);
+    background-color: $secondary;
+  }
+
+  &__box-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    left: 0;
+
+    height: 100%;
+    width: $defaultElementHeight;
+
+    transition: background-color $defaultAnimationDuration ease-out;
+    background-color: $secondary;
+  }
+
+  &__box-user-image {
+    width: $imageWidth;
+    height: $imageHeight;
+    border-radius: 50%;
+  }
+
+  &__box-input {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    padding: 0 $boxHorizontalPadding 0 0;
+
+    border: none;
+    background-color: transparent;
+  }
+
+  &__box-input-value {
+    text-align: center;
+  }
+
+  &__box-input::placeholder {
+    visibility: visible;
+    text-align: center;
+  }
+
+  &__box-input:focus::placeholder {
+    visibility: hidden;
+  }
+
+  &__box-input:focus {
+    color: $text;
+    padding-right: $smallPadding;
+  }
+
+  &__box:focus-within {
+    border-color: $primary;
+
+    .user-search {
+      &__box-background {
+        transform: translateX(-100%);
+      }
+
+      &__box-focus-area {
+        z-index: -2;
+      }
+
+      &__box-icon {
+        background-color: $primary;
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: $defaultElementHeight;
+    left: 0;
+    right: 0;
+
+    max-height: $dropdownContentHeight;
+    overflow: scroll;
+
+    border: 1px solid $primary;
+    border-top: none;
+    border-bottom-left-radius: $smallRadius;
+    border-bottom-right-radius: $smallRadius;
+    background-color: white;
+
+    z-index: 2;
+  }
+
+  &__dropdown-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__dropdown-item {
+    display: flex;
+    align-items: center;
+
+    height: $defaultElementHeight;
+
+    &:last-child {
+      height: calc(#{$defaultElementHeight} - #{$thinBorder});
+
+      .user-search__dropdown-item-name {
+        border: none;
+      }
+    }
+  }
+
+  &__dropdown-item-image-wrapper {
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    left: 0;
+
+    width: $defaultElementHeight;
+  }
+
+  &__dropdown-item-image {
+    width: $imageWidth;
+    height: $imageHeight;
+    border-radius: 50%;
+  }
+
+  &__dropdown-item-name {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    padding-left: $smallPadding;
+    margin-left: $defaultElementHeight;
+
+    border-bottom: $thinBorder solid $primary
+  }
+}

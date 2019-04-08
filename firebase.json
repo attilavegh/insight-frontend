@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/insight-frontend",
+    "public": "dist/apps/insight-frontend",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -11,12 +11,17 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@insight/*": ["libs/*"],
+      "@insight/core": ["libs/core/src/index.ts"],
+      "@insight/authentication": ["libs/authentication/src/index.ts"],
+      "@insight/my-insight": ["libs/my-insight/src/index.ts"],
+      "@insight/new-insight": ["libs/new-insight/src/index.ts"],
+      "@insight/shared-components": ["libs/shared-components/src/index.ts"],
+      "@insight/shared-services": ["libs/shared-services/src/index.ts"],
+      "@insight/shared-directives": ["libs/shared-directives/src/index.ts"]
+    }
   }
 }

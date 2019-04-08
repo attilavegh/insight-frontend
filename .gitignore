@@ -12,6 +12,12 @@
 chrome-profiler-events.json
 speed-measure-plugin.json
 
+test
+.DS_Store
+*.log
+.ng_pkg_build
+jest.debug.config.js
+
 # IDEs and editors
 /.idea
 /.firebase
@@ -27,7 +33,6 @@ speed-measure-plugin.json
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
-!.vscode/extensions.json
 
 # misc
 /.sass-cache
