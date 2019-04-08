@@ -1,11 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
     "insight-frontend": {
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/insight-frontend",
+      "sourceRoot": "apps/insight-frontend/src",
       "projectType": "application",
       "prefix": "insight",
       "schematics": {
@@ -17,26 +17,24 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/insight-frontend",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "dist/apps/insight-frontend",
+            "index": "apps/insight-frontend/src/index.html",
+            "main": "apps/insight-frontend/src/main.ts",
+            "polyfills": "apps/insight-frontend/src/polyfills.ts",
+            "tsConfig": "apps/insight-frontend/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/insight-frontend/src/favicon.ico",
+              "apps/insight-frontend/src/assets"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["apps/insight-frontend/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/insight-frontend/src/environments/environment.ts",
+                  "with": "apps/insight-frontend/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -78,17 +76,15 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
+            "main": "apps/insight-frontend/src/test.ts",
+            "polyfills": "apps/insight-frontend/src/polyfills.ts",
+            "tsConfig": "apps/insight-frontend/tsconfig.spec.json",
+            "karmaConfig": "apps/insight-frontend/karma.conf.js",
+            "styles": ["apps/insight-frontend/src/styles.scss"],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/insight-frontend/src/favicon.ico",
+              "apps/insight-frontend/src/assets"
             ]
           }
         },
@@ -96,25 +92,23 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "apps/insight-frontend/tsconfig.app.json",
+              "apps/insight-frontend/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
     },
     "insight-frontend-e2e": {
-      "root": "e2e/",
+      "root": "apps/insight-frontend-e2e",
       "projectType": "application",
       "prefix": "",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "protractorConfig": "apps/insight-frontend-e2e/protractor.conf.js",
             "devServerTarget": "insight-frontend:serve"
           },
           "configurations": {
@@ -126,14 +120,232 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": "apps/insight-frontend-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
           }
+        }
+      }
+    },
+    "core": {
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "projectType": "library",
+      "prefix": "libs",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/tsconfig.lib.json",
+              "libs/core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/test.ts",
+            "tsConfig": "libs/core/tsconfig.spec.json",
+            "karmaConfig": "libs/core/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "authentication": {
+      "root": "libs/authentication",
+      "sourceRoot": "libs/authentication/src",
+      "projectType": "library",
+      "prefix": "libs",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/authentication/tsconfig.lib.json",
+              "libs/authentication/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/authentication/src/test.ts",
+            "tsConfig": "libs/authentication/tsconfig.spec.json",
+            "karmaConfig": "libs/authentication/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "my-insight": {
+      "root": "libs/my-insight",
+      "sourceRoot": "libs/my-insight/src",
+      "projectType": "library",
+      "prefix": "libs",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/my-insight/tsconfig.lib.json",
+              "libs/my-insight/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/my-insight/src/test.ts",
+            "tsConfig": "libs/my-insight/tsconfig.spec.json",
+            "karmaConfig": "libs/my-insight/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "new-insight": {
+      "root": "libs/new-insight",
+      "sourceRoot": "libs/new-insight/src",
+      "projectType": "library",
+      "prefix": "libs",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/new-insight/tsconfig.lib.json",
+              "libs/new-insight/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/new-insight/src/test.ts",
+            "tsConfig": "libs/new-insight/tsconfig.spec.json",
+            "karmaConfig": "libs/new-insight/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-components": {
+      "root": "libs/shared-components",
+      "sourceRoot": "libs/shared-components/src",
+      "projectType": "library",
+      "prefix": "insight",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-components/tsconfig.lib.json",
+              "libs/shared-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared-components/src/test.ts",
+            "tsConfig": "libs/shared-components/tsconfig.spec.json",
+            "karmaConfig": "libs/shared-components/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-services": {
+      "root": "libs/shared-services",
+      "sourceRoot": "libs/shared-services/src",
+      "projectType": "library",
+      "prefix": "insight",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-services/tsconfig.lib.json",
+              "libs/shared-services/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared-services/src/test.ts",
+            "tsConfig": "libs/shared-services/tsconfig.spec.json",
+            "karmaConfig": "libs/shared-services/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-directives": {
+      "root": "libs/shared-directives",
+      "sourceRoot": "libs/shared-directives/src",
+      "projectType": "library",
+      "prefix": "insight",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-directives/tsconfig.lib.json",
+              "libs/shared-directives/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared-directives/src/test.ts",
+            "tsConfig": "libs/shared-directives/tsconfig.spec.json",
+            "karmaConfig": "libs/shared-directives/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
         }
       }
     }
   },
-  "defaultProject": "insight-frontend"
+  "defaultProject": "insight-frontend",
+  "cli": {
+    "defaultCollection": "@nrwl/schematics"
+  }
 }

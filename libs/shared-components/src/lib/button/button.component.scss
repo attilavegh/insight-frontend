@@ -1,0 +1,27 @@
+@import "../../../../shared-styles/styles";
+
+.button-wrapper {
+  width: 100%;
+  border-radius: $smallRadius;
+
+  &__button {
+    width: 100%;
+    height: $defaultElementHeight;
+
+    background-color: $secondary;
+
+    border: none;
+    outline: none;
+  }
+
+  &__button-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+
+    width: 100%;
+    height: 100%;
+  }
+}

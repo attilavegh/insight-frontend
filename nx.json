@@ -1,0 +1,39 @@
+{
+  "npmScope": "insight",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "insight-frontend": {
+      "tags": ["app"]
+    },
+    "insight-frontend-e2e": {
+      "tags": ["app-e2e"]
+    },
+    "core": {
+      "tags": ["core"]
+    },
+    "authentication": {
+      "tags": ["auth"]
+    },
+    "my-insight": {
+      "tags": ["my-insight"]
+    },
+    "new-insight": {
+      "tags": ["new-insight"]
+    },
+    "shared-components": {
+      "tags": ["shared-components"]
+    },
+    "shared-services": {
+      "tags": ["shared-services"]
+    },
+    "shared-directives": {
+      "tags": ["shared-directives"]
+    }
+  }
+}
