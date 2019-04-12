@@ -4,6 +4,10 @@
     "outDir": "../../dist/out-tsc/apps/insight-frontend",
     "types": []
   },
+  "include": [
+    "**/*.ts",
+    "../../libs/**/index.ts"
+  ],
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

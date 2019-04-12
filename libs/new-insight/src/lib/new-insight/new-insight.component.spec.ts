@@ -24,7 +24,7 @@ describe('NewInsightComponent', () => {
         RippleModule,
         InsightTypeSelectorModule,
         UserSearchModule,
-        InsightInputBoxModule,
+        InsightInputBoxModule
       ],
       providers: [
         {

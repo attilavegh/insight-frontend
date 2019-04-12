@@ -1,0 +1,6 @@
+<div class="my-insight-received" *ngIf="insights$ | async as insights">
+  <insight-message-container class="my-insight-received__item" *ngFor="let insight of insights"
+                             [message]="insight"
+                             [category]="insightCategory.RECEIVED">
+  </insight-message-container>
+</div>

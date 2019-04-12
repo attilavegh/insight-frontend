@@ -1,13 +1,13 @@
-import { Router, RouterEvent } from '@angular/router';
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 import { Effect, Actions } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 
 import { AuthenticationService } from '@insight/authentication';
-import { UserModel } from '@insight/shared-model';
+import { User } from '@insight/shared-model';
 
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 
 import { AppPartialState } from './app.reducer';
 import {
@@ -29,7 +29,7 @@ export class AppEffects {
       return this.router.events.pipe(
         take(1),
         switchMap(() => this.authentication.getUser()),
-        map((user: UserModel) => new SetUser(user))
+        map((user: User) => new SetUser(user))
       );
     },
 
@@ -44,7 +44,7 @@ export class AppEffects {
       return this.authentication.login().pipe(
         tap((user: SocialUser) => localStorage.setItem('token', user.idToken)),
         switchMap((user: SocialUser) => this.authentication.verifyUser(user)),
-        map((user: UserModel) => new SetUser(user)),
+        map((user: User) => new SetUser(user)),
         tap(() => this.router.navigate(['/']))
       );
     },

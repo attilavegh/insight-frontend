@@ -1,16 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { MessageContainerModule, MessageFilterModule, MessageTypeSelectorModule, PagingModule } from '@insight/shared-components';
+import { MessageContainerModule, MessageFilterModule, MessageCategorySelectorModule, PagingModule } from '@insight/shared-components';
 import { RippleModule } from '@insight/shared-directives';
 
 import { MyInsightComponent } from './my-insight/my-insight.component';
-import { MYINSIGHT_FEATURE_KEY, initialState as myInsightInitialState, myInsightReducer } from './+state/my-insight.reducer';
+import { MyInsightReceivedComponent } from './my-insight-received/my-insight-received.component';
+import { MyInsightSentComponent } from './my-insight-sent/my-insight-sent.component';
+import { MY_INSIGHT_FEATURE_KEY, myInsightsInitialState as myInsightInitialState, myInsightReducer } from './+state/my-insight.reducer';
 import { MyInsightEffects } from './+state/my-insight.effects';
-import { MyInsightFacade } from './+state/my-insight.facade';
+
+const routes: Routes = [
+  { path: '', component: MyInsightComponent,
+    children: [
+      { path: '', redirectTo: 'received', pathMatch: 'full' },
+      { path: 'received', component: MyInsightReceivedComponent },
+      { path: 'sent', component: MyInsightSentComponent },
+    ]
+  }
+];
 
 @NgModule({
   imports: [
@@ -18,17 +31,20 @@ import { MyInsightFacade } from './+state/my-insight.facade';
     PagingModule,
     RippleModule,
     MessageContainerModule,
-    MessageTypeSelectorModule,
+    MessageCategorySelectorModule,
     MessageFilterModule,
-    StoreModule.forFeature(MYINSIGHT_FEATURE_KEY, myInsightReducer, {
+    ReactiveFormsModule,
+    StoreModule.forFeature(MY_INSIGHT_FEATURE_KEY, myInsightReducer, {
       initialState: myInsightInitialState
     }),
-    EffectsModule.forFeature([MyInsightEffects])
+    EffectsModule.forFeature([MyInsightEffects]),
+    RouterModule.forChild(routes)
   ],
   declarations: [
-    MyInsightComponent
+    MyInsightComponent,
+    MyInsightReceivedComponent,
+    MyInsightSentComponent
   ],
-  exports: [MyInsightComponent],
-  providers: [MyInsightFacade]
+  exports: [MyInsightComponent]
 })
 export class MyInsightModule {}

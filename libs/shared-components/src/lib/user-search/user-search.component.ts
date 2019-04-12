@@ -1,7 +1,7 @@
 import { Component, ElementRef, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
-import { UserModel } from '@insight/shared-model';
+import { User } from '@insight/shared-model';
 
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -25,11 +25,11 @@ import { map, tap } from 'rxjs/operators';
 })
 export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
 
-  @Input() users: Observable<UserModel[]>;
+  @Input() users: Observable<User[]>;
   @Input() userCount: number;
   @Input() loading = false;
 
-  selectedUser: UserModel;
+  selectedUser: User;
 
   @ViewChild('searchField') searchField: ElementRef;
   isValid = true;
@@ -104,7 +104,7 @@ export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAcces
     this.elementEventSubscriptions.push(blurSubscription);
   }
 
-  selectUser(user: UserModel) {
+  selectUser(user: User) {
     this.selectedUser = user;
     this.value = user;
     this.searchFieldValue = user.fullName;

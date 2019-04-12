@@ -1,4 +1,4 @@
-export enum MessageType {
+export enum InsightCategory {
   RECEIVED = 'received',
   SENT = 'sent'
 }

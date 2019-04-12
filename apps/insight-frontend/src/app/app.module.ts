@@ -7,9 +7,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { storeFreeze } from 'ngrx-store-freeze';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
-import { NewInsightModule } from '@insight/new-insight';
-import { MyInsightModule } from '@insight/my-insight';
 import { AuthenticationModule } from '@insight/authentication';
 import { CoreModule } from '@insight/core';
 import { environmentProvider } from '@insight/environment';
@@ -18,17 +17,15 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { initialState as appInitialState, appReducer } from './+state/app.reducer';
+import { appInitialState as appInitialState, appReducer } from './+state/app.reducer';
 import { AppEffects } from './+state/app.effects';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
-    NewInsightModule,
-    MyInsightModule,
     AuthenticationModule,
     NxModule.forRoot(),
     StoreModule.forRoot(
@@ -39,7 +36,8 @@ import { AppEffects } from './+state/app.effects';
       }
     ),
     EffectsModule.forRoot([AppEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [environmentProvider]

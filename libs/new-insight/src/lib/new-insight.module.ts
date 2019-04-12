@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule, InsightInputBoxModule, InsightTypeSelectorModule, UserSearchModule } from '@insight/shared-components';
 import { RippleModule } from '@insight/shared-directives';
-import { environmentProvider } from '@insight/environment';
+import { RouterModule, Routes } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,6 +13,10 @@ import { NewInsightComponent } from './new-insight/new-insight.component';
 import { NewInsightFacade } from './+state/new-insight.facade';
 import { NEWINSIGHT_FEATURE_KEY, initialState as newInsightInitialState, newInsightReducer } from './+state/new-insight.reducer';
 import { NewInsightEffects } from './+state/new-insight.effects';
+
+const routes: Routes = [
+  { path: '', component: NewInsightComponent }
+];
 
 @NgModule({
   imports: [
@@ -26,7 +30,8 @@ import { NewInsightEffects } from './+state/new-insight.effects';
     StoreModule.forFeature(NEWINSIGHT_FEATURE_KEY, newInsightReducer, {
       initialState: newInsightInitialState
     }),
-    EffectsModule.forFeature([NewInsightEffects])
+    EffectsModule.forFeature([NewInsightEffects]),
+    RouterModule.forChild(routes)
   ],
   declarations: [
     NewInsightComponent

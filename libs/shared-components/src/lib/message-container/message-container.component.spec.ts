@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { InsightCategory, User } from '@insight/shared-model';
+
 import { MessageContainerComponent } from './message-container.component';
 
 describe('MessageContainerComponent', () => {
@@ -16,9 +18,20 @@ describe('MessageContainerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MessageContainerComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
 
-    component.message = {};
+    component.message = {
+      id: 1,
+      date: new Date(),
+      formattedDate: new Date().toDateString(),
+      sender: {} as User,
+      receiver: {} as User,
+      continueMessage: 'Continue',
+      considerMessage: 'Consider'
+    };
+
+    component.category = InsightCategory.SENT;
+
+    fixture.detectChanges();
   });
 
   it('should create', () => {

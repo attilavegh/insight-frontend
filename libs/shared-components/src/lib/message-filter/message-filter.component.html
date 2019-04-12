@@ -1,12 +1,12 @@
-<div tabindex="0" #filter class="message-filer" [class.message-filer-focused]="isFocused || !isDefaultFilter">
+<div tabindex="0" (click)="onClick()" (blur)="onBlur()" class="message-filer" [class.message-filer-focused]="isFocused || !isDefaultFilter">
   <div insightRipple class="message-filer__image">
     <img src="assets/message-filter.svg">
   </div>
 
   <div *ngIf="isFocused" class="message-filer__options">
     <ul class="message-filer__options-list">
-      <li class="message-filer__options-list-item" [class.message-filer__options-list-item-selected]="option.value == selectedFilter"
-          *ngFor="let option of filterOptions" (click)="onFilterSelect(option.value)">
+      <li class="message-filer__options-list-item" [class.message-filer__options-list-item-selected]="option.value == selectedFilter.value"
+          *ngFor="let option of filterOptions" (click)="onFilterSelect(option)">
         {{option.name}}
       </li>
     </ul>

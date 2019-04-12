@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MyInsightComponent } from '@insight/my-insight';
-import { MessageFilterComponent } from '@insight/shared-components/src/lib/message-filter/message-filter.component';
-import { MessageTypeSelectorComponent } from '@insight/shared-components/src/lib/message-type-selector/message-type-selector.component';
-import { MessageContainerComponent } from '@insight/shared-components/src/lib/message-container/message-container.component';
-import { ButtonComponent } from '@insight/shared-components/src/lib/button/button.component';
-import { PagingComponent } from '@insight/shared-components/src/lib/paging/paging.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { MessageFilterModule, MessageCategorySelectorModule, ButtonModule } from '@insight/shared-components';
+
+import { StoreModule } from '@ngrx/store';
+
+import { MyInsightComponent } from './my-insight.component';
 
 describe('MyInsightComponent', () => {
   let component: MyInsightComponent;
@@ -13,13 +13,17 @@ describe('MyInsightComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        MessageFilterModule,
+        MessageCategorySelectorModule,
+        MessageFilterModule,
+        ButtonModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('myInsight', {}, {})
+      ],
       declarations: [
-        MyInsightComponent,
-        MessageFilterComponent,
-        MessageTypeSelectorComponent,
-        MessageContainerComponent,
-        ButtonComponent,
-        PagingComponent
+        MyInsightComponent
       ]
     })
     .compileComponents();

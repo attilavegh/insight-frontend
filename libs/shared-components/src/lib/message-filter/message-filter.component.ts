@@ -1,62 +1,39 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { InsightFilterModel, MessageFilterType } from '@insight/shared-model';
+import { InsightFilterModel, InsightFilterType } from '@insight/shared-model';
 
-import { fromEvent, Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'insight-message-filter',
   templateUrl: './message-filter.component.html',
   styleUrls: ['./message-filter.component.scss']
 })
-export class MessageFilterComponent implements OnInit, OnDestroy {
+export class MessageFilterComponent {
 
-  @ViewChild('filter') _filterElement: ElementRef;
+  @Input() filterOptions: InsightFilterModel[];
+  @Input() selectedFilter: InsightFilterModel;
 
-  @Output() filterChange = new EventEmitter<MessageFilterType>();
+  @Output() filterChange = new EventEmitter<InsightFilterModel>();
 
   isFocused = false;
-  selectedFilter = MessageFilterType.ALL;
-
-  filterOptions: InsightFilterModel[] = [
-    { name: 'All', value: MessageFilterType.ALL },
-    { name: 'Last day', value: MessageFilterType.LAST_DAY },
-    { name: 'Last month', value: MessageFilterType.LAST_MONTH },
-    { name: 'Last 6 months', value: MessageFilterType.LAST_SIX_MONTHS },
-    { name: 'Last year', value: MessageFilterType.LAST_YEAR },
-  ];
-
-  filterFocusSubscription: Subscription;
 
   constructor() {}
 
-  ngOnInit() {
-    this.observeFilterFocus();
-  }
-
-  ngOnDestroy() {
-    this.filterFocusSubscription.unsubscribe();
-  }
-
-  onFilterSelect(filter: MessageFilterType) {
+  onFilterSelect(filter: InsightFilterModel) {
     this.selectedFilter = filter;
     this.filterChange.emit(filter);
   }
 
-  private observeFilterFocus() {
-    this.filterFocusSubscription = fromEvent(this.filterElement, 'click').pipe(
-      tap(() => this.isFocused = !this.isFocused),
-      switchMap(() => fromEvent(this.filterElement, 'blur')),
-      tap(() => this.isFocused = false)
-    ).subscribe();
+  onClick() {
+    this.isFocused = !this.isFocused;
   }
 
-  get filterElement() {
-    return this._filterElement.nativeElement;
+  onBlur() {
+    this.isFocused = false;
   }
 
   get isDefaultFilter() {
-    return this.selectedFilter === MessageFilterType.ALL;
+    return this.selectedFilter && this.selectedFilter.value === InsightFilterType.ALL;
   }
 }

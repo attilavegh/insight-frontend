@@ -15,15 +15,15 @@ export class AppFacade {
 
   constructor(private store: Store<AppPartialState>) {}
 
+  initApp() {
+    this.store.dispatch(new InitApp());
+  }
+
   login() {
     this.store.dispatch(new Login());
   }
 
   logout() {
     this.store.dispatch(new Logout());
-  }
-
-  initApp() {
-    this.store.dispatch(new InitApp());
   }
 }

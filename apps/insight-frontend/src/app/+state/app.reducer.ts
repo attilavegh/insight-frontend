@@ -1,24 +1,23 @@
 import { AppAction, AppActionTypes } from './app.actions';
 
-import { UserModel } from '@insight/shared-model';
+import { User } from '@insight/shared-model';
 
 export const APP_FEATURE_KEY = 'app';
 
 export interface AppState {
-  user: UserModel;
-  error: any;
+  user: User;
+  error?: any;
 }
 
 export interface AppPartialState {
   readonly [APP_FEATURE_KEY]: AppState;
 }
 
-export const initialState: AppState = {
-  user: null,
-  error: null
+export const appInitialState: AppState = {
+  user: null
 };
 
-export function appReducer(state: AppState = initialState, action: AppAction): AppState {
+export function appReducer(state: AppState = appInitialState, action: AppAction): AppState {
   switch (action.type) {
     case AppActionTypes.InitApp: {
       state = { ...state};
@@ -42,11 +41,11 @@ export function appReducer(state: AppState = initialState, action: AppAction): A
       break;
     }
     case AppActionTypes.LogoutSuccess: {
-      state = { ...initialState };
+      state = { ...appInitialState };
       break;
     }
     case AppActionTypes.LogoutError: {
-      state = { ...initialState, error: action.payload };
+      state = { ...appInitialState, error: action.payload };
       break;
     }
   }

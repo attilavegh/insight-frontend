@@ -1,33 +1,73 @@
 import { Action } from '@ngrx/store';
-import { Entity } from './my-insight.reducer';
+
+import { Insight, InsightFilterModel } from '@insight/shared-model';
 
 export enum MyInsightActionTypes {
-  LoadMyInsight = '[MyInsight] Load MyInsight',
-  MyInsightLoaded = '[MyInsight] MyInsight Loaded',
-  MyInsightLoadError = '[MyInsight] MyInsight Load Error'
+  GetReceivedInsights = '[MyInsight] Get Received Insights',
+  LoadReceivedInsights = '[MyInsight] Load Received Insights',
+  ReceivedInsightsLoaded = '[MyInsight] Received Insight Loaded',
+
+  GetSentInsights = '[MyInsight] Get Sent Insights',
+  LoadSentInsights = '[MyInsight] Load Sent Insights',
+  SentInsightsLoaded = '[MyInsight] Sent Insight Loaded',
+
+  InsightLoadError = '[MyInsight] Insight Load Error',
+
+  ChangeInsightFilter = '[MyInsight] Filter Insights',
+  InsightFilterChanged = '[MyInsight] Insight Filter Changed'
 }
 
-export class LoadMyInsight implements Action {
-  readonly type = MyInsightActionTypes.LoadMyInsight;
+export class GetReceivedInsights implements Action {
+  readonly type = MyInsightActionTypes.GetReceivedInsights;
 }
 
-export class MyInsightLoadError implements Action {
-  readonly type = MyInsightActionTypes.MyInsightLoadError;
+export class LoadReceivedInsights implements Action {
+  readonly type = MyInsightActionTypes.LoadReceivedInsights;
+}
+
+export class ReceivedInsightsLoaded implements Action {
+  readonly type = MyInsightActionTypes.ReceivedInsightsLoaded;
+  constructor(public payload: Insight[]) {}
+}
+
+export class GetSentInsights implements Action {
+  readonly type = MyInsightActionTypes.GetSentInsights;
+}
+
+export class LoadSentInsights implements Action {
+  readonly type = MyInsightActionTypes.LoadSentInsights;
+}
+
+export class SentInsightsLoaded implements Action {
+  readonly type = MyInsightActionTypes.SentInsightsLoaded;
+  constructor(public payload: Insight[]) {}
+}
+
+export class InsightLoadError implements Action {
+  readonly type = MyInsightActionTypes.InsightLoadError;
   constructor(public payload: any) {}
 }
 
-export class MyInsightLoaded implements Action {
-  readonly type = MyInsightActionTypes.MyInsightLoaded;
-  constructor(public payload: Entity[]) {}
+export class ChangeInsightFilter implements Action {
+  readonly type = MyInsightActionTypes.ChangeInsightFilter;
+  constructor(public payload: InsightFilterModel) {}
+}
+
+export class InsightFilterChanged implements Action {
+  readonly type = MyInsightActionTypes.InsightFilterChanged;
+  constructor(public payload: Insight[]) {}
 }
 
 export type MyInsightAction =
-  | LoadMyInsight
-  | MyInsightLoaded
-  | MyInsightLoadError;
+  GetReceivedInsights
+  | LoadReceivedInsights
+  | ReceivedInsightsLoaded
 
-export const fromMyInsightActions = {
-  LoadMyInsight,
-  MyInsightLoaded,
-  MyInsightLoadError
-};
+  | GetSentInsights
+  | LoadSentInsights
+  | SentInsightsLoaded
+
+  | InsightLoadError
+
+  | ChangeInsightFilter
+  | InsightFilterChanged;

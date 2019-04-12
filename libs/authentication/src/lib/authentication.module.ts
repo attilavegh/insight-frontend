@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { RippleModule } from '@insight/shared-directives';
 
@@ -10,12 +11,17 @@ import { InterceptorService } from './interceptor/interceptor.service';
 
 import { AuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
+const routes = [
+  { path: '', component: LoginComponent }
+];
+
 @NgModule({
   imports: [
     CommonModule,
     RippleModule,
     SocialLoginModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [
     LoginComponent
