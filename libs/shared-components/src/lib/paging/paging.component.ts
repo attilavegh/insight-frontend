@@ -7,12 +7,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PagingComponent implements OnInit {
 
-  @Input() numberOfPages = 3;
+  @Input() numberOfPages;
   @Output() changePage = new EventEmitter<number>();
+
   selectedPage = 1;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
   }
@@ -23,6 +23,6 @@ export class PagingComponent implements OnInit {
   }
 
   get hasNext() {
-    return this.selectedPage !== this.numberOfPages;
+    return this.numberOfPages && this.selectedPage !== this.numberOfPages;
   }
 }

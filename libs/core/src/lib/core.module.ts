@@ -2,17 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { HamburgerIconModule } from '@insight/shared-components';
-
 import { HeaderComponent } from './header/header.component';
+import { HamburgerIconComponent } from './hamburger-icon/hamburger-icon.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    HamburgerIconModule
   ],
   declarations: [
+    HamburgerIconComponent,
     HeaderComponent
   ],
   exports: [

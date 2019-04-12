@@ -1,17 +1,17 @@
 import { Action } from '@ngrx/store';
 
-import { UserModel } from '@insight/shared-model';
+import { User } from '@insight/shared-model';
 
 export enum AppActionTypes {
   InitApp = '[App] Init',
 
   Login = '[App] Login',
-  SetUser = '[App] SetUser',
-  LoginError = '[App] LoginError',
+  SetUser = '[App] Set User',
+  LoginError = '[App] Login Error',
 
   Logout = '[App] Logout',
-  LogoutSuccess = '[App] LogoutSuccess',
-  LogoutError = '[App] LogoutError'
+  LogoutSuccess = '[App] Logout Success',
+  LogoutError = '[App] Logout Error'
 }
 
 export class InitApp implements Action {
@@ -24,7 +24,7 @@ export class Login implements Action {
 
 export class SetUser implements Action {
   readonly type = AppActionTypes.SetUser;
-  constructor(public payload: UserModel) {}
+  constructor(public payload: User) {}
 }
 
 export class LoginError implements Action {

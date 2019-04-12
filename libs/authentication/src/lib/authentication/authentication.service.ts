@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
-import { UserModel } from '@insight/shared-model';
+import { User } from '@insight/shared-model';
 import { environmentToken } from '@insight/environment';
 
 import { fromPromise } from 'rxjs/internal-compatibility';
@@ -15,9 +15,9 @@ import { loginOpt } from './authentication.config';
 
 export interface AuthenticationServiceShape {
   login(): Observable<SocialUser>;
-  verifyUser(user: SocialUser): Observable<UserModel>;
+  verifyUser(user: SocialUser): Observable<User>;
   logout(): Observable<any>;
-  getUser(): Observable<UserModel>;
+  getUser(): Observable<User>;
 }
 
 @Injectable({
@@ -34,23 +34,23 @@ export class AuthenticationService implements AuthenticationServiceShape {
     return fromPromise(this.authService.signIn(GoogleLoginProvider.PROVIDER_ID, loginOpt));
   }
 
-  verifyUser(user: SocialUser): Observable<UserModel> {
-    return this.http.post<UserModel>(`${this.environment}/user/login`, user);
+  verifyUser(user: SocialUser): Observable<User> {
+    return this.http.post<User>(`${this.environment}/user/login`, user);
   }
 
   logout(): Observable<any> {
     return fromPromise(this.authService.signOut());
   }
 
-  getUser(): Observable<UserModel> {
+  getUser(): Observable<User> {
     return this.authState.pipe(
       filter((user: SocialUser) => !!user),
       switchMap((user: SocialUser) => this.fetchUser(user.id))
     );
   }
 
-  private fetchUser(googleId): Observable<UserModel> {
-    return this.http.get<UserModel>(`${this.environment}/user/${googleId}`);
+  private fetchUser(googleId): Observable<User> {
+    return this.http.get<User>(`${this.environment}/user/${googleId}`);
   }
 
   get authState() {

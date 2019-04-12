@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '@insight/shared-services';
-import { InsightType, UserModel } from '@insight/shared-model';
+import { InsightType, User } from '@insight/shared-model';
 
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs/operators';
@@ -28,7 +28,7 @@ export class NewInsightComponent implements OnInit, OnDestroy {
     consider: this.considerControl
   });
 
-  users$ = new Observable<UserModel[]>();
+  users$ = new Observable<User[]>();
   userCount = 0;
   isSearchLoading = false;
 
@@ -46,7 +46,7 @@ export class NewInsightComponent implements OnInit, OnDestroy {
       debounceTime(300),
       tap(() => this.isSearchLoading = true),
       switchMap((value: string) => this.userService.search(value)),
-      tap((users: UserModel[]) => {
+      tap((users: User[]) => {
         this.isSearchLoading = false;
         this.userCount = users.length;
       })
@@ -100,6 +100,6 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   }
 
   get isConsider() {
-    return this.typeControl.value === InsightType.CONSIDER;
+    return this.typeControl && this.typeControl.value === InsightType.CONSIDER;
   }
 }

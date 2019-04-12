@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { StoreModule } from '@ngrx/store';
 
-import { HamburgerIconComponent } from '../../../../shared-components/src/lib/hamburger-icon/hamburger-icon.component';
+import { HamburgerIconComponent } from '../hamburger-icon/hamburger-icon.component';
 
 import { HeaderComponent } from './header.component';
 

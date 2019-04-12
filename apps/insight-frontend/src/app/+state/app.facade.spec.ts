@@ -9,7 +9,7 @@ import { NxModule } from '@nrwl/nx';
 import { AppEffects } from './app.effects';
 import { AppFacade } from './app.facade';
 
-import { AppState, initialState, appReducer } from './app.reducer';
+import { AppState, appInitialState, appReducer } from './app.reducer';
 
 interface TestSchema {
   app: AppState;
@@ -27,7 +27,7 @@ describe('AppFacade', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
-          StoreModule.forFeature('app', appReducer, { initialState }),
+          StoreModule.forFeature('app', appReducer, { initialState: appInitialState }),
           EffectsModule.forFeature([AppEffects])
         ],
         providers: [AppFacade]

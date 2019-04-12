@@ -1,4 +1,6 @@
-export enum MessageFilterType {
+import { Insight } from '@insight/shared-model';
+
+export enum InsightFilterType {
   ALL = 'all',
   LAST_DAY = 'last_day',
   LAST_MONTH = 'last_month',
@@ -8,5 +10,11 @@ export enum MessageFilterType {
 
 export interface InsightFilterModel {
   name: string;
-  value: MessageFilterType;
+  value: InsightFilterType;
+  filterFn?: (insight: Insight) => {};
 }
+
+export const defaultFilter: InsightFilterModel = {
+  name: 'All',
+  value: InsightFilterType.ALL,
+};

@@ -1,0 +1,5 @@
+@import "../../../../shared-styles/styles";
+
+::ng-deep .message{
+  margin-bottom: $largeMargin;
+}

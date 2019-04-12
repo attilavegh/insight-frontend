@@ -27,6 +27,7 @@ $arrowWidth: 8px;
     background-color: $secondary;
 
     &-separator {
+      font-weight: lighter;
       padding-right: $smallPadding;
       padding-left: $smallPadding;
     }
@@ -69,7 +70,7 @@ $arrowWidth: 8px;
   &__content-label {
     width: fit-content;
     padding: $xSmallPadding;
-    margin-bottom: $xSmallMargin;
+    margin-bottom: $smallMargin;
     background-color: $secondary;
 
     font-weight: lighter;
