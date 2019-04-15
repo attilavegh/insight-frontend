@@ -13,7 +13,7 @@ export interface UserServiceShape {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService implements UserServiceShape{
+export class UserService implements UserServiceShape {
 
   constructor(@Inject(environmentToken) private environment: string,
               private httpClient: HttpClient) {}

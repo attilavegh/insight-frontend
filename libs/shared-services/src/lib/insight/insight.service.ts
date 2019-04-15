@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Insight } from '@insight/shared-model';
+import { Insight, InsightFormData } from '@insight/shared-model';
 import { environmentToken } from '@insight/environment';
 
 import { Observable } from 'rxjs';
@@ -15,12 +15,12 @@ export interface InsightServiceShape {
 @Injectable({
   providedIn: 'root'
 })
-export class InsightService implements InsightServiceShape{
+export class InsightService implements InsightServiceShape {
 
   constructor(@Inject(environmentToken) private environment: string,
               private http: HttpClient) {}
 
-  send(insight: Insight): Observable<Insight> {
+  send(insight: InsightFormData): Observable<Insight> {
     return this.http.post<Insight>(`${this.environment}/insight/send/`, insight);
   }
 

@@ -6,10 +6,7 @@ import { InsightFilterModel } from '@insight/shared-model';
 
 import { MyInsightPartialState } from './my-insight.reducer';
 import { myInsightQuery } from './my-insight.selectors';
-import {
-  ChangeInsightFilter,
-  GetReceivedInsights, GetSentInsights,
-} from './my-insight.actions';
+import { ChangeInsightFilter } from './my-insight.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +20,6 @@ export class MyInsightFacade {
   sentInsights$ = this.store.pipe(select(myInsightQuery.getSentInsights));
 
   constructor(private store: Store<MyInsightPartialState>) {}
-
-  getReceivedInsights() {
-    this.store.dispatch(new GetReceivedInsights());
-  }
-
-  getSentInsights() {
-    this.store.dispatch(new GetSentInsights());
-  }
 
   changeInsightFilter(filter: InsightFilterModel) {
     this.store.dispatch(new ChangeInsightFilter(filter));

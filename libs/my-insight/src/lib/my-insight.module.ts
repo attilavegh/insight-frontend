@@ -10,8 +10,7 @@ import { MessageContainerModule, MessageFilterModule, MessageCategorySelectorMod
 import { RippleModule } from '@insight/shared-directives';
 
 import { MyInsightComponent } from './my-insight/my-insight.component';
-import { MyInsightReceivedComponent } from './my-insight-received/my-insight-received.component';
-import { MyInsightSentComponent } from './my-insight-sent/my-insight-sent.component';
+import { MyInsightListComponent } from './my-insight-list/my-insight-list.component';
 import { MY_INSIGHT_FEATURE_KEY, myInsightsInitialState as myInsightInitialState, myInsightReducer } from './+state/my-insight.reducer';
 import { MyInsightEffects } from './+state/my-insight.effects';
 
@@ -19,8 +18,8 @@ const routes: Routes = [
   { path: '', component: MyInsightComponent,
     children: [
       { path: '', redirectTo: 'received', pathMatch: 'full' },
-      { path: 'received', component: MyInsightReceivedComponent },
-      { path: 'sent', component: MyInsightSentComponent },
+      { path: 'received', component: MyInsightListComponent },
+      { path: 'sent', component: MyInsightListComponent },
     ]
   }
 ];
@@ -42,8 +41,7 @@ const routes: Routes = [
   ],
   declarations: [
     MyInsightComponent,
-    MyInsightReceivedComponent,
-    MyInsightSentComponent
+    MyInsightListComponent
   ],
   exports: [MyInsightComponent]
 })

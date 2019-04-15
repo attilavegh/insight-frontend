@@ -1,33 +1,51 @@
 import { Action } from '@ngrx/store';
-import { Entity } from './new-insight.reducer';
+
+import { InsightFormData, User } from '@insight/shared-model';
 
 export enum NewInsightActionTypes {
-  LoadNewInsight = '[NewInsight] Load NewInsight',
-  NewInsightLoaded = '[NewInsight] NewInsight Loaded',
-  NewInsightLoadError = '[NewInsight] NewInsight Load Error'
+  SearchUser = '[NewInsight] Search User',
+  SearchUserLoaded = '[NewInsight] Search User Loaded',
+  SearchUserError = '[NewInsight] Search User Error',
+
+  SubmitForm = '[NewInsight] Submit Form',
+  SubmitFormSuccess = '[NewInsight] Submit Form Success',
+  SubmitFormError = '[NewInsight] Submit Form Error'
 }
 
-export class LoadNewInsight implements Action {
-  readonly type = NewInsightActionTypes.LoadNewInsight;
+export class SearchUser implements Action {
+  readonly type = NewInsightActionTypes.SearchUser;
+  constructor(public payload: string) {}
 }
 
-export class NewInsightLoadError implements Action {
-  readonly type = NewInsightActionTypes.NewInsightLoadError;
+export class SearchUserLoaded implements Action {
+  readonly type = NewInsightActionTypes.SearchUserLoaded;
+  constructor(public payload: User[]) {}
+}
+
+export class SearchUserError implements Action {
+  readonly type = NewInsightActionTypes.SearchUserError;
   constructor(public payload: any) {}
 }
 
-export class NewInsightLoaded implements Action {
-  readonly type = NewInsightActionTypes.NewInsightLoaded;
-  constructor(public payload: Entity[]) {}
+export class SubmitForm implements Action {
+  readonly type = NewInsightActionTypes.SubmitForm;
+  constructor(public payload: Partial<InsightFormData>) {}
+}
+
+export class SubmitFormSuccess implements Action {
+  readonly type = NewInsightActionTypes.SubmitFormSuccess;
+}
+
+export class SubmitFormError implements Action {
+  readonly type = NewInsightActionTypes.SubmitFormError;
+  constructor(public payload: any) {}
 }
 
 export type NewInsightAction =
-  | LoadNewInsight
-  | NewInsightLoaded
-  | NewInsightLoadError;
+  | SearchUser
+  | SearchUserLoaded
+  | SearchUserError
 
-export const fromNewInsightActions = {
-  LoadNewInsight,
-  NewInsightLoaded,
-  NewInsightLoadError
-};
+  | SubmitForm
+  | SubmitFormSuccess
+  | SubmitFormError;

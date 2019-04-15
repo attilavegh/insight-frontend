@@ -1,6 +1,6 @@
 <div class="user-search" [class.user-search__loading]="loading && isFocused">
   <div class="user-search__box"
-       [class.user-search__box-dropdown-visible]="userCount > 0 && isFocused"
+       [class.user-search__box-dropdown-visible]="users && users.length > 0 && isFocused"
        [class.user-search__box-error]="!isValid && !isFocused"
        [class.user-search__box-valid]="selectedUser">
     <div class="user-search__box-focus-area" (click)="searchField.focus()"></div>
@@ -18,7 +18,7 @@
            [class.user-search__box-input-value]="selectedUser && !isFocused">
   </div>
 
-  <div *ngIf="users | async as users" class="user-search__dropdown-wrapper">
+  <div *ngIf="users" class="user-search__dropdown-wrapper">
     <div *ngIf="isFocused && users.length > 0" class="user-search__dropdown">
       <ul class="user-search__dropdown-items">
         <li class="user-search__dropdown-item" *ngFor="let user of users" (mousedown)="selectUser(user)">

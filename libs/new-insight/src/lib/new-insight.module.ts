@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { NewInsightComponent } from './new-insight/new-insight.component';
 import { NewInsightFacade } from './+state/new-insight.facade';
-import { NEWINSIGHT_FEATURE_KEY, initialState as newInsightInitialState, newInsightReducer } from './+state/new-insight.reducer';
+import { NEW_INSIGHT_FEATURE_KEY, initialState as newInsightInitialState, newInsightReducer } from './+state/new-insight.reducer';
 import { NewInsightEffects } from './+state/new-insight.effects';
 
 const routes: Routes = [
@@ -27,7 +27,7 @@ const routes: Routes = [
     InsightTypeSelectorModule,
     UserSearchModule,
     InsightInputBoxModule,
-    StoreModule.forFeature(NEWINSIGHT_FEATURE_KEY, newInsightReducer, {
+    StoreModule.forFeature(NEW_INSIGHT_FEATURE_KEY, newInsightReducer, {
       initialState: newInsightInitialState
     }),
     EffectsModule.forFeature([NewInsightEffects]),

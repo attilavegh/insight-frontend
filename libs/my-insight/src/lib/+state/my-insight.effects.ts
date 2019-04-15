@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 
@@ -7,13 +8,13 @@ import { InsightService } from '@insight/shared-services';
 import { Insight, InsightCategory, User } from '@insight/shared-model';
 import { format } from '@insight/utils';
 
-import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { iif, of } from 'rxjs';
 
 import { MyInsightPartialState } from './my-insight.reducer';
 import { MyInsightFacade } from './my-insight.facade';
 import {
-  ChangeInsightFilter, InsightFilterChanged,
+  ChangeInsightFilter, GetReceivedInsights, GetSentInsights, InsightFilterChanged,
   InsightLoadError,
   LoadReceivedInsights,
   LoadSentInsights,
@@ -32,6 +33,33 @@ const formatInsightsDate = (insights: Insight[]): Insight[] => {
 
 @Injectable()
 export class MyInsightEffects {
+
+  @Effect() onInsightNavigation = this.dataPersistence.fetch(ROUTER_NAVIGATION, {
+      run: () => {
+        const receivedUrl = '/insights/received';
+        const sentUrl = '/insights/sent';
+
+        const filterRoutes = (state) => {
+          const payload = state.payload.routerState.url;
+          return payload === receivedUrl || payload === sentUrl;
+        };
+
+        return this.actions$.pipe(
+          take(1),
+          filter(state => filterRoutes(state)),
+          mergeMap((state: any) => iif(() => state.payload.routerState.url === receivedUrl,
+            of(new GetReceivedInsights()),
+            of(new GetSentInsights())
+          ))
+        );
+      },
+
+      onError: (action: LoadReceivedInsights, error) => {
+        console.error('Error', error);
+        return new InsightLoadError(error);
+      }
+    }
+  );
 
   @Effect() getReceivedInsights$ = this.dataPersistence.fetch(MyInsightActionTypes.GetReceivedInsights, {
       run: () => {
@@ -125,5 +153,6 @@ export class MyInsightEffects {
     private myInsightFacade: MyInsightFacade,
     private insightService: InsightService,
     private dataPersistence: DataPersistence<MyInsightPartialState>
-  ) {}
+  ) {
+  }
 }

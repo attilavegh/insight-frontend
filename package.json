@@ -9,7 +9,7 @@
     "lint": "./node_modules/.bin/nx lint && ng lint",
     "e2e": "ng e2e",
     "build-prod": "ng build --prod",
-    "test-ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessNoSandbox",
+    "test-ci": "ng test --no-watch --browsers=ChromeHeadlessNoSandbox",
     "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive",
     "affected:apps": "./node_modules/.bin/nx affected:apps",
     "affected:libs": "./node_modules/.bin/nx affected:libs",
