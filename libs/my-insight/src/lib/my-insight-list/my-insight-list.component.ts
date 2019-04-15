@@ -7,19 +7,16 @@ import { Insight, InsightCategory } from '@insight/shared-model';
 import { MyInsightFacade } from '../+state/my-insight.facade';
 
 @Component({
-  selector: 'insight-my-insight-sent',
-  templateUrl: './my-insight-sent.component.html',
-  styleUrls: ['./my-insight-sent.component.scss']
+  selector: 'insight-my-insight-received',
+  templateUrl: './my-insight-list.component.html',
+  styleUrls: ['./my-insight-list.component.scss']
 })
-export class MyInsightSentComponent implements OnInit {
+export class MyInsightListComponent implements OnInit {
 
   insights$: Observable<Insight[]> = this.myInsightFacade.displayedInsights$;
-  insightCategory = InsightCategory;
+  category$: Observable<InsightCategory> = this.myInsightFacade.category$;
 
   constructor(private myInsightFacade: MyInsightFacade) {}
 
-  ngOnInit() {
-    this.myInsightFacade.getSentInsights();
-  }
-
+  ngOnInit() {}
 }

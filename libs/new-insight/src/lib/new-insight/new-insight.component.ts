@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { UserService } from '@insight/shared-services';
-import { InsightType, User } from '@insight/shared-model';
+import { InsightType } from '@insight/shared-model';
 
-import { Observable, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
+import { NewInsightFacade } from '../+state/new-insight.facade';
 
 @Component({
   selector: 'insight-new-insight',
@@ -14,53 +14,40 @@ import { debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs
 })
 export class NewInsightComponent implements OnInit, OnDestroy {
 
+  searchSubscription: Subscription;
   typeControlSubscription: Subscription;
 
-  userControl = new FormControl('', [Validators.required]);
+  receiverControl = new FormControl('', [Validators.required]);
   typeControl = new FormControl(InsightType.CONTINUE, [Validators.required]);
-  continueControl = new FormControl('', [Validators.required]);
-  considerControl = new FormControl({value: '', disabled: true}, [Validators.required]);
+  continueMessageControl = new FormControl('', [Validators.required]);
+  considerMessageControl = new FormControl({ value: '', disabled: true }, [Validators.required]);
 
   form = new FormGroup({
-    user: this.userControl,
+    receiver: this.receiverControl,
     type: this.typeControl,
-    continue: this.continueControl,
-    consider: this.considerControl
+    continueMessage: this.continueMessageControl,
+    considerMessage: this.considerMessageControl
   });
 
-  users$ = new Observable<User[]>();
-  userCount = 0;
-  isSearchLoading = false;
+  isSearchLoading$ = this.newInsightFacade.searchLoading$;
+  users$ = this.newInsightFacade.users$;
 
-  constructor(private userService: UserService) {
-  }
+  constructor(private newInsightFacade: NewInsightFacade) {}
 
   ngOnInit() {
-    this.typeControlSubscription = this.typeControl.valueChanges.pipe(
-      distinctUntilChanged()
-    ).subscribe(this.onTypeControlChange.bind(this));
-
-    this.users$ = this.userControl.valueChanges.pipe(
-      filter(value => typeof value === 'string'),
-      distinctUntilChanged(),
-      debounceTime(300),
-      tap(() => this.isSearchLoading = true),
-      switchMap((value: string) => this.userService.search(value)),
-      tap((users: User[]) => {
-        this.isSearchLoading = false;
-        this.userCount = users.length;
-      })
-    );
+    this.searchSubscription = this.receiverControl.valueChanges.subscribe((name: string) => this.newInsightFacade.search(name));
+    this.typeControlSubscription = this.typeControl.valueChanges.subscribe(this.onTypeControlChange.bind(this));
   }
 
   ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
     this.typeControlSubscription.unsubscribe();
   }
 
   onSubmit() {
     if (this.form.valid) {
+      this.newInsightFacade.send(this.form.value);
       this.resetForm();
-      console.log('submit');
     } else {
       this.showErrors();
     }
@@ -92,10 +79,9 @@ export class NewInsightComponent implements OnInit, OnDestroy {
 
   private onTypeControlChange(value: InsightType) {
     if (value === InsightType.CONSIDER) {
-      this.considerControl.reset();
-      this.considerControl.enable();
+      this.considerMessageControl.enable();
     } else {
-      this.considerControl.disable();
+      this.considerMessageControl.disable();
     }
   }
 

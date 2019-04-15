@@ -3,7 +3,7 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 
 import { User } from '@insight/shared-model';
 
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -25,8 +25,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
 
-  @Input() users: Observable<User[]>;
-  @Input() userCount: number;
+  @Input() users: User[];
   @Input() loading = false;
 
   selectedUser: User;

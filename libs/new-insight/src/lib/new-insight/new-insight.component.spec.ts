@@ -1,12 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { StoreModule } from '@ngrx/store';
+
 import { RippleModule } from '@insight/shared-directives';
+import { environmentToken } from '@insight/environment';
 import { ButtonModule, InsightInputBoxModule, InsightTypeSelectorModule, UserSearchModule } from '@insight/shared-components';
 
 import { NewInsightComponent } from './new-insight.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { environmentToken } from '@insight/environment';
 
 describe('NewInsightComponent', () => {
   let component: NewInsightComponent;
@@ -24,7 +26,9 @@ describe('NewInsightComponent', () => {
         RippleModule,
         InsightTypeSelectorModule,
         UserSearchModule,
-        InsightInputBoxModule
+        InsightInputBoxModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('newInsight', {}, {})
       ],
       providers: [
         {

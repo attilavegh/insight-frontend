@@ -1,16 +1,17 @@
 <div class="new-insight">
   <form class="new-insight__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
     <div class="new-insight__form-row">
-      <insight-user-search [loading]="isSearchLoading" [users]="users$" [userCount]="userCount" formControlName="user"></insight-user-search>
+      <insight-user-search [loading]="isSearchLoading$ | async" [users]="users$ | async" formControlName="receiver"></insight-user-search>
     </div>
     <div class="new-insight__form-row">
       <insight-type-selector formControlName="type"></insight-type-selector>
     </div>
     <div class="new-insight__form-row">
-      <insight-input-box [headerText]="'Continue'" [placeholder]="'You should continue...'" formControlName="continue"></insight-input-box>
+      <insight-input-box [headerText]="'Continue'" [placeholder]="'You should continue...'" formControlName="continueMessage"></insight-input-box>
     </div>
     <div *ngIf="isConsider" class="new-insight__form-row">
-      <insight-input-box [headerText]="'Consider'" [placeholder]="'Please, consider...'" formControlName="consider"></insight-input-box>
+      <insight-input-box [headerText]="'Consider'" [placeholder]="'Please, consider...'" formControlName="considerMessage"></insight-input-box>
     </div>
 
     <div class="new-insight__form-row">

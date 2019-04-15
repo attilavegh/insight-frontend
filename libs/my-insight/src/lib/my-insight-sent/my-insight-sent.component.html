@@ -1,6 +1,0 @@
-<div class="my-insight-sent" *ngIf="insights$ | async as insights">
-  <insight-message-container class="my-insight-sent__item" *ngFor="let insight of insights"
-                             [message]="insight"
-                             [category]="insightCategory.SENT">
-  </insight-message-container>
-</div>

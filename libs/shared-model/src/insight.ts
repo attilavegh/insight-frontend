@@ -9,3 +9,10 @@ export interface Insight {
   date: Date;
   formattedDate: string;
 }
+
+export interface InsightFormData {
+  sender: User;
+  receiver: User;
+  continueMessage: string;
+  considerMessage?: string;
+}

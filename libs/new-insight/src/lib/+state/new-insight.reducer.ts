@@ -1,47 +1,74 @@
+import { InsightFormData, User } from '@insight/shared-model';
+
 import { NewInsightAction, NewInsightActionTypes } from './new-insight.actions';
 
-export const NEWINSIGHT_FEATURE_KEY = 'newInsight';
+export const NEW_INSIGHT_FEATURE_KEY = 'newInsight';
 
-/**
- * Interface for the 'NewInsight' data used in
- *  - NewInsightState, and
- *  - newInsightReducer
- *
- *  Note: replace if already defined in another module
- */
+interface UserSearch {
+  users: User[];
+  loading: boolean;
+  searchTerm: string;
+}
 
-/* tslint:disable:no-empty-interface */
-export interface Entity {}
+interface InsightForm {
+  data: Partial<InsightFormData>;
+  pending: boolean;
+}
 
 export interface NewInsightState {
-  list: Entity[]; // list of NewInsight; analogous to a sql normalized table
-  selectedId?: string | number; // which NewInsight record has been selected
-  loaded: boolean; // has the NewInsight list been loaded
-  error?: any; // last none error (if any)
+  userSearch: UserSearch;
+  form: InsightForm;
+  error?: any;
 }
 
 export interface NewInsightPartialState {
-  readonly [NEWINSIGHT_FEATURE_KEY]: NewInsightState;
+  readonly [NEW_INSIGHT_FEATURE_KEY]: NewInsightState;
 }
 
 export const initialState: NewInsightState = {
-  list: [],
-  loaded: false
+  userSearch: {
+    users: [],
+    loading: false,
+    searchTerm: ''
+  },
+  form: {
+    data: {
+      sender: null,
+      receiver: null,
+      continueMessage: ''
+    },
+    pending: false
+  }
 };
 
-export function newInsightReducer(
-  state: NewInsightState = initialState,
-  action: NewInsightAction
-): NewInsightState {
+export function newInsightReducer(state: NewInsightState = initialState, action: NewInsightAction): NewInsightState {
   switch (action.type) {
-    case NewInsightActionTypes.NewInsightLoaded: {
-      state = {
-        ...state,
-        list: action.payload,
-        loaded: true
-      };
+    case NewInsightActionTypes.SearchUser: {
+      state = {...state, userSearch: { ...state.userSearch, loading: action.payload.length > 1, searchTerm: action.payload }};
+      break;
+    }
+    case NewInsightActionTypes.SearchUserLoaded: {
+      state = { ...state, userSearch: { ...state.userSearch, loading: false, users: action.payload }};
+      break;
+    }
+    case NewInsightActionTypes.SearchUserError: {
+      state = { ...state, userSearch: { ...state.userSearch, loading: false }, error: action.payload };
+      break;
+    }
+
+    case NewInsightActionTypes.SubmitForm: {
+      state = { ...state, form: { data: { ...action.payload }, pending: true }};
+      break;
+    }
+    case NewInsightActionTypes.SubmitFormSuccess: {
+      state = { ...initialState };
+      break;
+    }
+    case NewInsightActionTypes.SubmitFormError: {
+      state = { ...state, error: action.payload };
       break;
     }
   }
+
   return state;
 }

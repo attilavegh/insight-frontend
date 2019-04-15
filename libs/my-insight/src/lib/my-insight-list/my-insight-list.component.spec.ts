@@ -4,11 +4,11 @@ import { MessageContainerModule } from '@insight/shared-components';
 
 import { StoreModule } from '@ngrx/store';
 
-import { MyInsightSentComponent } from './my-insight-sent.component';
+import { MyInsightListComponent } from './my-insight-list.component';
 
-describe('MyInsightSentComponent', () => {
-  let component: MyInsightSentComponent;
-  let fixture: ComponentFixture<MyInsightSentComponent>;
+describe('MyInsightListComponent', () => {
+  let component: MyInsightListComponent;
+  let fixture: ComponentFixture<MyInsightListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,14 +18,14 @@ describe('MyInsightSentComponent', () => {
         StoreModule.forFeature('myInsight', {}, {})
       ],
       declarations: [
-        MyInsightSentComponent
+        MyInsightListComponent
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyInsightSentComponent);
+    fixture = TestBed.createComponent(MyInsightListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
