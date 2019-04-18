@@ -5,11 +5,8 @@ import { RouterModule } from '@angular/router';
 
 import { RippleModule } from '@insight/shared-directives';
 
-import { LoginComponent } from './login-component/login.component';
-import { authServiceConfig } from './authentication/authentication.config';
-import { InterceptorService } from './interceptor/interceptor.service';
-
-import { AuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { LoginComponent } from './component/login/login.component';
+import { InterceptorService } from './service/interceptor/interceptor.service';
 
 const routes = [
   { path: '', component: LoginComponent }
@@ -19,7 +16,6 @@ const routes = [
   imports: [
     CommonModule,
     RippleModule,
-    SocialLoginModule,
     HttpClientModule,
     RouterModule.forChild(routes)
   ],
@@ -34,10 +30,6 @@ const routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    },
-    {
-      provide: AuthServiceConfig,
-      useValue: authServiceConfig
     }
   ]
 })

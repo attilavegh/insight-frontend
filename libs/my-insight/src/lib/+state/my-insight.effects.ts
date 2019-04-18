@@ -83,7 +83,7 @@ export class MyInsightEffects {
       run: () => {
         return this.appFacade.user$.pipe(
           filter(user => !!user),
-          switchMap((user: User) => this.insightService.getReceivedInsights(user.id)),
+          switchMap((user: User) => this.insightService.getReceivedInsights(user.googleId)),
           map((insights: Insight[]) => formatInsightsDate(insights)),
           map((insights: Insight[]) => new ReceivedInsightsLoaded(insights))
         );
@@ -118,7 +118,7 @@ export class MyInsightEffects {
       run: () => {
         return this.appFacade.user$.pipe(
           filter(user => !!user),
-          switchMap((user: User) => this.insightService.getSentInsights(user.id)),
+          switchMap((user: User) => this.insightService.getSentInsights(user.googleId)),
           map((fetchedInsights: Insight[]) => formatInsightsDate(fetchedInsights)),
           map((insights) => new SentInsightsLoaded(insights))
         );

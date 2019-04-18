@@ -1,7 +1,7 @@
 <div [class.insight-header__open]="isOpen" class="insight-header">
   <div class="insight-header__bar">
     <div class="insight-header__profile-picture-wrapper insight-header__section">
-      <img *ngIf="user$ | async as user" class="insight-header__profile_picture" [src]="user.imageUrl" alt="Profile picture">
+      <img *ngIf="user" class="insight-header__profile_picture" [src]="user.imageUrl" alt="Profile picture">
     </div>
 
     <div class="insight-header__logo-wrapper insight-header__section">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="insight-header__menu-icon insight-header__section">
-      <div *ngIf="isMenuButtonVisible" class="insight-header__menu-icon-clickable-area" (click)="toggle()">
+      <div *ngIf="user" class="insight-header__menu-icon-clickable-area" (click)="toggle()">
         <insight-hamburger-icon [open]="isOpen"></insight-hamburger-icon>
       </div>
     </div>

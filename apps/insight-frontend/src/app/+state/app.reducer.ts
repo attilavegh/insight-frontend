@@ -31,10 +31,6 @@ export function appReducer(state: AppState = appInitialState, action: AppAction)
       state = { ...state, user: action.payload };
       break;
     }
-    case AppActionTypes.LoginError: {
-      state = { ...state, error: action.payload, user: null };
-      break;
-    }
 
     case AppActionTypes.Logout: {
       state = { ...state };
@@ -44,8 +40,8 @@ export function appReducer(state: AppState = appInitialState, action: AppAction)
       state = { ...appInitialState };
       break;
     }
-    case AppActionTypes.LogoutError: {
-      state = { ...appInitialState, error: action.payload };
+    case AppActionTypes.AuthError: {
+      state = { ...appInitialState, error: action.payload, user: null };
       break;
     }
   }

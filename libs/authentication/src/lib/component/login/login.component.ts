@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AppFacade } from '../../../../../apps/insight-frontend/src/app/+state/app.facade';
+import { AppFacade } from '../../../../../../apps/insight-frontend/src/app/+state/app.facade';
 
 @Component({
   selector: 'insight-login',

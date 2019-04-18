@@ -1,7 +1,9 @@
 export * from './lib/authentication.module';
 
-export { LoginComponent } from './lib/login-component/login.component';
-export { LoginGuard } from './lib/login-guard/login.guard';
-export { LogoutGuard } from './lib/logout-guard/logout.guard';
-export { AuthenticationService } from './lib/authentication/authentication.service';
-export { AuthenticationServiceMock } from './lib/authentication/authentication.service.mock';
+export { LoginComponent } from './lib/component/login/login.component';
+export { LoginGuard } from './lib/guard/login/login.guard';
+export { LogoutGuard } from './lib/guard/logout/logout.guard';
+export { AuthenticationService } from './lib/service/authentication/authentication.service';
+export { AuthenticationServiceMock } from './lib/service/authentication/authentication.service.mock';
+
+export *  from './lib/model/authentication.model';
