@@ -4,11 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { environmentToken } from '@insight/environment';
 
-import { authServiceConfig } from '../authentication/authentication.config';
-
 import { AuthenticationService } from './authentication.service';
-
-import { AuthService, AuthServiceConfig } from 'angularx-social-login';
 
 describe('AuthenticationService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -17,11 +13,6 @@ describe('AuthenticationService', () => {
       HttpClientTestingModule
     ],
     providers: [
-      AuthService,
-      {
-        provide: AuthServiceConfig,
-        useValue: authServiceConfig
-      },
       {
         provide: environmentToken,
         useValue: 'http://localhost:4200'

@@ -4,6 +4,8 @@ import { NavigationStart, Router } from '@angular/router';
 import { filter, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
+import { User } from '@insight/shared-model';
+
 import { AppFacade } from '../../../../../apps/insight-frontend/src/app/+state/app.facade';
 
 @Component({
@@ -14,22 +16,20 @@ import { AppFacade } from '../../../../../apps/insight-frontend/src/app/+state/a
 export class HeaderComponent implements OnInit, OnDestroy {
 
   routeChangeSubscription: Subscription;
+  userSubscription: Subscription;
 
   isOpen = false;
-  isMenuButtonVisible = false;
-
-  user$ = this.appFacade.user$;
+  user: User;
 
   constructor(private router: Router,
               private appFacade: AppFacade) {}
 
   ngOnInit() {
+    this.userSubscription = this.appFacade.user$.subscribe(this.setUser.bind(this));
+
     this.routeChangeSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationStart),
-      tap((navigation: NavigationStart) => {
-        this.isOpen = false;
-        this.isMenuButtonVisible = navigation.url !== '/login';
-      })
+      tap(() => this.isOpen = false)
     ).subscribe();
   }
 
@@ -43,5 +43,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     this.appFacade.logout();
+  }
+
+  private setUser(user: User) {
+    this.user = user;
   }
 }
