@@ -46,7 +46,7 @@ export class NewInsightEffects {
       run: (action: SubmitForm) => {
         return this.appFacade.user$.pipe(
           take(1),
-          map((user: User) => ({ ...action.payload, sender: user })),
+          map((user: User) => ({ ...action.payload, sender: user.googleId })),
           switchMap((data: InsightFormData) => this.insightService.send(data)),
           map(() => new SubmitFormSuccess())
         );

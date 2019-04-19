@@ -105,7 +105,7 @@ export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAcces
 
   selectUser(user: User) {
     this.selectedUser = user;
-    this.value = user;
+    this.value = user.googleId;
     this.searchFieldValue = user.fullName;
   }
 

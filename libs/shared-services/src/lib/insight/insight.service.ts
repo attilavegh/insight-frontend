@@ -7,9 +7,9 @@ import { environmentToken } from '@insight/environment';
 import { Observable } from 'rxjs';
 
 export interface InsightServiceShape {
-  send(insight: Insight): Observable<Insight>;
-  getReceivedInsights(id: number): Observable<Insight[]>;
-  getSentInsights(id: number): Observable<Insight[]>;
+  send(insight: InsightFormData): Observable<Insight>;
+  getReceivedInsights(id: string): Observable<Insight[]>;
+  getSentInsights(id: string): Observable<Insight[]>;
 }
 
 @Injectable({
@@ -24,11 +24,11 @@ export class InsightService implements InsightServiceShape {
     return this.http.post<Insight>(`${this.environment}/insight/send/`, insight);
   }
 
-  getReceivedInsights(id: number): Observable<Insight[]> {
+  getReceivedInsights(id: string): Observable<Insight[]> {
     return this.http.get<Insight[]>(`${this.environment}/insight/received/${id}`);
   }
 
-  getSentInsights(id: number): Observable<Insight[]> {
+  getSentInsights(id: string): Observable<Insight[]> {
     return this.http.get<Insight[]>(`${this.environment}/insight/sent/${id}`);
   }
 }

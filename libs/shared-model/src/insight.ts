@@ -11,8 +11,8 @@ export interface Insight {
 }
 
 export interface InsightFormData {
-  sender: User;
-  receiver: User;
+  sender: string;
+  receiver: string;
   continueMessage: string;
   considerMessage?: string;
 }

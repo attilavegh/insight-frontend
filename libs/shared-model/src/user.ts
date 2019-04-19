@@ -1,5 +1,5 @@
 export interface User {
-  googleId: number;
+  googleId: string;
   firstName: string;
   lastName: string;
   fullName: string;

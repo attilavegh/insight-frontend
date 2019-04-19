@@ -33,8 +33,8 @@ export const initialState: NewInsightState = {
   },
   form: {
     data: {
-      sender: null,
-      receiver: null,
+      sender: '',
+      receiver: '',
       continueMessage: ''
     },
     pending: false
@@ -44,7 +44,7 @@ export const initialState: NewInsightState = {
 export function newInsightReducer(state: NewInsightState = initialState, action: NewInsightAction): NewInsightState {
   switch (action.type) {
     case NewInsightActionTypes.SearchUser: {
-      state = {...state, userSearch: { ...state.userSearch, loading: action.payload.length > 1, searchTerm: action.payload }};
+      state = {...state, userSearch: { ...state.userSearch, loading: action.payload && action.payload.length > 1, searchTerm: action.payload }};
       break;
     }
     case NewInsightActionTypes.SearchUserLoaded: {
