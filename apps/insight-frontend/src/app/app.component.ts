@@ -13,5 +13,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.appFacade.initApp();
+    this.appFacade.initNotification();
   }
 }
