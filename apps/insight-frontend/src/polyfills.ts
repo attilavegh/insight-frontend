@@ -14,6 +14,10 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
+// Fixes stompJS bug - https://github.com/stomp-js/ng2-stompjs/issues/70#issuecomment-388061761
+(window as any).global = window;
+//
+
 /***************************************************************************************************
  * BROWSER POLYFILLS
  */

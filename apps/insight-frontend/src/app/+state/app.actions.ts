@@ -1,9 +1,13 @@
 import { Action } from '@ngrx/store';
 
-import { User } from '@insight/shared-model';
+import { Insight, User } from '@insight/shared-model';
 
 export enum AppActionTypes {
-  InitApp = '[App] Init',
+  InitUser = '[App] Init User',
+
+  InitNotification = '[App] Init Notification',
+  NewNotification = '[App] New Notification',
+  NotificationError = '[App] Notification Error',
 
   Login = '[App] Login',
   SetUser = '[App] Set User',
@@ -14,8 +18,22 @@ export enum AppActionTypes {
   AuthError = '[App] Auth Error'
 }
 
-export class InitApp implements Action {
-  readonly type = AppActionTypes.InitApp;
+export class InitUser implements Action {
+  readonly type = AppActionTypes.InitUser;
+}
+
+export class InitNotification implements Action {
+  readonly type = AppActionTypes.InitNotification;
+}
+
+export class NewNotification implements Action {
+  readonly type = AppActionTypes.NewNotification;
+  constructor(public payload: Insight) {}
+}
+
+export class NotificationError implements Action {
+  readonly type = AppActionTypes.NotificationError;
+  constructor(public payload: any) {}
 }
 
 export class Login implements Action {
@@ -40,7 +58,10 @@ export class AuthError implements Action {
   constructor(public  payload: any) {}
 }
 
-export type AppAction = InitApp
+export type AppAction = InitUser
+  | InitNotification
+  | NewNotification
+  | NotificationError
   | Login
   | SetUser
 

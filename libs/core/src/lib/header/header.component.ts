@@ -22,7 +22,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: User;
 
   constructor(private router: Router,
-              private appFacade: AppFacade) {}
+              private appFacade: AppFacade) {
+  }
 
   ngOnInit() {
     this.userSubscription = this.appFacade.user$.subscribe(this.setUser.bind(this));

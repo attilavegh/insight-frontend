@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { AppPartialState } from './app.reducer';
 import { appQuery } from './app.selectors';
-import { InitApp, Login, Logout } from './app.actions';
+import { InitNotification, InitUser, Login, Logout } from './app.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,11 @@ export class AppFacade {
   constructor(private store: Store<AppPartialState>) {}
 
   initApp() {
-    this.store.dispatch(new InitApp());
+    this.store.dispatch(new InitUser());
+  }
+
+  initNotification() {
+    this.store.dispatch(new InitNotification());
   }
 
   login() {

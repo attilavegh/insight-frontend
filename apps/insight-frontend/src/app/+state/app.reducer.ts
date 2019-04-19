@@ -19,7 +19,7 @@ export const appInitialState: AppState = {
 
 export function appReducer(state: AppState = appInitialState, action: AppAction): AppState {
   switch (action.type) {
-    case AppActionTypes.InitApp: {
+    case AppActionTypes.InitUser: {
       state = { ...state};
       break;
     }

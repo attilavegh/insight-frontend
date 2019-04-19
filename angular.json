@@ -24,9 +24,12 @@
             "tsConfig": "apps/insight-frontend/tsconfig.app.json",
             "assets": [
               "apps/insight-frontend/src/favicon.ico",
-              "apps/insight-frontend/src/assets"
+              "apps/insight-frontend/src/assets",
+              "apps/insight-frontend/src/manifest.webmanifest"
             ],
-            "styles": ["apps/insight-frontend/src/styles.scss"],
+            "styles": [
+              "apps/insight-frontend/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -52,7 +55,8 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ]
+              ],
+              "serviceWorker": true
             }
           }
         },
@@ -80,11 +84,14 @@
             "polyfills": "apps/insight-frontend/src/polyfills.ts",
             "tsConfig": "apps/insight-frontend/tsconfig.spec.json",
             "karmaConfig": "apps/insight-frontend/karma.conf.js",
-            "styles": ["apps/insight-frontend/src/styles.scss"],
+            "styles": [
+              "apps/insight-frontend/src/styles.scss"
+            ],
             "scripts": [],
             "assets": [
               "apps/insight-frontend/src/favicon.ico",
-              "apps/insight-frontend/src/assets"
+              "apps/insight-frontend/src/assets",
+              "apps/insight-frontend/src/manifest.webmanifest"
             ]
           }
         },
@@ -95,7 +102,9 @@
               "apps/insight-frontend/tsconfig.app.json",
               "apps/insight-frontend/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -121,7 +130,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/insight-frontend-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -139,7 +150,9 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -170,7 +183,9 @@
               "libs/authentication/tsconfig.lib.json",
               "libs/authentication/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -201,7 +216,9 @@
               "libs/my-insight/tsconfig.lib.json",
               "libs/my-insight/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -232,7 +249,9 @@
               "libs/new-insight/tsconfig.lib.json",
               "libs/new-insight/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -263,7 +282,9 @@
               "libs/shared-components/tsconfig.lib.json",
               "libs/shared-components/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -294,7 +315,9 @@
               "libs/shared-services/tsconfig.lib.json",
               "libs/shared-services/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
@@ -325,7 +348,9 @@
               "libs/shared-directives/tsconfig.lib.json",
               "libs/shared-directives/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "test": {
