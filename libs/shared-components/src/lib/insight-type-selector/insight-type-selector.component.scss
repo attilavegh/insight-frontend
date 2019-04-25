@@ -10,6 +10,10 @@
   border: 1px solid $secondary;
   border-radius: $smallRadius;
 
+  &-disabled {
+    border-style: dashed;
+  }
+
   &__continue {
     display: flex;
     align-items: center;
@@ -29,6 +33,8 @@
 
     transition: opacity $defaultAnimationDuration ease-out;
     opacity: 0;
+
+    z-index: 1;
   }
 
   &__continue-consider {
@@ -39,27 +45,27 @@
     width: 50%;
     height: 100%;
 
-    &-background {
-      position: absolute;
-      transition: $defaultAnimationDuration ease-out;
-      transform: translateX(-75%);
-
-      width: 100%;
-      height: 100%;
-
-      background-color: $secondary;
-
-      z-index: -1;
-    }
+    z-index: 1;
 
     &-selected {
-      .insight-type-selector__continue-consider-background {
-        transform: translateX(-25%);
+      .insight-type-selector__background {
+        transform: translateX(0);
       }
 
       .insight-type-selector__link {
         opacity: 1;
       }
     }
+  }
+
+  &__background {
+    position: absolute;
+    transition: $defaultAnimationDuration ease-out;
+    transform: translateX(-50%);
+
+    width: 100%;
+    height: 100%;
+
+    background-color: $secondary;
   }
 }

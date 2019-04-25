@@ -5,7 +5,7 @@ $optionsWidth: 130px;
 $optionsRelativeYPosition: 46px;
 $optionsRelativeXPosition: -100px;
 
-.message-filer {
+.message-filter {
   position: relative;
   width: 100%;
   height: $defaultElementHeight;
@@ -29,6 +29,7 @@ $optionsRelativeXPosition: -100px;
   }
 
   &__options {
+    display: none;
     position: absolute;
     top: $optionsRelativeYPosition;
     left: $optionsRelativeXPosition;
@@ -38,6 +39,10 @@ $optionsRelativeXPosition: -100px;
     border-radius: $smallRadius;
 
     z-index: 1;
+
+    &-focused {
+      display: block;
+    }
 
     &-list {
       list-style: none;
@@ -70,6 +75,25 @@ $optionsRelativeXPosition: -100px;
       &-selected {
         background-color: $secondary;
       }
+    }
+  }
+}
+
+@include for-desktop {
+  .message-filter {
+    height: auto;
+
+    &__image {
+      display: none;
+    }
+    
+    &__options {
+      display: block;
+      position: static;
+
+      width: 100%;
+
+      box-shadow: none;
     }
   }
 }

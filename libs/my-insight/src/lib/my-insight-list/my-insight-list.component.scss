@@ -1,5 +1,27 @@
 @import "../../../../shared-styles/styles";
 
-::ng-deep .message {
-  margin-bottom: $largeMargin;
+.my-insight-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 100%;
+  min-width: 100%;
+
+  &__empty {
+    justify-content: normal;
+  }
+
+  &__status-empty {
+    color: $light-text;
+  }
+
+  &__item {
+    width: 100%;
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: $largeMargin;
+  }
 }

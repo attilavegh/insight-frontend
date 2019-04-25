@@ -1,9 +1,11 @@
 <div class="my-insight">
   <div class="my-insight__row my-insight__options">
-    <div class="my-insight__options-type">
+    <div class="my-insight__options-category">
+      <span class="my-insight__options-label">Category</span>
       <insight-message-category-selector></insight-message-category-selector>
     </div>
     <div class="my-insight__options-filter">
+      <span class="my-insight__options-label">Filter</span>
       <insight-message-filter [filterOptions]="filters"
                               [selectedFilter]="selectedFilter$ | async"
                               (filterChange)="onFilterChange($event)">
@@ -14,8 +16,4 @@
   <div class="my-insight__row my-insight__content">
     <router-outlet></router-outlet>
   </div>
-
-  <!--<div class="my-insight__row">-->
-    <!--<insight-paging></insight-paging>-->
-  <!--</div>-->
 </div>

@@ -6,9 +6,9 @@ const getMyInsightState = createFeatureSelector<MyInsightState>(
   MY_INSIGHT_FEATURE_KEY
 );
 
-const getLoaded = createSelector(
+const getLoading = createSelector(
   getMyInsightState,
-  (state: MyInsightState) => state.loaded
+  (state: MyInsightState) => state.loading
 );
 
 const getError = createSelector(
@@ -42,7 +42,7 @@ const getFilter = createSelector(
 );
 
 export const myInsightQuery = {
-  getLoaded,
+  getLoading,
   getError,
   getReceivedInsights,
   getSentInsights,

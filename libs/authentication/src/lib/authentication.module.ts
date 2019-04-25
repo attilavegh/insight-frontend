@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { RippleModule } from '@insight/shared-directives';
+import { LoadingModule } from '@insight/shared-components';
 
 import { LoginComponent } from './component/login/login.component';
 import { InterceptorService } from './service/interceptor/interceptor.service';
@@ -17,6 +18,7 @@ const routes = [
     CommonModule,
     RippleModule,
     HttpClientModule,
+    LoadingModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

@@ -2,7 +2,8 @@
   <div class="user-search__box"
        [class.user-search__box-dropdown-visible]="users && users.length > 0 && isFocused"
        [class.user-search__box-error]="!isValid && !isFocused"
-       [class.user-search__box-valid]="selectedUser">
+       [class.user-search__box-valid]="selectedUser"
+       [class.user-search__box-disabled]="isDisabled">
     <div class="user-search__box-focus-area" (click)="searchField.focus()"></div>
     <div class="user-search__box-background"></div>
 
@@ -15,6 +16,10 @@
     </div>
 
     <input #searchField class="user-search__box-input" placeholder="Search"
+           [disabled]="isDisabled"
+           (keyup)="onKeyup($event.target.value)"
+           (focus)="onFocus()"
+           (blur)="onBlur()"
            [class.user-search__box-input-value]="selectedUser && !isFocused">
   </div>
 

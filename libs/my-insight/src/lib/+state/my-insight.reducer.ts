@@ -8,7 +8,7 @@ export interface MyInsightState {
   receivedInsights: Insight[];
   sentInsights: Insight[];
   displayedInsights: Insight[];
-  loaded: boolean;
+  loading: boolean;
   category: InsightCategory;
   filter: InsightFilterModel;
   error?: any;
@@ -22,7 +22,7 @@ export const myInsightsInitialState: MyInsightState = {
   receivedInsights: [],
   sentInsights: [],
   displayedInsights: [],
-  loaded: false,
+  loading: false,
   category: InsightCategory.RECEIVED,
   filter: defaultFilter
 };
@@ -30,34 +30,34 @@ export const myInsightsInitialState: MyInsightState = {
 export function myInsightReducer(state: MyInsightState = myInsightsInitialState, action: MyInsightAction): MyInsightState {
   switch (action.type) {
     case MyInsightActionTypes.GetReceivedInsights: {
-      state = { ...state, displayedInsights: [], category: InsightCategory.RECEIVED, filter: defaultFilter, loaded: false };
+      state = { ...state, displayedInsights: [], category: InsightCategory.RECEIVED, filter: defaultFilter, loading: true };
       break;
     }
     case MyInsightActionTypes.ReceivedInsightsLoaded: {
-      state = { ...state, displayedInsights: action.payload, receivedInsights: action.payload, loaded: true };
+      state = { ...state, displayedInsights: action.payload, receivedInsights: action.payload, loading: false };
       break;
     }
 
     case MyInsightActionTypes.GetSentInsights: {
-      state = { ...state, displayedInsights: [], category: InsightCategory.SENT, filter: defaultFilter, loaded: false };
+      state = { ...state, displayedInsights: [], category: InsightCategory.SENT, filter: defaultFilter, loading: true };
       break;
     }
     case MyInsightActionTypes.SentInsightsLoaded: {
-      state = { ...state, displayedInsights: action.payload, sentInsights: action.payload, loaded: true };
+      state = { ...state, displayedInsights: action.payload, sentInsights: action.payload, loading: false };
       break;
     }
 
     case MyInsightActionTypes.InsightLoadError: {
-      state = { ...state, error: action.payload, loaded: true };
+      state = { ...state, error: action.payload, loading: false };
       break;
     }
 
     case MyInsightActionTypes.ChangeInsightFilter: {
-      state = { ...state, filter: action.payload };
+      state = { ...state, filter: action.payload, loading: true };
       break;
     }
     case MyInsightActionTypes.InsightFilterChanged: {
-      state = { ...state, displayedInsights: action.payload };
+      state = { ...state, displayedInsights: action.payload, loading: false };
       break;
     }
   }

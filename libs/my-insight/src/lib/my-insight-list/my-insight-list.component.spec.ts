@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessageContainerModule } from '@insight/shared-components';
+import { LoadingModule, MessageContainerModule } from '@insight/shared-components';
 
 import { StoreModule } from '@ngrx/store';
 
@@ -14,6 +14,7 @@ describe('MyInsightListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MessageContainerModule,
+        LoadingModule,
         StoreModule.forRoot({}),
         StoreModule.forFeature('myInsight', {}, {})
       ],

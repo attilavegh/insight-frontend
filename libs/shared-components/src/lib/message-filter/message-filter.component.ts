@@ -1,13 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { InsightFilterModel, InsightFilterType } from '@insight/shared-model';
-
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'insight-message-filter',
   templateUrl: './message-filter.component.html',
-  styleUrls: ['./message-filter.component.scss']
+  styleUrls: ['./message-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageFilterComponent {
 

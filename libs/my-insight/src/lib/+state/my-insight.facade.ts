@@ -12,7 +12,7 @@ import { ChangeInsightFilter } from './my-insight.actions';
   providedIn: 'root'
 })
 export class MyInsightFacade {
-  loaded$ = this.store.pipe(select(myInsightQuery.getLoaded));
+  loading$ = this.store.pipe(select(myInsightQuery.getLoading));
   category$ = this.store.pipe(select(myInsightQuery.getCategory));
   displayedInsights$ = this.store.pipe(select(myInsightQuery.getDisplayedInsights));
   filter$ = this.store.pipe(select(myInsightQuery.getFilter));

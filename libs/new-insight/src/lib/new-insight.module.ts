@@ -2,7 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ButtonModule, InsightInputBoxModule, InsightTypeSelectorModule, UserSearchModule } from '@insight/shared-components';
+import {
+  ButtonModule,
+  InsightInputBoxModule,
+  InsightTypeSelectorModule,
+  LoadingModule,
+  UserSearchModule
+} from '@insight/shared-components';
 import { RippleModule } from '@insight/shared-directives';
 import { RouterModule, Routes } from '@angular/router';
 

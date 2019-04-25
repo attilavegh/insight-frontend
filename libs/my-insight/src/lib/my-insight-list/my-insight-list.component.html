@@ -1,6 +1,17 @@
-<div class="my-insight-received" *ngIf="insights$ | async as insights">
-  <insight-message-container class="my-insight-received__item" *ngFor="let insight of insights"
-                             [message]="insight"
-                             [category]="category$ | async">
-  </insight-message-container>
+<div class="my-insight-list" *ngIf="insights$ | async as insights" [class.my-insight-list__empty]="insights.length > 0">
+
+  <div class="my-insight-list__status">
+    <div *ngIf="loading$ | async" class="my-insight-list__status-loading">
+      <insight-loading></insight-loading>
+    </div>
+    <div class="my-insight-list__status-empty" *ngIf="!(loading$ | async) && insights.length == 0">
+      There are no insights to show.
+    </div>
+  </div>
+
+  <div class="my-insight-list__item" *ngFor="let insight of insights">
+    <insight-message-container [message]="insight"
+                               [category]="category$ | async">
+    </insight-message-container>
+  </div>
 </div>

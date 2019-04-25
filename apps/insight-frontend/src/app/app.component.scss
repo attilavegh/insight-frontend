@@ -1,12 +1,27 @@
-  @import "../../../../libs/shared-styles/styles";
+@import "../../../../libs/shared-styles/styles";
 
 .insight-wrapper {
+  display: flex;
+  min-height: 100%;
+  max-width: $maxPageWidth;
+
   margin: 0 auto;
   padding-top: $largeElementHeight;
 
-  max-width: $maxPageWidth;
+  background-color: $white;
 
   &__content {
-    margin: $pageMarginVertical $pageMarginHorizontal;
+    margin: $mobilePageMarginVertical $mobilePageMarginHorizontal;
+    width: 100%;
+  }
+}
+
+@include for-desktop {
+  .insight-wrapper {
+    box-shadow: $shadow $defaultShadowValues;
+
+    &__content {
+      margin: $desktopPageMarginVertical $desktopPageMarginHorizontal;
+    }
   }
 }

@@ -1,22 +1,89 @@
 @import "../../../../shared-styles/styles";
 
+$contentUpperMargin: 32px;
+
 .my-insight {
+  max-width: $defaultElementMaxWidth;
+  height: 100%;
+  margin: 0 auto;
+
   &__row:not(:first-child) {
     padding-top: $largePadding;
+    padding-bottom: $largePadding;
   }
 
   &__options {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    max-width: $defaultElementMaxWidth;
 
-    &-type {
+    &-category {
       width: 80%;
       padding-right: $smallPadding;
     }
 
     &-filter {
       width: $defaultElementHeight;
+    }
+  }
+
+  &__options-label {
+    display: none;
+  }
+
+  &__content {
+    height: calc(100% - #{$contentUpperMargin});
+  }
+}
+
+@include for-desktop {
+  .my-insight {
+    display: flex;
+    justify-content: space-between;
+    max-width: none;
+    height: auto;
+
+    &__options {
+      height: fit-content;
+      max-width: $smallElementMaxWidth;
+      padding: $xLargePadding;
+
+      flex-direction: column;
+      justify-content: normal;
+
+      box-shadow: $shadow $defaultShadowValues;
+    }
+
+    &__options-category {
+      width: 100%;
+      padding: 0;
+    }
+
+    &__options-filter {
+      width: 100%;
+      margin-top: $defaultMargin;
+    }
+
+    &__options-label {
+      display: block;
+      margin-bottom: $xSmallMargin;
+
+      color: $light-text;
+      font-weight: lighter;
+    }
+
+    &__row:not(:first-child) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &__content {
+      width: 100%;
+      height: auto;
+      max-width: $defaultElementMaxWidth;
+
+      margin-left: $xxLargeMargin;
     }
   }
 }

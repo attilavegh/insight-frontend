@@ -6,6 +6,7 @@ export const APP_FEATURE_KEY = 'app';
 
 export interface AppState {
   user: User;
+  loading: boolean;
   error?: any;
 }
 
@@ -14,7 +15,8 @@ export interface AppPartialState {
 }
 
 export const appInitialState: AppState = {
-  user: null
+  user: null,
+  loading: false
 };
 
 export function appReducer(state: AppState = appInitialState, action: AppAction): AppState {
@@ -24,11 +26,11 @@ export function appReducer(state: AppState = appInitialState, action: AppAction)
       break;
     }
     case AppActionTypes.Login: {
-      state = { ...state};
+      state = { ...state, loading: true};
       break;
     }
     case AppActionTypes.SetUser: {
-      state = { ...state, user: action.payload };
+      state = { ...state, user: action.payload, loading: false };
       break;
     }
 

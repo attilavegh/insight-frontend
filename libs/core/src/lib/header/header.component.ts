@@ -18,7 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   routeChangeSubscription: Subscription;
   userSubscription: Subscription;
 
-  isOpen = false;
+  isMobileMenuOpen = false;
+  isDesktopMenuOpen = false;
   user: User;
 
   constructor(private router: Router,
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.routeChangeSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationStart),
-      tap(() => this.isOpen = false)
+      tap(() => this.isMobileMenuOpen = false)
     ).subscribe();
   }
 
@@ -39,11 +40,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggle() {
-    this.isOpen = !this.isOpen;
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
   logout() {
     this.appFacade.logout();
+  }
+
+  focusDesktopMenu() {
+    this.isDesktopMenuOpen = true;
+  }
+
+  blurDesktopMenu() {
+    this.isDesktopMenuOpen = false;
   }
 
   private setUser(user: User) {
