@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -12,6 +12,7 @@ import {
   selector: 'insight-input-box',
   templateUrl: './insight-input-box.component.html',
   styleUrls: ['./insight-input-box.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,8 +28,6 @@ import {
 })
 export class InsightInputBoxComponent implements ControlValueAccessor, Validator {
 
-  @ViewChild('textarea') textarea: ElementRef;
-
   @Input() headerText;
   @Input() placeholder;
 
@@ -39,7 +38,7 @@ export class InsightInputBoxComponent implements ControlValueAccessor, Validator
 
   onChange = (_: any) => {};
 
-  constructor() {}
+  constructor(private ref: ChangeDetectorRef) {}
 
   registerOnChange(fn: any) {
     this.onChange = fn;
@@ -49,6 +48,7 @@ export class InsightInputBoxComponent implements ControlValueAccessor, Validator
   }
 
   setDisabledState(isDisabled: boolean) {
+    this.ref.markForCheck();
     this.isDisabled = isDisabled;
   }
 
@@ -57,12 +57,16 @@ export class InsightInputBoxComponent implements ControlValueAccessor, Validator
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
+    this.ref.markForCheck();
+
     this.isValid = !control.dirty || control.value !== '';
     return (this.isValid) ? null : { valid: false };
   }
 
   onFocus() {
-    this.isFocused = true;
+    if (!this.isDisabled) {
+      this.isFocused = true;
+    }
   }
 
   onBlur() {

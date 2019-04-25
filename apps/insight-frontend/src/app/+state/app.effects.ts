@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { SwPush } from '@angular/service-worker';
+import { Injectable, NgZone } from '@angular/core';
 
 import { Effect, Actions } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
@@ -69,7 +68,7 @@ export class AppEffects {
         switchMap((accessCode: OneTimeAuthCode) => this.authentication.authenticate(accessCode)),
         tap((authToken: AuthToken) => this.saveTokens(authToken)),
         map((authToken: AuthToken) => this.authentication.getUser(authToken.idToken)),
-        tap(() => this.router.navigate(['/'])),
+        tap(() => this.ngZone.run(() => this.router.navigate(['/']))),
         map((user: User) => new SetUser(user))
       );
     },
@@ -82,14 +81,9 @@ export class AppEffects {
 
   @Effect() logout$ = this.dataPersistence.fetch(AppActionTypes.Logout, {
     run: () => {
-      return this.actions$.pipe(
-        take(1),
-        tap(() => {
-          localStorage.clear();
-          this.router.navigate(['/login']);
-        }),
-        map(() => new LogoutSuccess())
-      );
+        localStorage.clear();
+        this.router.navigate(['/login']);
+        return new LogoutSuccess();
     },
 
     onError: (action: Logout, error) => {
@@ -114,6 +108,7 @@ export class AppEffects {
     private router: Router,
     private actions$: Actions,
     private appFacade: AppFacade,
+    private ngZone: NgZone,
     private notificationService: NotificationService,
     private dataPersistence: DataPersistence<AppPartialState>
   ) {}

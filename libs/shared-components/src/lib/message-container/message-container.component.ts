@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { InsightCategory, Insight } from '@insight/shared-model';
 
 @Component({
   selector: 'insight-message-container',
   templateUrl: './message-container.component.html',
-  styleUrls: ['./message-container.component.scss']
+  styleUrls: ['./message-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageContainerComponent {
 

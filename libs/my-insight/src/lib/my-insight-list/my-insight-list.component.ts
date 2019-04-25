@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-
-import { Observable } from 'rxjs';
-
-import { Insight, InsightCategory } from '@insight/shared-model';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { MyInsightFacade } from '../+state/my-insight.facade';
 
 @Component({
   selector: 'insight-my-insight-received',
   templateUrl: './my-insight-list.component.html',
-  styleUrls: ['./my-insight-list.component.scss']
+  styleUrls: ['./my-insight-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyInsightListComponent implements OnInit {
 
-  insights$: Observable<Insight[]> = this.myInsightFacade.displayedInsights$;
-  category$: Observable<InsightCategory> = this.myInsightFacade.category$;
+  insights$ = this.myInsightFacade.displayedInsights$;
+  category$ = this.myInsightFacade.category$;
+  loading$ = this.myInsightFacade.loading$;
 
   constructor(private myInsightFacade: MyInsightFacade) {}
 

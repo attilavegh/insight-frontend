@@ -1,10 +1,14 @@
-$maxPageWidth: 1200px;
+$maxPageWidth: 1024px;
+$defaultElementMaxWidth: 420px;
+$smallElementMaxWidth: 370px;
 
 $thinBorder: 1px;
 $thickBorder: 2px;
 
-$pageMarginHorizontal: 6px;
-$pageMarginVertical: 24px;
+$mobilePageMarginHorizontal: 6px;
+$desktopPageMarginHorizontal: 56px;
+$mobilePageMarginVertical: 24px;
+$desktopPageMarginVertical: 56px;
 
 $defaultElementHeight: 56px;
 $largeElementHeight: 64px;
@@ -13,12 +17,15 @@ $xSmallMargin: 4px;
 $smallMargin: 8px;
 $defaultMargin: 16px;
 $largeMargin: 24px;
+$xLargeMargin: 32px;
+$xxLargeMargin: 56px;
 
 $xSmallPadding: 4px;
 $smallPadding: 8px;
 $defaultPadding: 16px;
 $largePadding: 24px;
 $xLargePadding: 32px;
+$xxLargePadding: 56px;
 
 $smallRadius: 3px;
 $largeRadius: 20px;

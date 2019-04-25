@@ -1,12 +1,22 @@
-<div insightRipple [disableRipple]="!isConsider || isSelectionChanged" class="insight-type-selector" [class.insight-type-selector__continue-consider-selected]="isConsider">
-    <div #continueButton class="insight-type-selector__continue" insightRipple [disableRipple]="isConsider">
-      <span class="insight-type-selector__continue-consider-text">Continue</span>
-    </div>
+<div class="insight-type-selector"
+     insightRipple
+     [class.insight-type-selector__continue-consider-selected]="isConsider"
+     [class.insight-type-selector-disabled]="isDisabled"
+     [disableRipple]="!isConsider || isSelectionChanged || isDisabled">
+
+  <div class="insight-type-selector__continue"
+       insightRipple
+       [disableRipple]="isConsider || isDisabled"
+       (click)="onContinueButtonClick()">
+    <span class="insight-type-selector__continue-consider-text">Continue</span>
+  </div>
 
   <div class="insight-type-selector__link">&</div>
 
-  <div #considerButton class="insight-type-selector__continue-consider">
+  <div class="insight-type-selector__continue-consider"
+       (click)="onConsiderButtonClick()">
     <span class="insight-type-selector__continue-consider-text">Consider</span>
-    <div class="insight-type-selector__continue-consider-background"></div>
   </div>
+
+  <div class="insight-type-selector__background"></div>
 </div>

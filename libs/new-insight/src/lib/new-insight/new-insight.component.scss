@@ -1,6 +1,14 @@
 @import "../../../../shared-styles/styles";
 
 .new-insight {
+  width: 100%;
+  max-width: $defaultElementMaxWidth;
+  margin: 0 auto;
+
+  &__form-row {
+    max-width: $defaultElementMaxWidth;
+  }
+
   &__form-row:not(:first-child) {
     padding-top: $largePadding;
   }

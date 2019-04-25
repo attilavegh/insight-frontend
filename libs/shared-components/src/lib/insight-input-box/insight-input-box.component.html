@@ -1,7 +1,17 @@
-<div class="insight-input-box" [class.insight-input-box__focused]="isFocused" [class.insight-input-box__invalid]="!isValid && !isFocused">
+<div class="insight-input-box"
+     [class.insight-input-box__focused]="isFocused"
+     [class.insight-input-box__disabled]="isDisabled"
+     [class.insight-input-box__invalid]="!isValid && !isFocused">
   <div class="insight-input-box__header">
     <span>{{headerText}}</span>
     <div class="insight-input-box__header-arrow"></div>
   </div>
-  <textarea #textarea [placeholder]="placeholder" [value]="value" (focus)="onFocus()" (blur)="onBlur()" (keyup)="onKeyup($event.target.value)" class="insight-input-box__text"></textarea>
+  <textarea class="insight-input-box__text"
+            [disabled]="isDisabled"
+            [placeholder]="placeholder"
+            [value]="value"
+            (focus)="onFocus()"
+            (blur)="onBlur()"
+            (keyup)="onKeyup($event.target.value)">
+  </textarea>
 </div>

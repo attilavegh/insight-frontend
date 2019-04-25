@@ -6,7 +6,8 @@ $menuItemWidth: 120px;
 $menuItemPadding: 6px;
 $menuItemMarginSeparated: 16px;
 
-$logoHeight: 23px;
+$mobileLogoHeight: 23px;
+$desktopLogoHeight: 28px;
 
 $profilePictureDimension: 40px;
 
@@ -20,6 +21,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
 
   height: $largeElementHeight;
   box-shadow: $shadow $defaultShadowValues;
+  background-color: $primary;
 
   z-index: 10;
 
@@ -31,11 +33,11 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     height: 100%;
 
     z-index: 10;
-    background-color: $primary;
   }
 
   &__section {
     display: flex;
+    background-color: $primary;
   }
 
   &__profile-picture-wrapper {
@@ -44,7 +46,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     padding-left: $defaultPadding;
   }
 
-  &__profile_picture {
+  &__profile-picture {
     width: $profilePictureDimension;
     height: $profilePictureDimension;
 
@@ -68,7 +70,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
 
   &__logo {
     display: block;
-    height: $logoHeight;
+    height: $mobileLogoHeight;
   }
 
   &__menu-icon {
@@ -86,6 +88,11 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
   }
 
   &__menu-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: $hiddenMenuContentPosition;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,9 +101,10 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
     background-color: $primary;
     border-bottom-right-radius: $largeRadius;
 
-    box-shadow: $shadow $defaultShadowValues;
+    box-shadow: none;
     transition: $defaultAnimationDuration ease-out;
-    transform: translateY($hiddenMenuContentPosition);
+
+    z-index: -1;
 
     &-items {
       list-style: none;
@@ -112,6 +120,8 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
       justify-content: center;
       align-items: center;
 
+      cursor: pointer;
+
       text-align: center;
       height: $menuItemHeight;
       width: $menuItemWidth;
@@ -121,28 +131,131 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
       border: 2px solid transparent;
     }
 
-    &-item-selected{
+    &-item-selected {
       border-color: $secondary;
     }
 
-    &-item-separated {
+    &-logout-item-mobile {
       margin-top: $menuItemMarginSeparated;
     }
+
+  }
+
+  &__settings {
+    display: none;
   }
 
   &__open {
     .insight-header {
       &__menu-content {
-        transform: translateY($defaultElementHeight);
+        box-shadow: $shadow $defaultShadowValues;
+        transform: translateY($mobileMenuContentHeight);
       }
 
       &__menu-content-items {
         opacity: 1;
       }
 
-      &__profile_picture {
+      &__profile-picture {
         opacity: 1;
       }
+    }
+  }
+}
+
+@include for-desktop {
+  .insight-header {
+    &__bar {
+      max-width: $maxPageWidth;
+      margin: 0 auto;
+
+      padding-left: $xLargePadding;
+      padding-right: $xLargePadding;
+
+      position: relative;
+      justify-content: space-between;
+    }
+
+    &__bar-centered {
+      justify-content: center;
+    }
+
+    &__logo {
+      height: $desktopLogoHeight;
+    }
+
+    &__profile-picture-wrapper, &__menu-icon {
+      display: none;
+    }
+
+    &__profile-picture {
+      opacity: 1;
+    }
+
+    &__logo-wrapper {
+      width: auto;
+    }
+
+    &__menu-content {
+      position: static;
+      z-index: auto;
+
+      height: auto;
+      box-shadow: none;
+      transform: none;
+      transition: none;
+
+      &-items {
+        transition: none;
+        display: inline-flex;
+        opacity: 1;
+      }
+
+      &-logout-item-mobile {
+        display: none;
+      }
+    }
+
+    &__settings {
+      display: flex;
+      width: auto;
+
+      margin-left: $xLargeMargin;
+    }
+
+    &__settings-menu {
+      display: none;
+      position: absolute;
+      top: 55px;
+      right: 45px;
+
+      border: $thinBorder solid $secondary;
+      background-color: $white;
+
+      &:hover {
+        background-color: $secondary;
+      }
+    }
+
+    &__settings-menu-open {
+      display: block;
+    }
+
+    &__settings-menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    &__settings-menu-list-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+
+      width: $menuItemWidth;
+      height: $menuItemHeight;
     }
   }
 }

@@ -37,6 +37,14 @@ $imageHeight: 35px;
     }
   }
 
+  &__box-valid {
+    border: $thinBorder solid $primary;
+  }
+
+  &__box-disabled {
+    border-style: dashed;
+  }
+
   &__loading {
     .user-search__box-icon {
       animation-duration: $slowAnimationDuration;
@@ -60,10 +68,6 @@ $imageHeight: 35px;
     }
   }
 
-  &__box-valid {
-    border: $thinBorder solid $primary;
-  }
-
   &__box-focus-area {
     position: absolute;
     top: 0;
@@ -83,7 +87,6 @@ $imageHeight: 35px;
     width: 100%;
     height: 100%;
 
-    z-index: -1;
 
     transition: $defaultAnimationDuration ease-out, opacity $defaultAnimationDuration ease-out;
     transform: translateX(0);
@@ -118,6 +121,8 @@ $imageHeight: 35px;
     width: 100%;
 
     padding: 0 $boxHorizontalPadding 0 0;
+
+    z-index: 1;
 
     border: none;
     background-color: transparent;

@@ -2,20 +2,33 @@
   <form class="new-insight__form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <div class="new-insight__form-row">
-      <insight-user-search [loading]="isSearchLoading$ | async" [users]="users$ | async" formControlName="receiver"></insight-user-search>
+      <insight-user-search formControlName="receiver"
+                           [loading]="isSearchLoading$ | async"
+                           [users]="users$ | async">
+      </insight-user-search>
     </div>
     <div class="new-insight__form-row">
-      <insight-type-selector formControlName="type"></insight-type-selector>
+      <insight-type-selector formControlName="type">
+      </insight-type-selector>
     </div>
     <div class="new-insight__form-row">
-      <insight-input-box [headerText]="'Continue'" [placeholder]="'You should continue...'" formControlName="continueMessage"></insight-input-box>
+      <insight-input-box formControlName="continueMessage"
+                         [headerText]="'Continue'"
+                         [placeholder]="'You should continue...'">
+      </insight-input-box>
     </div>
     <div *ngIf="isConsider" class="new-insight__form-row">
-      <insight-input-box [headerText]="'Consider'" [placeholder]="'Please, consider...'" formControlName="considerMessage"></insight-input-box>
+      <insight-input-box formControlName="considerMessage"
+                         [headerText]="'Consider'"
+                         [placeholder]="'Please, consider...'">
+      </insight-input-box>
     </div>
 
     <div class="new-insight__form-row">
-      <insight-button [type]="'submit'" text="Send"></insight-button>
+      <insight-button [text]="pending ? 'Sending...' : 'Send'"
+                      [type]="'submit'"
+                      [disabled]="pending">
+      </insight-button>
     </div>
   </form>
 </div>

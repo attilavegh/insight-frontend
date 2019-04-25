@@ -11,6 +11,7 @@ import { InitNotification, InitUser, Login, Logout } from './app.actions';
 })
 export class AppFacade {
   user$ = this.store.pipe(select(appQuery.getUser));
+  loading$ = this.store.pipe(select(appQuery.getLoading));
   error$ = this.store.pipe(select(appQuery.getError));
 
   constructor(private store: Store<AppPartialState>) {}

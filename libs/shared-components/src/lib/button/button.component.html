@@ -1,5 +1,8 @@
 <div class="button-wrapper" insightRipple>
-  <button [type]="type" class="button-wrapper__button">
+  <button class="button-wrapper__button"
+          [class.button-wrapper__button-disabled]="disabled"
+          [disabled]="disabled"
+          [type]="type">
     <span class="button-wrapper__button-text">{{text}}</span>
   </button>
 </div>

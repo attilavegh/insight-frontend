@@ -9,6 +9,11 @@ const getUser = createSelector(
   (state: AppState) => state.user
 );
 
+const getLoading = createSelector(
+  getAppState,
+  (state: AppState) => state.loading
+);
+
 const getError = createSelector(
   getAppState,
   (state: AppState) => state.error
@@ -16,5 +21,6 @@ const getError = createSelector(
 
 export const appQuery = {
   getUser,
+  getLoading,
   getError
 };

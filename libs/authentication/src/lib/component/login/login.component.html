@@ -2,6 +2,11 @@
   <div class="login__background">
     <img class="login__background-image" src="assets/login-background.svg" alt="Login background">
   </div>
+
+  <div class="login__loading">
+    <insight-loading *ngIf="loading$ | async"></insight-loading>
+  </div>
+
   <div insightRipple class="login__button-wrapper">
     <button  class="login__button" (click)="login()">
       <img class="login__button-image" src="assets/google-logo.svg" alt="Google logo">

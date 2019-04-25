@@ -9,6 +9,7 @@ $arrowWidth: 8px;
 .message {
   position: relative;
   width: 100%;
+  max-width: $defaultElementMaxWidth;
 
   border: $thinBorder solid $secondary;
   border-radius: $smallRadius;
@@ -33,6 +34,7 @@ $arrowWidth: 8px;
     }
 
     &-timestamp {
+      color: $light-text;
       font-weight: lighter;
     }
   }

@@ -14,6 +14,11 @@ const getSearchLoading = createSelector(
   (state: NewInsightState) => state.userSearch && state.userSearch.loading
 );
 
+const getPending = createSelector(
+  getNewInsightState,
+  (state: NewInsightState) => state.form && state.form.pending
+);
+
 const getError = createSelector(
   getNewInsightState,
   (state: NewInsightState) => state.error
@@ -22,5 +27,6 @@ const getError = createSelector(
 export const newInsightQuery = {
   getUsers,
   getSearchLoading,
+  getPending,
   getError
 };

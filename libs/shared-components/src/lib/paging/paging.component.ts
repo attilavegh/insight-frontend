@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'insight-paging',
   templateUrl: './paging.component.html',
-  styleUrls: ['./paging.component.scss']
+  styleUrls: ['./paging.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PagingComponent implements OnInit {
 

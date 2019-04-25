@@ -7,12 +7,21 @@
   font-size: 16px;
   font-family: 'Rubik', 'Helvetica Neue', sans-serif;
 
+  outline-style: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-touch-callout: none;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
+
+  @include for-desktop {
+    background-image: url("../src/assets/desktop-background.svg");
+  }
 }
 
 a {
@@ -21,6 +30,14 @@ a {
 
 input::placeholder, textarea::placeholder {
   color: $text;
+}
+
+ul li:hover, div:hover {
+  cursor: default;
+}
+
+span:hover {
+  cursor: text;
 }
 
 input:hover,

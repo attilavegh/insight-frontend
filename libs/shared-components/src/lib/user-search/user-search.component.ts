@@ -1,10 +1,14 @@
-import { Component, ElementRef, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
 import { User } from '@insight/shared-model';
-
-import { fromEvent, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'insight-user-search',
@@ -23,33 +27,26 @@ import { map, tap } from 'rxjs/operators';
     }
   ]
 })
-export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
+export class UserSearchComponent implements OnInit, ControlValueAccessor, Validator {
+
+  @ViewChild('searchField') searchField: ElementRef;
 
   @Input() users: User[];
   @Input() loading = false;
 
   selectedUser: User;
 
-  @ViewChild('searchField') searchField: ElementRef;
   isValid = true;
   isFocused = false;
+  isDisabled = false;
 
-  elementEventSubscriptions: Subscription[] = [];
   _value: any;
 
   onChange = (_: any) => {};
 
   constructor() {}
 
-  ngOnInit() {
-    this.observeKeyupEvent();
-    this.observeSearchFocus();
-    this.observeSearchBlur();
-  }
-
-  ngOnDestroy(): void {
-    this.elementEventSubscriptions.forEach(subscription => subscription.unsubscribe());
-  }
+  ngOnInit() {}
 
   registerOnChange(fn: any) {
     this.onChange = fn;
@@ -59,6 +56,7 @@ export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAcces
   }
 
   setDisabledState(isDisabled: boolean) {
+    this.isDisabled = isDisabled;
   }
 
   writeValue(value: any) {
@@ -75,32 +73,17 @@ export class UserSearchComponent implements OnInit, OnDestroy, ControlValueAcces
     return (this.isValid) ? null : { valid: false };
   }
 
-  observeKeyupEvent() {
-    const valueChange = fromEvent(this.searchField.nativeElement, 'keyup').pipe(
-      map((event: any) => event.target.value),
-      tap((value: string) => {
-        this.selectedUser = null;
-        this.value = value;
-      })
-    ).subscribe();
-
-    this.elementEventSubscriptions.push(valueChange);
+  onKeyup(value: string) {
+    this.selectedUser = null;
+    this.value = value;
   }
 
-  observeSearchFocus() {
-    const focusSubscription = fromEvent(this.searchField.nativeElement, 'focus').pipe(
-      tap(() => this.isFocused = true)
-    ).subscribe();
-
-    this.elementEventSubscriptions.push(focusSubscription);
+  onFocus() {
+    this.isFocused = true;
   }
 
-  observeSearchBlur() {
-    const blurSubscription = fromEvent(this.searchField.nativeElement, 'blur').pipe(
-      tap(() => this.isFocused = false)
-    ).subscribe();
-
-    this.elementEventSubscriptions.push(blurSubscription);
+  onBlur() {
+    this.isFocused = false;
   }
 
   selectUser(user: User) {

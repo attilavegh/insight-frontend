@@ -80,4 +80,8 @@ $arrowWidth: 8px;
       border-top-color: $warn;
     }
   }
+
+  &__disabled {
+    border-style: dashed;
+  }
 }

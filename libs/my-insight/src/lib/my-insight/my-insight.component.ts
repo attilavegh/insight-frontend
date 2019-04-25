@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Insight, InsightFilterModel, InsightFilterType } from '@insight/shared-model';
 import { diffFromNow } from '@insight/utils';
@@ -8,7 +8,8 @@ import { MyInsightFacade } from '../+state/my-insight.facade';
 @Component({
   selector: 'insight-my-insight',
   templateUrl: './my-insight.component.html',
-  styleUrls: ['./my-insight.component.scss']
+  styleUrls: ['./my-insight.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyInsightComponent implements OnInit {
 

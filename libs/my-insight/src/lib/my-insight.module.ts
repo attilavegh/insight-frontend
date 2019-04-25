@@ -6,7 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { MessageContainerModule, MessageFilterModule, MessageCategorySelectorModule, PagingModule } from '@insight/shared-components';
+import {
+  MessageContainerModule,
+  MessageFilterModule,
+  MessageCategorySelectorModule,
+  PagingModule,
+  LoadingModule
+} from '@insight/shared-components';
 import { RippleModule } from '@insight/shared-directives';
 
 import { MyInsightComponent } from './my-insight/my-insight.component';
@@ -32,6 +38,7 @@ const routes: Routes = [
     MessageContainerModule,
     MessageCategorySelectorModule,
     MessageFilterModule,
+    LoadingModule,
     ReactiveFormsModule,
     StoreModule.forFeature(MY_INSIGHT_FEATURE_KEY, myInsightReducer, {
       initialState: myInsightInitialState
