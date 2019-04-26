@@ -6,7 +6,7 @@ import { DataPersistence } from '@nrwl/nx';
 
 import { AuthenticationService, authTokenName, OneTimeAuthCode, refreshTokenName, AuthToken } from '@insight/authentication';
 import { Insight, User } from '@insight/shared-model';
-import { NotificationService } from '@insight/shared-services';
+import { AnalyticsService, NotificationService } from '@insight/shared-services';
 
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
@@ -98,6 +98,12 @@ export class AppEffects {
     }
   });
 
+  @Effect({ dispatch: false }) setUser$ = this.dataPersistence.fetch(AppActionTypes.SetUser, {
+    run: (action: SetUser) => {
+      this.analytics.setUser(action.payload.googleId);
+    }
+  });
+
   private saveTokens(authToken: AuthToken) {
     localStorage.setItem(authTokenName, authToken.idToken);
     localStorage.setItem(refreshTokenName, authToken.refreshToken);
@@ -109,6 +115,7 @@ export class AppEffects {
     private actions$: Actions,
     private appFacade: AppFacade,
     private ngZone: NgZone,
+    private analytics: AnalyticsService,
     private notificationService: NotificationService,
     private dataPersistence: DataPersistence<AppPartialState>
   ) {}

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { InsightType } from '@insight/shared-model';
+import { EventCategory, InsightType } from '@insight/shared-model';
+import { AnalyticsService } from '@insight/shared-services';
 
 import { skip } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -36,7 +37,8 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   isSearchLoading$ = this.newInsightFacade.searchLoading$;
   users$ = this.newInsightFacade.users$;
 
-  constructor(private newInsightFacade: NewInsightFacade) {}
+  constructor(private newInsightFacade: NewInsightFacade,
+              private analytics: AnalyticsService) {}
 
   ngOnInit() {
     this.searchSubscription = this.receiverControl.valueChanges.subscribe((name: string) => this.newInsightFacade.search(name));
@@ -52,9 +54,11 @@ export class NewInsightComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.form.valid) {
+      this.analytics.log(EventCategory.SendInsight, 'submit');
       this.newInsightFacade.send(this.form.value);
       this.form.disable();
     } else {
+      this.analytics.log(EventCategory.SendInsight, 'invalid_submit');
       this.showErrors();
     }
   }
@@ -93,6 +97,8 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   }
 
   private onTypeControlChange(value: InsightType) {
+    this.analytics.log(EventCategory.SendInsight, 'type_change');
+
     if (value === InsightType.CONSIDER) {
       this.considerMessageControl.enable();
     } else {
