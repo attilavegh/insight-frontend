@@ -65,6 +65,7 @@ export class AppEffects {
   @Effect() login$ = this.dataPersistence.fetch(AppActionTypes.Login, {
     run: () => {
       return this.authentication.login().pipe(
+        take(1),
         switchMap((accessCode: OneTimeAuthCode) => this.authentication.authenticate(accessCode)),
         tap((authToken: AuthToken) => this.saveTokens(authToken)),
         map((authToken: AuthToken) => this.authentication.getUser(authToken.idToken)),

@@ -41,7 +41,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
   }
 
   &__profile-picture-wrapper {
-    width: 32%;
+    width: 20%;
     align-items: center;
     padding-left: $defaultPadding;
   }
@@ -58,7 +58,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
   }
 
   &__logo-wrapper {
-    width: 34%;
+    width: 60%;
     justify-content: center;
     align-items: center;
   }
@@ -74,7 +74,7 @@ $hiddenMenuContentPosition: calc(-1 * (#{$mobileMenuContentHeight} - #{$defaultE
   }
 
   &__menu-icon {
-    width: 32%;
+    width: 20%;
     padding-right: $defaultPadding;
     justify-content: flex-end;
     align-items: center;

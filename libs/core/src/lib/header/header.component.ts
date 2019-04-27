@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
+import { User } from '@insight/shared-model';
+
 import { filter, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-
-import { User } from '@insight/shared-model';
 
 import { AppFacade } from '../../../../../apps/insight-frontend/src/app/+state/app.facade';
 
