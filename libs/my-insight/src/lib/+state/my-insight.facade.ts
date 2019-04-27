@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 
-import { InsightFilterModel } from '@insight/shared-model';
+import { Insight, InsightFilterModel } from '@insight/shared-model';
 
 import { MyInsightPartialState } from './my-insight.reducer';
 import { myInsightQuery } from './my-insight.selectors';
-import { ChangeInsightFilter } from './my-insight.actions';
+import { ChangeInsightFilter, UpdateSentInsights } from './my-insight.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,9 @@ export class MyInsightFacade {
 
   changeInsightFilter(filter: InsightFilterModel) {
     this.store.dispatch(new ChangeInsightFilter(filter));
+  }
+
+  updateSentInsights(insight: Insight) {
+    this.store.dispatch(new UpdateSentInsights(insight));
   }
 }

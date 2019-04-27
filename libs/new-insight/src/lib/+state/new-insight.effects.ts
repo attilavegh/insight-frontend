@@ -3,7 +3,9 @@ import { Effect, Actions } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 
 import { InsightService, UserService } from '@insight/shared-services';
-import { InsightFormData, User } from '@insight/shared-model';
+import { Insight, InsightFormData, User } from '@insight/shared-model';
+import { MyInsightFacade } from '@insight/my-insight';
+import { format } from '@insight/utils';
 
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 
@@ -48,7 +50,7 @@ export class NewInsightEffects {
           take(1),
           map((user: User) => ({ ...action.payload, sender: user.googleId })),
           switchMap((data: InsightFormData) => this.insightService.send(data)),
-          map(() => new SubmitFormSuccess())
+          map((insight: Insight) => new SubmitFormSuccess(insight))
         );
       },
 
@@ -59,11 +61,18 @@ export class NewInsightEffects {
     }
   );
 
+  @Effect({ dispatch: false }) submitFormSuccess = this.dataPersistence.fetch(NewInsightActionTypes.SubmitFormSuccess, {
+    run: (action: SubmitFormSuccess) => {
+      this.myInsightFacade.updateSentInsights({...action.payload, formattedDate: format(action.payload.date)});
+    }
+  });
+
   constructor(
     private actions$: Actions,
     private userService: UserService,
     private insightService: InsightService,
     private appFacade: AppFacade,
+    private myInsightFacade: MyInsightFacade,
     private dataPersistence: DataPersistence<NewInsightPartialState>
   ) {}
 }

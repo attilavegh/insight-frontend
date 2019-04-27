@@ -52,8 +52,8 @@ export class InsightInputBoxComponent implements ControlValueAccessor, Validator
     this.isDisabled = isDisabled;
   }
 
-  writeValue(obj: any) {
-    this.value = obj;
+  writeValue(value: any) {
+    this.value = !!value ? value : '';
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
