@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { ScriptInjectorService } from '@insight/shared-services';
 import { User } from '@insight/shared-model';
 
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, ReplaySubject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { OneTimeAuthCode } from '../../model/authentication.model';
 
@@ -19,23 +19,24 @@ declare let gapi: any;
 })
 export class GoogleLoginProviderService {
 
-  constructor(private scriptInjector: ScriptInjectorService) {}
+  auth2 = new ReplaySubject(1);
+
+  constructor(private scriptInjector: ScriptInjectorService) {
+    this.injectGoogleAuthScript().pipe(
+      map(() => this.initGoogleAuth())
+    ).subscribe();
+  }
 
   login(): Observable<OneTimeAuthCode> {
-    return this.injectGoogleAuthScript().pipe(
-      switchMap(() => this.initGoogleAuth()),
+    return this.auth2.pipe(
       switchMap((auth2: any) => this.grantAccess(auth2))
     );
   }
 
-  private initGoogleAuth(): Observable<any> {
-    return new Observable(observer => {
-      gapi.load('auth2', () => {
-        const auth2 = gapi.auth2.init(authConfig);
-
-        observer.next(auth2);
-        observer.complete();
-      });
+  private initGoogleAuth() {
+    gapi.load('auth2', () => {
+      const auth2 = gapi.auth2.init(authConfig);
+      this.auth2.next(auth2);
     });
   }
 

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { InsightFormData, User } from '@insight/shared-model';
+import { Insight, InsightFormData, User } from '@insight/shared-model';
 
 export enum NewInsightActionTypes {
   SearchUser = '[NewInsight] Search User',
@@ -34,6 +34,7 @@ export class SubmitForm implements Action {
 
 export class SubmitFormSuccess implements Action {
   readonly type = NewInsightActionTypes.SubmitFormSuccess;
+  constructor(public payload: Insight) {}
 }
 
 export class SubmitFormError implements Action {

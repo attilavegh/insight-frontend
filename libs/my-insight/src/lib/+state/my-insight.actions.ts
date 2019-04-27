@@ -11,6 +11,8 @@ export enum MyInsightActionTypes {
   LoadSentInsights = '[MyInsight] Load Sent Insights',
   SentInsightsLoaded = '[MyInsight] Sent Insight Loaded',
 
+  UpdateSentInsights = '[MyInsight] Update Sent Insights',
+
   InsightLoadError = '[MyInsight] Insight Load Error',
 
   ChangeInsightFilter = '[MyInsight] Filter Insights',
@@ -48,6 +50,11 @@ export class InsightLoadError implements Action {
   constructor(public payload: any) {}
 }
 
+export class UpdateSentInsights implements Action {
+  readonly type = MyInsightActionTypes.UpdateSentInsights;
+  constructor(public payload: Insight) {}
+}
+
 export class ChangeInsightFilter implements Action {
   readonly type = MyInsightActionTypes.ChangeInsightFilter;
   constructor(public payload: InsightFilterModel) {}
@@ -68,6 +75,8 @@ export type MyInsightAction =
   | SentInsightsLoaded
 
   | InsightLoadError
+
+  | UpdateSentInsights
 
   | ChangeInsightFilter
   | InsightFilterChanged;

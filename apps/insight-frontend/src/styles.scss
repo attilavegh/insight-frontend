@@ -20,7 +20,7 @@ body {
   margin: 0;
 
   @include for-desktop {
-    background-image: url("../src/assets/desktop-background.svg");
+    background-image: url("assets/desktop-background.svg");
   }
 }
 

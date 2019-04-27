@@ -20,7 +20,7 @@ $loadingIndicatorSize: 30px;
   &__background {
     display: flex;
     justify-content: center;
-    margin-bottom: $largeElementHeight;
+    margin-bottom: $largeMargin;
     width: 100%;
 
     &-image {

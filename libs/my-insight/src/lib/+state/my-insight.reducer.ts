@@ -52,6 +52,11 @@ export function myInsightReducer(state: MyInsightState = myInsightsInitialState,
       break;
     }
 
+    case MyInsightActionTypes.UpdateSentInsights: {
+      state = { ...state, sentInsights: [action.payload, ...state.sentInsights] };
+      break;
+    }
+
     case MyInsightActionTypes.ChangeInsightFilter: {
       state = { ...state, filter: action.payload, loading: true };
       break;
