@@ -1,14 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  forwardRef,
-  Input,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
-import { User } from '@insight/shared-model';
+import { EventCategory, User } from '@insight/shared-model';
+import { AnalyticsService } from '@insight/shared-services';
 
 @Component({
   selector: 'insight-user-search',
@@ -44,7 +38,7 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
 
   onChange = (_: any) => {};
 
-  constructor() {}
+  constructor(private analytics: AnalyticsService) {}
 
   ngOnInit() {}
 
@@ -87,6 +81,8 @@ export class UserSearchComponent implements OnInit, ControlValueAccessor, Valida
   }
 
   selectUser(user: User) {
+    this.analytics.log(EventCategory.SendInsight, 'selectUser');
+
     this.selectedUser = user;
     this.value = user.googleId;
     this.searchFieldValue = user.fullName;
