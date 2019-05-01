@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { AnalyticsService } from '@insight/shared-services';
-import { EventCategory } from '@insight/shared-model';
+import { AnalyticsService, NotificationService } from '@insight/shared-services';
+import { EventCategory, NotificationPayload, NotificationType } from '@insight/shared-model';
 
 import { filter, tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 import { AppFacade } from './+state/app.facade';
 
@@ -17,15 +17,22 @@ import { AppFacade } from './+state/app.facade';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  notificationPayload$: Observable<NotificationPayload>;
+  notificationDisplayStatus$: Observable<boolean>;
+
   routerSubscription: Subscription;
 
   constructor(private appFacade: AppFacade,
               private analytics: AnalyticsService,
-              private router: Router) {}
+              private router: Router,
+              private notificationService: NotificationService) {}
 
   ngOnInit() {
     this.appFacade.initApp();
     this.appFacade.initNotification();
+
+    this.notificationPayload$ = this.notificationService.payload$;
+    this.notificationDisplayStatus$ = this.notificationService.display$;
 
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -35,5 +42,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routerSubscription.unsubscribe();
-  };
+  }
 }

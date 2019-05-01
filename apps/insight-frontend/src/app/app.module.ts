@@ -11,8 +11,9 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { AuthenticationModule } from '@insight/authentication';
-import { CoreModule } from '@insight/core';
+import { NotificationModule } from '@insight/shared-components';
 import { environmentProvider } from '@insight/environment';
+import { CoreModule } from '@insight/core';
 
 import { environment } from '../environments/environment';
 
@@ -28,6 +29,7 @@ import { AppEffects } from './+state/app.effects';
     BrowserModule,
     AppRoutingModule,
     AuthenticationModule,
+    NotificationModule,
     NxModule.forRoot(),
     StoreModule.forRoot(
       { app: appReducer },

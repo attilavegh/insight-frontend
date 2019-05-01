@@ -4,8 +4,8 @@ import { ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 
-import { InsightService } from '@insight/shared-services';
-import { Insight, InsightCategory, User } from '@insight/shared-model';
+import { InsightService, NotificationService } from '@insight/shared-services';
+import { Insight, InsightCategory, notificationMessage, NotificationType, User } from '@insight/shared-model';
 import { format } from '@insight/utils';
 
 import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
@@ -92,6 +92,7 @@ export class MyInsightEffects {
 
       onError: (action: LoadReceivedInsights, error) => {
         console.error('Error', error);
+        this.notification.show(notificationMessage.generalError, NotificationType.ERROR);
         return new InsightLoadError(error);
       }
     }
@@ -128,6 +129,7 @@ export class MyInsightEffects {
 
       onError: (action: LoadSentInsights, error) => {
         console.error('Error', error);
+        this.notification.show(notificationMessage.generalError, NotificationType.ERROR);
         return new InsightLoadError(error);
       }
     }
@@ -154,6 +156,7 @@ export class MyInsightEffects {
     private appFacade: AppFacade,
     private myInsightFacade: MyInsightFacade,
     private insightService: InsightService,
+    private notification: NotificationService,
     private dataPersistence: DataPersistence<MyInsightPartialState>
   ) {
   }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
+import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 
-import { InsightService, UserService } from '@insight/shared-services';
-import { Insight, InsightFormData, User } from '@insight/shared-model';
+import { InsightService, NotificationService, UserService } from '@insight/shared-services';
+import { Insight, InsightFormData, notificationMessage, NotificationType, User } from '@insight/shared-model';
 import { MyInsightFacade } from '@insight/my-insight';
 import { format } from '@insight/utils';
 
@@ -39,6 +39,7 @@ export class NewInsightEffects {
 
       onError: (action: SearchUser, error) => {
         console.error('Error', error);
+        this.notification.show(notificationMessage.generalError, NotificationType.ERROR);
         return new SearchUserError(error);
       }
     }
@@ -56,6 +57,7 @@ export class NewInsightEffects {
 
       onError: (action: SubmitForm, error) => {
         console.error('Error', error);
+        this.notification.show(notificationMessage.generalError, NotificationType.ERROR);
         return new SubmitFormError(error);
       }
     }
@@ -63,6 +65,7 @@ export class NewInsightEffects {
 
   @Effect({ dispatch: false }) submitFormSuccess = this.dataPersistence.fetch(NewInsightActionTypes.SubmitFormSuccess, {
     run: (action: SubmitFormSuccess) => {
+      this.notification.show(notificationMessage.sendSuccess, NotificationType.SUCCESS);
       this.myInsightFacade.updateSentInsights({...action.payload, formattedDate: format(action.payload.date)});
     }
   });
@@ -72,6 +75,7 @@ export class NewInsightEffects {
     private userService: UserService,
     private insightService: InsightService,
     private appFacade: AppFacade,
+    private notification: NotificationService,
     private myInsightFacade: MyInsightFacade,
     private dataPersistence: DataPersistence<NewInsightPartialState>
   ) {}
