@@ -24,7 +24,6 @@ $arrowWidth: 8px;
     padding-left: $defaultPadding;
     padding-right: $smallPadding;
 
-    transition: background-color $fastAnimationDuration ease-out;
     background-color: $secondary;
 
     &-separator {
@@ -50,7 +49,6 @@ $arrowWidth: 8px;
     border-left: $arrowHeight solid transparent;
     border-right: $arrowHeight solid transparent;
 
-    transition: border-top-color $fastAnimationDuration ease-out;
     border-top: $arrowWidth solid $secondary;
   }
 

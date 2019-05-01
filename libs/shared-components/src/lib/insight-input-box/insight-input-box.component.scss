@@ -51,6 +51,7 @@ $arrowWidth: 8px;
     padding: $defaultPadding;
     border: none;
     font-weight: lighter;
+    background-color: $white;
 
     &::placeholder {
       color: $placeholder;

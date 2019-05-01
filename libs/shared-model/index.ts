@@ -4,3 +4,4 @@ export { InsightFilterType, InsightFilterModel, defaultFilter } from './src/insi
 export { Insight, InsightFormData } from './src/insight.model';
 export { InsightType } from './src/insight-type.model';
 export { EventCategory, EventParameters } from './src/analytics.model';
+export { NotificationType, NotificationPayload, notificationMessage } from './src/notification.model';

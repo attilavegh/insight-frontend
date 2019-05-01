@@ -1,0 +1,80 @@
+@import "../../../../shared-styles/styles";
+
+$notificationHeight: 100px;
+$notificationWidth: 400px;
+
+$notificationDesktopAnimationPositionClose: calc(-1 * #{$notificationWidth});
+$notificationDesktopAnimationPositionOpen: calc(-1 * (#{$largePadding} + #{$notificationWidth}));
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  top: -$notificationHeight;
+  left: 0;
+
+  width: 100%;
+  height: $notificationHeight;
+  padding: $defaultPadding;
+
+  transition: transform $defaultAnimationDuration ease;
+  background-color: $primary;
+  border-bottom-right-radius: $largeRadius;
+  z-index: 100;
+
+  &__message {
+    text-align: center;
+    opacity: 0;
+    font-weight: 500;
+  }
+
+  &__message, &__image {
+    transition: opacity $defaultAnimationDuration ease;
+    opacity: 0;
+  }
+
+  &-active {
+    box-shadow: $shadow $defaultShadowValues;
+    transform: translateY($notificationHeight);
+
+    .notification__message, .notification__image {
+      opacity: 1;
+    }
+  }
+
+  &-error {
+    background-color: $warn;
+  }
+}
+
+@include for-desktop {
+  .notification {
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    width: $notificationWidth;
+    top: initial;
+    left: initial;
+
+    border-bottom-right-radius: 0;
+
+    bottom: 10%;
+    padding: $largePadding;
+
+    opacity: 0;
+    transition: $defaultAnimationDuration ease;
+    right: $notificationDesktopAnimationPositionClose;
+
+    &-active {
+      opacity: 1;
+      transform: translateX($notificationDesktopAnimationPositionOpen);
+    }
+
+    &__image {
+      margin-right: $xLargeMargin;
+    }
+  }
+}

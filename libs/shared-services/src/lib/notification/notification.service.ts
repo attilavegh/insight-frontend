@@ -1,15 +1,11 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { environmentToken } from '@insight/environment';
-import { Insight, User } from '@insight/shared-model';
+import { NotificationPayload, NotificationType } from '@insight/shared-model';
 
-import { Observable } from 'rxjs';
-
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 export interface NotificationServiceShape {
-  connect(user: User): Observable<Insight>;
+  show(message: string, type: NotificationType, duration: number);
 }
 
 @Injectable({
@@ -17,43 +13,30 @@ export interface NotificationServiceShape {
 })
 export class NotificationService implements NotificationServiceShape {
 
-  readonly isNotificationSupported = !!('Notification' in window);
+  private _payload$ = new Subject<NotificationPayload>();
+  private _display$ = new BehaviorSubject<boolean>(false);
 
-  constructor(@Inject(environmentToken) private environment: string) {}
+  private closeTimer;
 
-  connect(user: User): Observable<Insight> {
-    const websocket = new SockJS(`${this.environment}/ws`);
-    const client = Stomp.over(websocket);
+  constructor() {}
 
-    return new Observable(observer => {
-      if (!this.isNotificationSupported) {
-          observer.complete();
-      }
+  show(message: string, type: NotificationType = NotificationType.SUCCESS, duration: number = 2000) {
+    this._payload$.next({ message, type });
+    this._display$.next(true);
 
-      this.requestPermission();
-      client.debug = null;
-
-      client.connect({}, () => {
-        client.subscribe(`/notification/${user.googleId}`, (notification) => {
-          observer.next(JSON.parse(notification.body) as Insight);
-        });
-      });
-    });
+    clearTimeout(this.closeTimer);
+    this.closeTimer = setTimeout(() => this.close(), duration);
   }
 
-  create(insight: Insight) {
-    const notificationOptions: NotificationOptions = {
-      body: 'View your new insight!',
-      icon: insight.sender.imageUrl
-    };
-
-    const notification = new Notification(insight.sender.fullName, notificationOptions);
-    notification.onclick = () => window.open('https://elte-insight.firebaseapp.com/insights', '_blank');
+  private close() {
+    this._display$.next(false);
   }
 
-  private requestPermission() {
-    if (Notification.permission === 'default') {
-      Notification.requestPermission();
-    }
+  get payload$(): Observable<NotificationPayload> {
+    return this._payload$.asObservable();
+  }
+
+  get display$() {
+    return this._display$.asObservable();
   }
 }

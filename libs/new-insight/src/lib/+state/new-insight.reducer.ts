@@ -65,7 +65,7 @@ export function newInsightReducer(state: NewInsightState = initialState, action:
       break;
     }
     case NewInsightActionTypes.SubmitFormError: {
-      state = { ...state, error: action.payload };
+      state = { ...state, form: { ...state.form, pending: false }, error: action.payload };
       break;
     }
   }

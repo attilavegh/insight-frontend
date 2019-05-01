@@ -1,0 +1,8 @@
+<div class="notification"
+     [class.notification-active]="shouldDisplay"
+     [class.notification-error]="isErrorType">
+  <img class="notification__image"
+       [src]="isSuccessType ? 'assets/success-icon.svg' : 'assets/error-icon.svg'"
+       [alt]="isSuccessType ? 'Success' : 'Error'">
+  <span class="notification__message">{{payload && payload.message}}</span>
+</div>

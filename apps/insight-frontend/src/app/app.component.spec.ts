@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 
 import { CoreModule } from '@insight/core';
+import { NotificationModule } from '@insight/shared-components';
 import { AuthenticationModule } from '@insight/authentication';
 import { environmentToken } from '@insight/environment';
 
@@ -16,6 +17,7 @@ describe('AppComponent', () => {
         RouterTestingModule,
         CoreModule,
         AuthenticationModule,
+        NotificationModule,
         StoreModule.forRoot({}, {}),
       ],
       declarations: [

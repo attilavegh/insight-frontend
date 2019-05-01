@@ -1,12 +1,12 @@
 import { Router } from '@angular/router';
 import { Injectable, NgZone } from '@angular/core';
 
-import { Effect, Actions } from '@ngrx/effects';
+import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 
-import { AuthenticationService, authTokenName, OneTimeAuthCode, refreshTokenName, AuthToken } from '@insight/authentication';
-import { Insight, User } from '@insight/shared-model';
-import { AnalyticsService, NotificationService } from '@insight/shared-services';
+import { AuthenticationService, AuthToken, authTokenName, OneTimeAuthCode, refreshTokenName } from '@insight/authentication';
+import { Insight, notificationMessage, NotificationType, User } from '@insight/shared-model';
+import { AnalyticsService, BrowserNotificationService, NotificationService } from '@insight/shared-services';
 
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
@@ -14,10 +14,15 @@ import { AppPartialState } from './app.reducer';
 import { AppFacade } from './app.facade';
 import {
   AppActionTypes,
+  AuthError,
+  InitNotification,
+  InitUser,
   Login,
-  SetUser,
   Logout,
-  AuthError, LogoutSuccess, InitUser, InitNotification, NewNotification, NotificationError
+  LogoutSuccess,
+  NewNotification,
+  NotificationError,
+  SetUser
 } from './app.actions';
 
 
@@ -45,7 +50,7 @@ export class AppEffects {
       return this.appFacade.user$.pipe(
         filter((user: User) => !!user),
         take(1),
-        switchMap((user: User) => this.notificationService.connect(user)),
+        switchMap((user: User) => this.browserNotification.connect(user)),
         map((insight: Insight) => new NewNotification(insight))
       );
     },
@@ -58,7 +63,7 @@ export class AppEffects {
 
   @Effect({ dispatch: false }) newNotification$ = this.dataPersistence.fetch(AppActionTypes.NewNotification, {
     run: (action: NewNotification) => {
-      this.notificationService.create(action.payload);
+      this.browserNotification.create(action.payload);
     }
   });
 
@@ -76,6 +81,7 @@ export class AppEffects {
 
     onError: (action: Login, error) => {
       console.error('Error:', error);
+      this.notification.show(notificationMessage.generalError, NotificationType.ERROR);
       return new AuthError(error);
     }
   });
@@ -116,8 +122,9 @@ export class AppEffects {
     private actions$: Actions,
     private appFacade: AppFacade,
     private ngZone: NgZone,
+    private notification: NotificationService,
     private analytics: AnalyticsService,
-    private notificationService: NotificationService,
+    private browserNotification: BrowserNotificationService,
     private dataPersistence: DataPersistence<AppPartialState>
   ) {}
 }
