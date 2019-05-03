@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { InsightFilterModel, InsightFilterType } from '@insight/shared-model';
+import { AssignmentResult, InsightFilterModel, InsightFilterType } from '@insight/shared-model';
 
 @Component({
   selector: 'insight-message-filter',
@@ -9,6 +9,9 @@ import { InsightFilterModel, InsightFilterType } from '@insight/shared-model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageFilterComponent {
+
+  readonly highlightedFilterBucketName = 'highlighted_filter';
+  @Input() filterAssignment: AssignmentResult;
 
   @Input() filterOptions: InsightFilterModel[];
   @Input() selectedFilter: InsightFilterModel;
@@ -21,7 +24,7 @@ export class MessageFilterComponent {
 
   onFilterSelect(filter: InsightFilterModel) {
     this.selectedFilter = filter;
-    this.filterChange.emit(filter);
+    this.filterChange.emit({...filter, bucketName: this.filterAssignment && this.filterAssignment.bucketName});
   }
 
   onClick() {
@@ -34,5 +37,9 @@ export class MessageFilterComponent {
 
   get isDefaultFilter() {
     return this.selectedFilter && this.selectedFilter.value === InsightFilterType.ALL;
+  }
+
+  get isHighlightedExperiment() {
+    return this.filterAssignment && this.filterAssignment.bucketName === this.highlightedFilterBucketName;
   }
 }

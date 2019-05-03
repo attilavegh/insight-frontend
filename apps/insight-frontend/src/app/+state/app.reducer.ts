@@ -1,11 +1,12 @@
 import { AppAction, AppActionTypes } from './app.actions';
 
-import { User } from '@insight/shared-model';
+import { AssignmentResult, User } from '@insight/shared-model';
 
 export const APP_FEATURE_KEY = 'app';
 
 export interface AppState {
   user: User;
+  assignments: AssignmentResult[];
   loading: boolean;
   error?: any;
 }
@@ -16,15 +17,12 @@ export interface AppPartialState {
 
 export const appInitialState: AppState = {
   user: null,
+  assignments: [],
   loading: false
 };
 
 export function appReducer(state: AppState = appInitialState, action: AppAction): AppState {
   switch (action.type) {
-    case AppActionTypes.InitUser: {
-      state = { ...state};
-      break;
-    }
     case AppActionTypes.Login: {
       state = { ...state, loading: true};
       break;
@@ -42,8 +40,19 @@ export function appReducer(state: AppState = appInitialState, action: AppAction)
       state = { ...appInitialState };
       break;
     }
+
     case AppActionTypes.AuthError: {
       state = { ...appInitialState, error: action.payload, user: null };
+      break;
+    }
+
+    case AppActionTypes.GetAssignmentsSuccess: {
+      state = { ...state, assignments: action.payload };
+      break;
+    }
+
+    case AppActionTypes.GetAssignmentsError: {
+      state = { ...state, error: action.payload };
       break;
     }
   }

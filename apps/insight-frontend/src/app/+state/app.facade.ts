@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { AppPartialState } from './app.reducer';
 import { appQuery } from './app.selectors';
-import { InitNotification, InitUser, Login, Logout } from './app.actions';
+import { GetAssignments, InitNotification, InitUser, Login, Logout } from './app.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,11 @@ import { InitNotification, InitUser, Login, Logout } from './app.actions';
 export class AppFacade {
   user$ = this.store.pipe(select(appQuery.getUser));
   loading$ = this.store.pipe(select(appQuery.getLoading));
-  error$ = this.store.pipe(select(appQuery.getError));
+  assignments$ = this.store.pipe(select(appQuery.getAssignments));
 
   constructor(private store: Store<AppPartialState>) {}
 
-  initApp() {
+  initUser() {
     this.store.dispatch(new InitUser());
   }
 
@@ -30,5 +30,9 @@ export class AppFacade {
 
   logout() {
     this.store.dispatch(new Logout());
+  }
+
+  getAssignments() {
+    this.store.dispatch(new GetAssignments());
   }
 }

@@ -6,8 +6,9 @@
     </div>
     <div class="my-insight__options-filter">
       <span class="my-insight__options-label">Show insights</span>
-      <insight-message-filter [filterOptions]="filters"
+      <insight-message-filter [filterAssignment]="filterAssignment$ | async"
                               [selectedFilter]="selectedFilter$ | async"
+                              [filterOptions]="filters"
                               (filterChange)="onFilterChange($event)">
       </insight-message-filter>
     </div>

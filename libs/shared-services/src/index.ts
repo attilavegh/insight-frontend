@@ -4,3 +4,5 @@ export { ScriptInjectorService } from './lib/script-injector/script-injector.ser
 export { BrowserNotificationService } from './lib/browser-notification/browser-notification.service';
 export { AnalyticsService } from './lib/analytics/analytics.service';
 export { NotificationService } from './lib/notification/notification.service';
+export { SplitterService } from './lib/splitter/splitter.service';
+export { DeviceTypeDetectorService } from './lib/device-type-detector/device-type-detector.service';

@@ -1,4 +1,8 @@
-<div tabindex="0" (click)="onClick()" (blur)="onBlur()" class="message-filter" [class.message-filter-focused]="isFocused || !isDefaultFilter">
+<div tabindex="0" (click)="onClick()" (blur)="onBlur()"
+     class="message-filter"
+     [class.message-filter-focused]="isFocused || !isDefaultFilter"
+     [class.message-filter-highlighted]="isHighlightedExperiment"
+     [class.message-filter-highlighted-active]="isHighlightedExperiment && !isDefaultFilter">
   <div insightRipple class="message-filter__image">
     <img src="assets/message-filter.svg">
   </div>

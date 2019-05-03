@@ -22,6 +22,8 @@ import { AppComponent } from './app.component';
 import { appInitialState as appInitialState, appReducer } from './+state/app.reducer';
 import { AppEffects } from './+state/app.effects';
 
+import { DeviceDetectorModule } from 'ngx-device-detector';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -41,7 +43,8 @@ import { AppEffects } from './+state/app.effects';
     EffectsModule.forRoot([AppEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    DeviceDetectorModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [environmentProvider]

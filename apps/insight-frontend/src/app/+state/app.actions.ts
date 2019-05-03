@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Insight, User } from '@insight/shared-model';
+import { AssignmentDetail, AssignmentResult, Insight, User } from '@insight/shared-model';
 
 export enum AppActionTypes {
   InitUser = '[App] Init User',
@@ -15,7 +15,11 @@ export enum AppActionTypes {
   Logout = '[App] Logout',
   LogoutSuccess = '[App] Logout Success',
 
-  AuthError = '[App] Auth Error'
+  AuthError = '[App] Auth Error',
+
+  GetAssignments = '[App] Get Assignments',
+  GetAssignmentsSuccess = '[App] Get Assignments Success',
+  GetAssignmentsError = '[App] Get Assignments Error'
 }
 
 export class InitUser implements Action {
@@ -55,16 +59,34 @@ export class LogoutSuccess implements Action {
 
 export class AuthError implements Action {
   readonly type = AppActionTypes.AuthError;
-  constructor(public  payload: any) {}
+  constructor(public payload: any) {}
+}
+
+export class GetAssignments implements Action {
+  readonly type = AppActionTypes.GetAssignments;
+}
+
+export class GetAssignmentsSuccess implements Action {
+  readonly type = AppActionTypes.GetAssignmentsSuccess;
+  constructor(public payload: AssignmentResult[]) {}
+}
+
+export class GetAssignmentsError implements Action {
+  readonly type = AppActionTypes.GetAssignmentsError;
+  constructor(public payload: any) {}
 }
 
 export type AppAction = InitUser
   | InitNotification
   | NewNotification
   | NotificationError
+
   | Login
+  | Logout
+  | LogoutSuccess
+  | AuthError
   | SetUser
 
-  | Logout
-  | AuthError
-  | LogoutSuccess;
+  | GetAssignments
+  | GetAssignmentsSuccess
+  | GetAssignmentsError;
