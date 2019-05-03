@@ -14,13 +14,13 @@ const getLoading = createSelector(
   (state: AppState) => state.loading
 );
 
-const getError = createSelector(
+const getAssignments = createSelector(
   getAppState,
-  (state: AppState) => state.error
+  (state: AppState) => state.assignments
 );
 
 export const appQuery = {
   getUser,
   getLoading,
-  getError
+  getAssignments
 };

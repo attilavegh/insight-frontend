@@ -28,8 +28,9 @@ export class AppComponent implements OnInit, OnDestroy {
               private notificationService: NotificationService) {}
 
   ngOnInit() {
-    this.appFacade.initApp();
+    this.appFacade.initUser();
     this.appFacade.initNotification();
+    this.appFacade.getAssignments();
 
     this.notificationPayload$ = this.notificationService.payload$;
     this.notificationDisplayStatus$ = this.notificationService.display$;

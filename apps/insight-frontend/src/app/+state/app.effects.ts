@@ -5,16 +5,23 @@ import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 
 import { AuthenticationService, AuthToken, authTokenName, OneTimeAuthCode, refreshTokenName } from '@insight/authentication';
-import { Insight, notificationMessage, NotificationType, User } from '@insight/shared-model';
-import { AnalyticsService, BrowserNotificationService, NotificationService } from '@insight/shared-services';
+import { AssignmentResult, Insight, notificationMessage, NotificationType, User } from '@insight/shared-model';
+import {
+  AnalyticsService,
+  BrowserNotificationService,
+  DeviceTypeDetectorService,
+  NotificationService,
+  SplitterService
+} from '@insight/shared-services';
 
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { iif, of } from 'rxjs';
 
 import { AppPartialState } from './app.reducer';
 import { AppFacade } from './app.facade';
 import {
   AppActionTypes,
-  AuthError,
+  AuthError, GetAssignmentsError, GetAssignmentsSuccess,
   InitNotification,
   InitUser,
   Login,
@@ -24,7 +31,6 @@ import {
   NotificationError,
   SetUser
 } from './app.actions';
-
 
 @Injectable()
 export class AppEffects {
@@ -88,9 +94,9 @@ export class AppEffects {
 
   @Effect() logout$ = this.dataPersistence.fetch(AppActionTypes.Logout, {
     run: () => {
-        localStorage.clear();
-        this.router.navigate(['/login']);
-        return new LogoutSuccess();
+      localStorage.clear();
+      window.location.reload();
+      return new LogoutSuccess();
     },
 
     onError: (action: Logout, error) => {
@@ -111,6 +117,25 @@ export class AppEffects {
     }
   });
 
+  @Effect() getAssignments$ = this.dataPersistence.fetch(AppActionTypes.GetAssignments, {
+    run: () => {
+      return this.appFacade.user$.pipe(
+        filter((user: User) => !!user),
+        take(1),
+        mergeMap((user: User) => iif(() => this.splitter.isMocked(),
+          of(this.splitter.parseMockedData()),
+          this.splitter.assign(user.googleId, this.deviceTypeDetector.detect()),
+        )),
+        map((result: AssignmentResult[]) => new GetAssignmentsSuccess(result))
+      );
+    },
+
+    onError: (action: Logout, error) => {
+      console.error('Error:', error);
+      return new GetAssignmentsError(error);
+    }
+  });
+
   private saveTokens(authToken: AuthToken) {
     localStorage.setItem(authTokenName, authToken.idToken);
     localStorage.setItem(refreshTokenName, authToken.refreshToken);
@@ -125,6 +150,8 @@ export class AppEffects {
     private notification: NotificationService,
     private analytics: AnalyticsService,
     private browserNotification: BrowserNotificationService,
+    private deviceTypeDetector: DeviceTypeDetectorService,
+    private splitter: SplitterService,
     private dataPersistence: DataPersistence<AppPartialState>
   ) {}
 }

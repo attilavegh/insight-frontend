@@ -26,13 +26,13 @@
         <li class="insight-header__menu-content-item" routerLink="/insights" routerLinkActive="insight-header__menu-content-item-selected">
           <a>My insights</a>
         </li>
-        <li class="insight-header__menu-content-item insight-header__menu-content-logout-item-mobile" routerLink="/login" (click)="logout()">Logout</li>
+        <li class="insight-header__menu-content-item insight-header__menu-content-logout-item-mobile" (click)="logout()">Logout</li>
 
         <li class="insight-header__menu-content-item insight-header__settings" tabindex="0" (focus)="focusDesktopMenu()" (blur)="blurDesktopMenu()">
           <img *ngIf="user" class="insight-header__profile-picture" [src]="user.imageUrl" alt="Profile picture">
           <div class="insight-header__settings-menu" [class.insight-header__settings-menu-open]="isDesktopMenuOpen">
             <ul class="insight-header__settings-menu-list">
-              <li class="insight-header__settings-menu-list-item" routerLink="/login" (mousedown)="logout()">
+              <li class="insight-header__settings-menu-list-item" (mousedown)="logout()">
                 <a>Logout</a>
               </li>
             </ul>

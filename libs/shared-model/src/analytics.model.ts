@@ -6,6 +6,7 @@ export enum EventCategory {
 }
 
 export interface EventParameters {
+  event_label?: string;
   url?: string;
   value?: number;
 }

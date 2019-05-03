@@ -19,6 +19,15 @@ $optionsRelativeXPosition: -100px;
     background-color: $secondary;
   }
 
+  &-highlighted {
+    transition: none;
+    background-color: $secondary;
+  }
+
+  &-highlighted-active {
+    border-color: $primary;
+  }
+
   &__image {
     display: flex;
     justify-content: center;

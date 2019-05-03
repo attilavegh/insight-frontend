@@ -12,6 +12,7 @@ export interface InsightFilterModel {
   name: string;
   value: InsightFilterType;
   filterFn?: (insight: Insight) => {};
+  bucketName?: string;
 }
 
 export const defaultFilter: InsightFilterModel = {
