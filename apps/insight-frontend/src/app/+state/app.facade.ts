@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { select, Store } from '@ngrx/store';
 
+import { AssignmentResult } from '@insight/shared-model';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { AppPartialState } from './app.reducer';
 import { appQuery } from './app.selectors';
 import { GetAssignments, InitNotification, InitUser, Login, Logout } from './app.actions';
@@ -12,7 +17,6 @@ import { GetAssignments, InitNotification, InitUser, Login, Logout } from './app
 export class AppFacade {
   user$ = this.store.pipe(select(appQuery.getUser));
   loading$ = this.store.pipe(select(appQuery.getLoading));
-  assignments$ = this.store.pipe(select(appQuery.getAssignments));
 
   constructor(private store: Store<AppPartialState>) {}
 
@@ -34,5 +38,13 @@ export class AppFacade {
 
   getAssignments() {
     this.store.dispatch(new GetAssignments());
+  }
+
+  selectAssignment(name: string): Observable<AssignmentResult> {
+    return this.store.pipe(
+      select(appQuery.getAssignments),
+      map(assignments => assignments.filter(assignment => assignment.experimentName === name)),
+      map(assignments => assignments[0])
+    );
   }
 }

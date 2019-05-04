@@ -2,7 +2,7 @@ import { Insight } from '@insight/shared-model';
 
 export enum InsightFilterType {
   ALL = 'all',
-  LAST_DAY = 'last_day',
+  TODAY = 'today',
   LAST_MONTH = 'last_month',
   LAST_SIX_MONTHS = 'last_six_months',
   LAST_YEAR = 'last_year'
