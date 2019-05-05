@@ -26,6 +26,10 @@ $arrowWidth: 8px;
     background-color: $secondary;
   }
 
+  &__header-text {
+    cursor: default;
+  }
+
   &__header-arrow {
     position: absolute;
     top: $headerHeight;

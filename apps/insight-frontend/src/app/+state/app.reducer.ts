@@ -1,8 +1,13 @@
-import { AppAction, AppActionTypes } from './app.actions';
+import { RouterReducerState } from '@ngrx/router-store';
 
 import { AssignmentResult, User } from '@insight/shared-model';
 
+import { AppAction, AppActionTypes } from './app.actions';
+
 export const APP_FEATURE_KEY = 'app';
+export const ROUTER_FEATURE_KEY = 'router';
+
+export const userImg = localStorage.getItem('userImg');
 
 export interface AppState {
   user: User;
@@ -13,12 +18,21 @@ export interface AppState {
 
 export interface AppPartialState {
   readonly [APP_FEATURE_KEY]: AppState;
+  readonly [ROUTER_FEATURE_KEY]: RouterReducerState;
 }
 
 export const appInitialState: AppState = {
   user: null,
   assignments: [],
   loading: false
+};
+
+export const routerInitialState: RouterReducerState = {
+  state: {
+    url: '/',
+    root: null
+  },
+  navigationId: 0
 };
 
 export function appReducer(state: AppState = appInitialState, action: AppAction): AppState {
@@ -28,7 +42,7 @@ export function appReducer(state: AppState = appInitialState, action: AppAction)
       break;
     }
     case AppActionTypes.SetUser: {
-      state = { ...state, user: action.payload, loading: false };
+      state = { ...state, user: { ...action.payload, imageUrl: action.payload.imageUrl || userImg }, loading: false };
       break;
     }
 

@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { NavigationEnd, Router } from '@angular/router';
 
 import { AnalyticsService, NotificationService } from '@insight/shared-services';
-import { EventCategory, NotificationPayload, NotificationType } from '@insight/shared-model';
+import { EventCategory, NotificationPayload } from '@insight/shared-model';
 
 import { filter, tap } from 'rxjs/operators';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { AppFacade } from './+state/app.facade';
 

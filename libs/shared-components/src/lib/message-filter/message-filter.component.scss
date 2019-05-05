@@ -104,5 +104,9 @@ $optionsRelativeXPosition: -100px;
 
       box-shadow: none;
     }
+
+    &__options-list-item {
+      cursor: pointer;
+    }
   }
 }

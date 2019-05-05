@@ -27,11 +27,14 @@ export class SplitterService implements SplitterServiceShape {
   }
 
   isMocked(): boolean {
-    return !!localStorage.getItem(this.mockedSplitterKey);
+    return !!this.getMockData();
   }
 
   parseMockedData(): AssignmentResult[] {
-    const mockedData = localStorage.getItem(this.mockedSplitterKey);
-    return JSON.parse(mockedData);
+    return JSON.parse(this.getMockData());
+  }
+
+  private getMockData() {
+    return localStorage.getItem(this.mockedSplitterKey);
   }
 }

@@ -10,7 +10,6 @@ import {
   MessageContainerModule,
   MessageFilterModule,
   MessageCategorySelectorModule,
-  PagingModule,
   LoadingModule
 } from '@insight/shared-components';
 import { RippleModule } from '@insight/shared-directives';
@@ -33,7 +32,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    PagingModule,
     RippleModule,
     MessageContainerModule,
     MessageCategorySelectorModule,

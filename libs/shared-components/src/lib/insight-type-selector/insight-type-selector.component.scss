@@ -22,7 +22,8 @@
     width: 50%;
     height: 100%;
 
-    z-index: 1
+    z-index: 1;
+    cursor: pointer;
   }
 
   &__link {
@@ -46,6 +47,11 @@
     height: 100%;
 
     z-index: 1;
+    cursor: pointer;
+
+    &-text {
+      cursor: pointer;
+    }
 
     &-selected {
       .insight-type-selector__background {

@@ -1,61 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { User } from '@insight/shared-model';
+import { NavigationLinks } from '@insight/shared-model';
+import { LayoutService } from '@insight/shared-services';
 
-import { filter, tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 import { AppFacade } from '../../../../../apps/insight-frontend/src/app/+state/app.facade';
 
 @Component({
   selector: 'insight-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent {
 
-  routeChangeSubscription: Subscription;
-  userSubscription: Subscription;
+  user$ = this.appFacade.user$.pipe(share());
+  activePage$ = this.appFacade.activeUrl$;
+  desktopLayoutObserver$ = this.layout.desktopLayoutObserver$;
 
-  isMobileMenuOpen = false;
-  isDesktopMenuOpen = false;
-  user: User;
+  navigationLinks: NavigationLinks = {
+    sendInsight: '/',
+    myInsights: '/insights'
+  };
 
-  constructor(private router: Router,
-              private appFacade: AppFacade) {
-  }
+  constructor(private appFacade: AppFacade,
+              private layout: LayoutService) {}
 
-  ngOnInit() {
-    this.userSubscription = this.appFacade.user$.subscribe(this.setUser.bind(this));
-
-    this.routeChangeSubscription = this.router.events.pipe(
-      filter(event => event instanceof NavigationStart),
-      tap(() => this.isMobileMenuOpen = false)
-    ).subscribe();
-  }
-
-  ngOnDestroy() {
-    this.routeChangeSubscription.unsubscribe();
-  }
-
-  toggle() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-  }
-
-  logout() {
+  onLogout() {
     this.appFacade.logout();
-  }
-
-  focusDesktopMenu() {
-    this.isDesktopMenuOpen = true;
-  }
-
-  blurDesktopMenu() {
-    this.isDesktopMenuOpen = false;
-  }
-
-  private setUser(user: User) {
-    this.user = user;
   }
 }

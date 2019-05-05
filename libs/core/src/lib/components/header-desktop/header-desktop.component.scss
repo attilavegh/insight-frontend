@@ -1,0 +1,153 @@
+@import "../../../../../shared-styles/styles";
+
+$menuItemHeight: 45px;
+$menuItemWidth: 120px;
+$menuItemPadding: 6px;
+
+$desktopLogoHeight: 28px;
+$settingsMenuTopPosition: 60px;
+$settingsMenuRightPosition: 45px;
+
+$profilePictureDimension: 40px;
+
+.insight-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: $largeElementHeight;
+  box-shadow: $shadow $defaultShadowValues;
+  background-color: $primary;
+
+  z-index: 10;
+
+  &__bar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    height: 100%;
+    max-width: $maxPageWidth;
+    margin: 0 auto;
+
+    padding-left: $xLargePadding;
+    padding-right: $xLargePadding;
+  }
+
+  &__bar-centered {
+    justify-content: center;
+  }
+
+  &__section {
+    display: flex;
+    background-color: $primary;
+  }
+
+  &__profile-picture-wrapper {
+    align-items: center;
+    padding-left: $defaultPadding;
+  }
+
+  &__profile-picture {
+    width: $profilePictureDimension;
+    height: $profilePictureDimension;
+
+    border-radius: 50%;
+    background-color: $white;
+
+    &:hover {
+      box-shadow: $shadow $defaultShadowValues;
+    }
+  }
+
+  &__logo-wrapper {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__logo {
+    display: block;
+    height: $desktopLogoHeight;
+  }
+
+  &__menu-content {
+    display: flex;
+    align-items: center;
+
+    &-items {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    &-item {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+
+      text-align: center;
+      height: $menuItemHeight;
+      width: $menuItemWidth;
+      padding: $menuItemPadding;
+
+      outline: none;
+      border: $thickBorder  solid transparent;
+    }
+
+    &-item:first-child {
+      margin-right: $xSmallMargin;
+    }
+
+    &-item:not(:last-child):hover {
+      border-color: $secondary;
+    }
+
+    &-item-selected {
+      border-color: $secondary;
+    }
+  }
+
+  &__settings {
+    width: auto;
+    margin-left: $xLargeMargin;
+  }
+
+  &__settings-menu {
+    position: absolute;
+    display: none;
+    top: $settingsMenuTopPosition;
+    right: $settingsMenuRightPosition;
+
+    border: $thinBorder solid $secondary;
+    background-color: $white;
+
+    &:hover {
+      background-color: $secondary;
+    }
+  }
+
+  &__settings-menu-open {
+    display: block;
+  }
+
+  &__settings-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__settings-menu-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    width: $menuItemWidth;
+    height: $menuItemHeight;
+  }
+}

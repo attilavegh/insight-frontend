@@ -1,0 +1,17 @@
+import { TestBed } from '@angular/core/testing';
+import { BreakpointObserver } from '@angular/cdk/layout';
+
+import { LayoutService } from './layout.service';
+
+describe('LayoutService', () => {
+  beforeEach(() => TestBed.configureTestingModule({
+    providers: [
+      BreakpointObserver
+    ]
+  }));
+
+  it('should be created', () => {
+    const service: LayoutService = TestBed.get(LayoutService);
+    expect(service).toBeTruthy();
+  });
+});
