@@ -64,7 +64,7 @@ $notificationDesktopAnimationPositionOpen: calc(-1 * (#{$largePadding} + #{$noti
     padding: $largePadding;
 
     opacity: 0;
-    transition: $defaultAnimationDuration ease;
+    transition: $defaultAnimationDuration ease, width 0ms;
     right: $notificationDesktopAnimationPositionClose;
 
     &-active {

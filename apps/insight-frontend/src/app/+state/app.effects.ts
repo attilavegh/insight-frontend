@@ -146,16 +146,16 @@ export class AppEffects {
   }
 
   constructor(
-    private authentication: AuthenticationService,
-    private router: Router,
     private actions$: Actions,
-    private appFacade: AppFacade,
+    private router: Router,
     private ngZone: NgZone,
+    private dataPersistence: DataPersistence<AppPartialState>,
+    private appFacade: AppFacade,
+    private authentication: AuthenticationService,
     private notification: NotificationService,
     private analytics: AnalyticsService,
     private browserNotification: BrowserNotificationService,
     private deviceTypeDetector: DeviceTypeDetectorService,
-    private splitter: SplitterService,
-    private dataPersistence: DataPersistence<AppPartialState>
+    private splitter: SplitterService
   ) {}
 }
