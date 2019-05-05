@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { AssignmentDetail, AssignmentResult, Insight, User } from '@insight/shared-model';
+import { AssignmentResult, Insight, User } from '@insight/shared-model';
 
 export enum AppActionTypes {
   InitUser = '[App] Init User',

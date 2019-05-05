@@ -15,6 +15,10 @@
       background-color: $secondary;
       outline: none;
     }
+
+    &-selected:hover {
+      cursor: default;
+    }
   }
 
   &__button-received, &__button-sent {
@@ -24,5 +28,6 @@
     width: 50%;
 
     transition: background-color $defaultAnimationDuration ease-out;
+    cursor: pointer;
   }
 }

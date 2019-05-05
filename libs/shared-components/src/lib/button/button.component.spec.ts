@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RippleModule } from '@insight/shared-directives';
+
 import { ButtonComponent } from './button.component';
 
 describe('ButtonComponent', () => {
@@ -8,7 +10,12 @@ describe('ButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ButtonComponent ]
+      imports: [
+        RippleModule
+      ],
+      declarations: [
+        ButtonComponent
+      ]
     })
     .compileComponents();
   }));

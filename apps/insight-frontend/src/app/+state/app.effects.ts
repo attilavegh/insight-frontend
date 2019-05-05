@@ -14,7 +14,7 @@ import {
   SplitterService
 } from '@insight/shared-services';
 
-import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { iif, of } from 'rxjs';
 
 import { AppPartialState } from './app.reducer';
@@ -78,10 +78,7 @@ export class AppEffects {
       return this.authentication.login().pipe(
         take(1),
         switchMap((accessCode: OneTimeAuthCode) => this.authentication.authenticate(accessCode)),
-        tap((authToken: AuthToken) => this.saveTokens(authToken)),
-        map((authToken: AuthToken) => this.authentication.getUser(authToken.idToken)),
-        tap(() => this.ngZone.run(() => this.router.navigate(['/']))),
-        map((user: User) => new SetUser(user))
+        map((authToken: AuthToken) => this.onLoginSuccess(authToken))
       );
     },
 
@@ -136,9 +133,16 @@ export class AppEffects {
     }
   });
 
-  private saveTokens(authToken: AuthToken) {
+  private onLoginSuccess(authToken: AuthToken) {
+    const user = this.authentication.getUser(authToken.idToken);
+
     localStorage.setItem(authTokenName, authToken.idToken);
     localStorage.setItem(refreshTokenName, authToken.refreshToken);
+    localStorage.setItem('userImg', user.imageUrl);
+
+    this.ngZone.run(() => this.router.navigate(['/']));
+
+    return new SetUser(user);
   }
 
   constructor(

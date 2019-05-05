@@ -6,3 +6,4 @@ export { AnalyticsService } from './lib/analytics/analytics.service';
 export { NotificationService } from './lib/notification/notification.service';
 export { SplitterService } from './lib/splitter/splitter.service';
 export { DeviceTypeDetectorService } from './lib/device-type-detector/device-type-detector.service';
+export { LayoutService } from './lib/layout/layout.service';

@@ -372,5 +372,10 @@
   "defaultProject": "insight-frontend",
   "cli": {
     "defaultCollection": "@nrwl/schematics"
+  },
+  "schematics": {
+    "@nrwl/schematics:component": {
+      "styleext": "scss"
+    }
   }
 }

@@ -18,6 +18,8 @@ export class AppFacade {
   user$ = this.store.pipe(select(appQuery.getUser));
   loading$ = this.store.pipe(select(appQuery.getLoading));
 
+  activeUrl$ = this.store.pipe(select(appQuery.getActiveUrl));
+
   constructor(private store: Store<AppPartialState>) {}
 
   initUser() {

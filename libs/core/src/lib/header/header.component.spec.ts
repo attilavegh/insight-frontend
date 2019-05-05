@@ -3,7 +3,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { StoreModule } from '@ngrx/store';
 
-import { HamburgerIconComponent } from '../hamburger-icon/hamburger-icon.component';
+import { HamburgerIconComponent } from '../components/hamburger-icon/hamburger-icon.component';
+import { HeaderDesktopComponent } from '../components/header-desktop/header-desktop.component';
+import { HeaderMobileComponent } from '../components//header-mobile/header-mobile.component';
 
 import { HeaderComponent } from './header.component';
 
@@ -15,6 +17,8 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         HeaderComponent,
+        HeaderDesktopComponent,
+        HeaderMobileComponent,
         HamburgerIconComponent
       ],
       imports: [

@@ -1,44 +1,18 @@
-<!--refactor needed-->
+<div class="header">
+  <div class="header__state" *ngIf="desktopLayoutObserver$ | async as desktop">
+    <insight-header-desktop class="header__state-desktop"
+                            *ngIf="desktop.matches"
+                            [user]="user$ | async"
+                            [navigationLinks]="navigationLinks"
+                            (logoutChange)="onLogout()">
+    </insight-header-desktop>
 
-<div [class.insight-header__open]="isMobileMenuOpen" class="insight-header">
-  <div class="insight-header__bar" [class.insight-header__bar-centered]="!user">
-    <div class="insight-header__profile-picture-wrapper insight-header__section">
-      <img *ngIf="user" class="insight-header__profile-picture" [src]="user.imageUrl" alt="Profile picture">
-    </div>
-
-    <div class="insight-header__logo-wrapper insight-header__section">
-      <a class="insight-header__logo-link" routerLink="/">
-        <img class="insight-header__logo" src="assets/insight-logo.svg" alt="Insight">
-      </a>
-    </div>
-
-    <div class="insight-header__menu-icon insight-header__section">
-      <div *ngIf="user" class="insight-header__menu-icon-clickable-area" (click)="toggle()">
-        <insight-hamburger-icon [open]="isMobileMenuOpen"></insight-hamburger-icon>
-      </div>
-    </div>
-
-    <div *ngIf="user" class="insight-header__menu-content">
-      <ul class="insight-header__menu-content-items">
-        <li class="insight-header__menu-content-item" routerLink="/" routerLinkActive="insight-header__menu-content-item-selected" [routerLinkActiveOptions]="{ exact: true }">
-          <a>Send insight</a>
-        </li>
-        <li class="insight-header__menu-content-item" routerLink="/insights" routerLinkActive="insight-header__menu-content-item-selected">
-          <a>My insights</a>
-        </li>
-        <li class="insight-header__menu-content-item insight-header__menu-content-logout-item-mobile" (click)="logout()">Logout</li>
-
-        <li class="insight-header__menu-content-item insight-header__settings" tabindex="0" (focus)="focusDesktopMenu()" (blur)="blurDesktopMenu()">
-          <img *ngIf="user" class="insight-header__profile-picture" [src]="user.imageUrl" alt="Profile picture">
-          <div class="insight-header__settings-menu" [class.insight-header__settings-menu-open]="isDesktopMenuOpen">
-            <ul class="insight-header__settings-menu-list">
-              <li class="insight-header__settings-menu-list-item" (mousedown)="logout()">
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <insight-header-mobile class="header__state-mobile"
+                           *ngIf="!desktop.matches"
+                           [user]="user$ | async"
+                           [activePage]="activePage$ | async"
+                           [navigationLinks]="navigationLinks"
+                           (logoutChange)="onLogout()">
+    </insight-header-mobile>
   </div>
 </div>

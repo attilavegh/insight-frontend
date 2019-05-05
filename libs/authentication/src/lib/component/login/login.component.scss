@@ -3,6 +3,7 @@
 $loginImageMaxWidth: 400px;
 
 $loadingIndicatorSize: 30px;
+$googleLogoWidth: 28px;
 
 .login {
   display: flex;
@@ -54,6 +55,7 @@ $loadingIndicatorSize: 30px;
     outline: none;
 
     &-image {
+      width: $googleLogoWidth;
       margin-right: $defaultMargin;
     }
 

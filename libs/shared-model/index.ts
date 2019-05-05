@@ -7,3 +7,4 @@ export { EventCategory, EventParameters } from './src/analytics.model';
 export { NotificationType, NotificationPayload, notificationMessage } from './src/notification.model';
 export { AssignmentDetail, AssignmentResult } from './src/splitter.model';
 export { DeviceType } from './src/device-type.model';
+export { HeaderComponentShape, NavigationLinks, NavigationLink } from './src/header.model';

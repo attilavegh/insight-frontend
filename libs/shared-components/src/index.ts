@@ -1,5 +1,4 @@
 export { ButtonModule } from './lib/button/button.module';
-export { PagingModule } from './lib/paging/paging.module';
 export { LoadingModule } from './lib/loading/loading.module';
 export { UserSearchModule } from './lib/user-search/user-search.module';
 export { MessageCategorySelectorModule } from './lib/message-category-selector/message-category-selector.module';

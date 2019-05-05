@@ -4,7 +4,7 @@
     <div *ngIf="loading$ | async" class="my-insight-list__status-loading">
       <insight-loading></insight-loading>
     </div>
-    <div class="my-insight-list__status-empty" *ngIf="!(loading$ | async) && insights.length == 0">
+    <div *ngIf="(loading$ | async) == false && insights.length == 0" class="my-insight-list__status-empty">
       There are no insights to show.
     </div>
   </div>

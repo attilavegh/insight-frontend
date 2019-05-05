@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
+import { share } from 'rxjs/operators';
+
 import { MyInsightFacade } from '../+state/my-insight.facade';
 
 @Component({
@@ -12,7 +14,7 @@ export class MyInsightListComponent implements OnInit {
 
   insights$ = this.myInsightFacade.displayedInsights$;
   category$ = this.myInsightFacade.category$;
-  loading$ = this.myInsightFacade.loading$;
+  loading$ = this.myInsightFacade.loading$.pipe(share());
 
   constructor(private myInsightFacade: MyInsightFacade) {}
 
