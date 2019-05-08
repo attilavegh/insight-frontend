@@ -1,8 +1,8 @@
 {
-  "name": "insight-frontend",
-  "short_name": "insight-frontend",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Insight",
+  "short_name": "Insight",
+  "theme_color": "#FCB853",
+  "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
