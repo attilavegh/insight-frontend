@@ -4,7 +4,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { EventCategory, InsightType } from '@insight/shared-model';
 import { AnalyticsService } from '@insight/shared-services';
 
-import { skip } from 'rxjs/operators';
+import { skip, withLatestFrom } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 import { NewInsightFacade } from '../+state/new-insight.facade';
@@ -43,7 +43,10 @@ export class NewInsightComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.searchSubscription = this.receiverControl.valueChanges.subscribe((name: string) => this.newInsightFacade.search(name));
     this.typeControlSubscription = this.typeControl.valueChanges.subscribe(this.onTypeControlChange.bind(this));
-    this.pendingSubscription = this.newInsightFacade.pending$.pipe(skip(1)).subscribe(this.onPendingChange.bind(this));
+    this.pendingSubscription = this.newInsightFacade.pending$.pipe(
+      skip(1),
+      withLatestFrom(this.newInsightFacade.error$),
+    ).subscribe(([pending, error]) => this.onPendingChange(pending, error));
   }
 
   ngOnDestroy() {
@@ -63,11 +66,11 @@ export class NewInsightComponent implements OnInit, OnDestroy {
     }
   }
 
-  private onPendingChange(pending: boolean) {
+  private onPendingChange(pending: boolean, error: any) {
+    this.enableForm();
     this.pending = pending;
 
-    if (!pending) {
-      this.form.enable();
+    if (!pending && !error) {
       this.resetForm();
     }
   }
@@ -85,6 +88,14 @@ export class NewInsightComponent implements OnInit, OnDestroy {
       control.markAsPristine();
       control.updateValueAndValidity();
     });
+  }
+
+  private enableForm() {
+    this.form.enable();
+
+    if (!this.isConsider) {
+      this.considerMessageControl.disable();
+    }
   }
 
   private updateControls(callbackFn: (control: AbstractControl) => void) {

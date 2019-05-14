@@ -15,6 +15,7 @@ export class NewInsightFacade {
   users$ = this.store.pipe(select(newInsightQuery.getUsers));
   pending$ = this.store.pipe(select(newInsightQuery.getPending));
   searchLoading$ = this.store.pipe(select(newInsightQuery.getSearchLoading));
+  error$ = this.store.pipe(select(newInsightQuery.getError));
 
   constructor(private store: Store<NewInsightPartialState>) {}
 
