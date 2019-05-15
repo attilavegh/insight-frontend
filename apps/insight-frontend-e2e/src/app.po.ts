@@ -1,25 +1,31 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, protractor } from 'protractor';
 
 export class AppPage {
 
   private message = 'Keep up the good work';
 
   open() {
-    return browser.get('/');
+    browser.get('/');
+    browser.driver.sleep(2000);
   }
 
-  login(email: string, password: string, hasExistingAccounts = false) {
+  login(email: string, password: string) {
     const loginButton = element(by.css('.login__button'));
     loginButton.click();
 
     browser.driver.sleep(5000);
 
-    return browser.getAllWindowHandles().then((handles) => {
-      browser.switchTo().window(handles[1]).then(() => {
+    return browser.getAllWindowHandles()
+      .then((handles) => {
+        return browser.switchTo().window(handles[1]);
+      })
+      .then(() => {
         browser.ignoreSynchronization = true;
-
-        if (hasExistingAccounts) {
-          browser.driver.findElement(by.css('.eARute')).click();
+        return browser.driver.findElements(by.css('.eARute'));
+      })
+      .then((newAccountCreatorElements) => {
+        if (!!newAccountCreatorElements[0]) {
+          newAccountCreatorElements[0].click();
           browser.driver.sleep(3000);
         }
 
@@ -33,17 +39,19 @@ export class AppPage {
 
         browser.driver.sleep(5000);
         browser.ignoreSynchronization = false;
-      });
-    }).then(() => {
-      browser.getAllWindowHandles().then((handles) => {
+      })
+      .then(() => {
+        return browser.getAllWindowHandles();
+      })
+      .then((handles) => {
         browser.switchTo().window(handles[0]);
       });
-    });
   }
 
   logout() {
     browser.element(by.css('.insight-header__settings')).click();
     browser.element(by.css('.insight-header__settings-menu-list-item')).click();
+    browser.driver.sleep(2000);
   }
 
   selectUser() {
@@ -73,7 +81,19 @@ export class AppPage {
     browser.sleep(2000);
   }
 
+  sentNotificationElement() {
+    const notificationElement = element(by.css('.notification__message'));
+    browser.wait(protractor.ExpectedConditions.visibilityOf(notificationElement), 5000);
+
+    return notificationElement;
+  }
+
   isSent() {
     return !!browser.element(by.cssContainingText('.message__content-continue', this.message));
+  }
+
+  isLoggedIn() {
+    const authToken = browser.executeScript('return window.localStorage.getItem("insightAuthToken");');
+    return !!authToken;
   }
 }
