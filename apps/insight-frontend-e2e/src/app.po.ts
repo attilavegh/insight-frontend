@@ -83,7 +83,7 @@ export class AppPage {
 
   sentNotificationElement() {
     const notificationElement = element(by.css('.notification__message'));
-    browser.wait(protractor.ExpectedConditions.visibilityOf(notificationElement), 5000);
+    browser.wait(protractor.ExpectedConditions.visibilityOf(notificationElement), 30000);
 
     return notificationElement;
   }
