@@ -8,3 +8,7 @@ Features:
 * Real time and email notifications
 * Analitics
 * A/B test capability
+* Continous delivery
+* Firebase integration
+
+The application is available [here](https://elte-insight.firebaseapp.com/).
